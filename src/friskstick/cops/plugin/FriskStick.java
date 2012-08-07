@@ -44,9 +44,8 @@ public class FriskStick extends JavaPlugin implements Listener{
 							if(inventory.contains(new ItemStack(Integer.parseInt(firsthalf), i, Short.parseShort(lasthalf)))){
 								cop.getInventory().addItem(new ItemStack(Integer.parseInt(firsthalf), getConfig().getInt("amount-confiscated"), Short.parseShort(lasthalf)));
 								inventory.removeItem(new ItemStack(Integer.parseInt(firsthalf), 2305, Short.parseShort(lasthalf)));
-								cop.sendMessage(getConfig().getString("cop-found-msg").replaceAll("&", "ง").replaceAll("%itemname%", getConfig().getStringList("drug-names").toArray()[index].toString()).replaceAll("%player%", frisked.getName()));
-								frisked.sendMessage(getConfig().getString("player-found-msg").replaceAll("&", "ง").replaceAll("%cop%", cop.getName()).replaceAll("%itemname%", getConfig().getStringList("drug-names").toArray()[index].toString()));
-								jail(frisked.getName());
+								cop.sendMessage(getConfig().getString("cop-found-msg").replaceAll("&", "ยง").replaceAll("%itemname%", getConfig().getStringList("drug-names").toArray()[index].toString()).replaceAll("%player%", frisked.getName()));
+								frisked.sendMessage(getConfig().getString("player-found-msg").replaceAll("&", "ยง").replaceAll("%cop%", cop.getName()).replaceAll("%itemname%", getConfig().getStringList("drug-names").toArray()[index].toString()));
 								found = true;
 							}
 						}
@@ -55,9 +54,8 @@ public class FriskStick extends JavaPlugin implements Listener{
 							int drugid = Integer.parseInt(drug);
 							cop.getInventory().addItem(new ItemStack(drugid, getConfig().getInt("amount-confiscated")));
 							inventory.removeItem(new ItemStack(drugid, 2305));
-							cop.sendMessage(getConfig().getString("cop-found-msg").replaceAll("&", "ง").replaceAll("%itemname%", getConfig().getStringList("drug-names").toArray()[index].toString()).replaceAll("%player%", frisked.getName()));
-							frisked.sendMessage(getConfig().getString("player-found-msg").replaceAll("&", "ง").replaceAll("%cop%", cop.getName()).replaceAll("%itemname%", getConfig().getStringList("drug-names").toArray()[index].toString()));
-							jail(frisked.getName());
+							cop.sendMessage(getConfig().getString("cop-found-msg").replaceAll("&", "ยง").replaceAll("%itemname%", getConfig().getStringList("drug-names").toArray()[index].toString()).replaceAll("%player%", frisked.getName()));
+							frisked.sendMessage(getConfig().getString("player-found-msg").replaceAll("&", "ยง").replaceAll("%cop%", cop.getName()).replaceAll("%itemname%", getConfig().getStringList("drug-names").toArray()[index].toString()));
 							found = true;
 						}
 					}
@@ -65,21 +63,10 @@ public class FriskStick extends JavaPlugin implements Listener{
 				}
 				index = 0;
 				if(!found){
-					cop.sendMessage(getConfig().getString("cop-not-found-msg").replaceAll("&", "ง").replaceAll("%player%", frisked.getName()));
-					frisked.sendMessage(getConfig().getString("player-not-found-msg").replaceAll("&", "ง").replaceAll("%cop%", cop.getName()));
-					if(cop.getHealth() >= 10){
-						cop.setHealth(cop.getHealth() - 2);
-					}else{
-						cop.setHealth(0);
-					}
+					cop.sendMessage(getConfig().getString("cop-not-found-msg").replaceAll("&", "ยง").replaceAll("%player%", frisked.getName()));
+					frisked.sendMessage(getConfig().getString("player-not-found-msg").replaceAll("&", "ยง").replaceAll("%cop%", cop.getName()));
+					cop.setHealth(cop.getHealth() - 2);
 				}
-			}
-		}
-	}
-	public void jail(String name){
-		if(this.getConfig().getBoolean("auto-jail")){
-			if(getServer().getPluginManager().isPluginEnabled("Essentials")){
-				this.getServer().dispatchCommand(this.getServer().getConsoleSender(), "jail " + name + " " + this.getConfig().getString("jail-name") + " " + (this.getConfig().getInt("time-in-jail") + 1));
 			}
 		}
 	}
