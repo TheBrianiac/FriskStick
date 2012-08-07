@@ -1,73 +1,63 @@
-package friskstick.cops.plugin;
+import java.util.Scanner;
 
-import java.util.logging.Logger;
-import org.bukkit.Material;
-import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerInteractEntityEvent;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.PlayerInventory;
-import org.bukkit.plugin.PluginDescriptionFile;
-import org.bukkit.plugin.PluginManager;
-import org.bukkit.plugin.java.JavaPlugin;
-
-public class FriskStick extends JavaPlugin implements Listener{
-	public final Logger logger = Logger.getLogger("Minecraft");
-	int index = 0;
+public class EnumTest{
+	private static String[] as = new String[3];
+	private static int[] an = new int[3];
+	private static String s;
+	private static int n;
+	private static String s1;
+	private static int n1;
+	private static String s2;
+	private static int n2;
 	
-	public void onEnable(){
-		PluginDescriptionFile pdffile = this.getDescription();
-		this.logger.info(pdffile.getName() + " v" + pdffile.getVersion() + " has been enabled!");
-		PluginManager pm = this.getServer().getPluginManager();
-		pm.registerEvents(this, this);
-		getConfig().options().copyDefaults(true);
-		saveConfig();
+	public static void main(String args[]){
+		Scanner input = new Scanner(System.in);
+		int times = 0;
+		while(times < 3){
+		System.out.println("Enter a sentence:");
+		as[times] = input.nextLine();
+		System.out.println("Enter a number:");
+		an[times] = input.nextInt();
+		as[times] = (times == 0 ? s : times == 1 ? s1 : s2);
+		an[times] = (times == 0 ? n : times == 1 ? n1 : n2);
+		times++;
+		}
+		for(e i: e.values()){
+			System.out.printf("%s\t%s\t%d\n", i, i.getS(), i.getN());
+		}
+		input.close();
 	}
-	public void onDisable(){
-		PluginDescriptionFile pdffile = this.getDescription();
-		this.logger.info(pdffile.getName() + " has been disabled.");
-	}
-	@EventHandler
-	public void Stick(PlayerInteractEntityEvent event){
-		if(event.getRightClicked() instanceof Player && event.getPlayer().getItemInHand().getType() == Material.STICK){
-			Player frisked = (Player)event.getRightClicked();
-			Player cop = event.getPlayer();
-			if(cop.hasPermission("friskstick.use")){
-				PlayerInventory inventory = frisked.getInventory();
-				boolean found = false;
-				for(String drug: getConfig().getStringList("drug-ids")){
-					if(drug.contains(":")){
-						String firsthalf = drug.split(":")[0];
-						String lasthalf = drug.split(":")[1];
-						for(int i = 1; i <= getConfig().getInt("amount-to-search-for"); i++){
-							if(inventory.contains(new ItemStack(Integer.parseInt(firsthalf), i, Short.parseShort(lasthalf)))){
-								cop.getInventory().addItem(new ItemStack(Integer.parseInt(firsthalf), getConfig().getInt("amount-confiscated"), Short.parseShort(lasthalf)));
-								inventory.removeItem(new ItemStack(Integer.parseInt(firsthalf), 2305, Short.parseShort(lasthalf)));
-								cop.sendMessage(getConfig().getString("cop-found-msg").replaceAll("&", "§").replaceAll("%itemname%", getConfig().getStringList("drug-names").toArray()[index].toString()).replaceAll("%player%", frisked.getName()));
-								frisked.sendMessage(getConfig().getString("player-found-msg").replaceAll("&", "§").replaceAll("%cop%", cop.getName()).replaceAll("%itemname%", getConfig().getStringList("drug-names").toArray()[index].toString()));
-								found = true;
-							}
-						}
-					}else{
-						if(inventory.contains(Integer.parseInt(drug))){
-							int drugid = Integer.parseInt(drug);
-							cop.getInventory().addItem(new ItemStack(drugid, getConfig().getInt("amount-confiscated")));
-							inventory.removeItem(new ItemStack(drugid, 2305));
-							cop.sendMessage(getConfig().getString("cop-found-msg").replaceAll("&", "§").replaceAll("%itemname%", getConfig().getStringList("drug-names").toArray()[index].toString()).replaceAll("%player%", frisked.getName()));
-							frisked.sendMessage(getConfig().getString("player-found-msg").replaceAll("&", "§").replaceAll("%cop%", cop.getName()).replaceAll("%itemname%", getConfig().getStringList("drug-names").toArray()[index].toString()));
-							found = true;
-						}
-					}
-					index++;
-				}
-				index = 0;
-				if(!found){
-					cop.sendMessage(getConfig().getString("cop-not-found-msg").replaceAll("&", "§").replaceAll("%player%", frisked.getName()));
-					frisked.sendMessage(getConfig().getString("player-not-found-msg").replaceAll("&", "§").replaceAll("%cop%", cop.getName()));
-					cop.setHealth(cop.getHealth() - 2);
-				}
+	public enum e{
+		e1(s, n),
+		e2(s1, n1),
+		e3(s2, n2);
+		e(String st, int nu){
+			s = st;
+			n = nu;
+		}
+		public String getS(){
+			int t = 0;
+			String parString;
+			if(t == 0){
+				parString = s;
+			}else if(t == 1){
+				parString = s1;
+			}else{
+				parString = s2;
 			}
+			return parString;
+		}
+		public int getN(){
+			int t = 0;
+			int parInt;
+			if(t == 0){
+				parInt = n;
+			}else if(t == 1){
+				parInt = n1;
+			}else{
+				parInt = n2;
+			}
+			return parInt;
 		}
 	}
 }
