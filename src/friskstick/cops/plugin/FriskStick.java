@@ -47,8 +47,9 @@ public class FriskStick extends JavaPlugin implements Listener{
 								String firsthalf = drug.split(":")[0];
 								String lasthalf = drug.split(":")[1];
 								for(int i = 1; i <= getConfig().getInt("amount-to-search-for"); i++){
+									ItemStack[] contents = inventory.getContents();
 									if(inventory.contains(new ItemStack(Integer.parseInt(firsthalf), i, Short.parseShort(lasthalf)))){
-										player.getInventory().addItem(new ItemStack(Integer.parseInt(firsthalf), getConfig().getInt("amount-confiscated"), Short.parseShort(lasthalf)));
+										player.getInventory().addItem(new ItemStack(contents[inventory.first(new ItemStack(Integer.parseInt(firsthalf), i, Short.parseShort(lasthalf)))]));
 										inventory.removeItem(new ItemStack(Integer.parseInt(firsthalf), 2305, Short.parseShort(lasthalf)));
 										player.sendMessage(getConfig().getString("cop-found-msg").replaceAll("&", "§").replaceAll("%itemname%", getConfig().getStringList("drug-names").toArray()[index].toString()).replaceAll("%player%", this.getServer().getPlayer(args[0]).getName()));
 										this.getServer().getPlayer(args[0]).sendMessage(getConfig().getString("player-found-msg").replaceAll("&", "§").replaceAll("%player%", player.getName()).replaceAll("%itemname%", getConfig().getStringList("drug-names").toArray()[index].toString()));
@@ -61,7 +62,8 @@ public class FriskStick extends JavaPlugin implements Listener{
 							}else{
 								if(inventory.contains(Integer.parseInt(drug))){
 									int drugid = Integer.parseInt(drug);
-									player.getInventory().addItem(new ItemStack(drugid, getConfig().getInt("amount-confiscated")));
+									ItemStack[] contents = inventory.getContents();
+									player.getInventory().addItem(new ItemStack(contents[inventory.first(drugid)]));
 									inventory.removeItem(new ItemStack(drugid, 2305));
 									player.sendMessage(getConfig().getString("cop-found-msg").replaceAll("&", "§").replaceAll("%itemname%", getConfig().getStringList("drug-names").toArray()[index].toString()).replaceAll("%player%", this.getServer().getPlayer(args[0]).getName()));
 									this.getServer().getPlayer(args[0]).sendMessage(getConfig().getString("player-found-msg").replaceAll("&", "§").replaceAll("%player%", player.getName()).replaceAll("%itemname%", getConfig().getStringList("drug-names").toArray()[index].toString()));
@@ -163,7 +165,8 @@ public class FriskStick extends JavaPlugin implements Listener{
 						String lasthalf = drug.split(":")[1];
 						for(int i = 1; i <= getConfig().getInt("amount-to-search-for"); i++){
 							if(inventory.contains(new ItemStack(Integer.parseInt(firsthalf), i, Short.parseShort(lasthalf)))){
-								cop.getInventory().addItem(new ItemStack(Integer.parseInt(firsthalf), getConfig().getInt("amount-confiscated"), Short.parseShort(lasthalf)));
+								ItemStack[] contents = inventory.getContents();
+								cop.getInventory().addItem(new ItemStack(contents[inventory.first(new ItemStack(Integer.parseInt(firsthalf), i, Short.parseShort(lasthalf)))]));
 								inventory.removeItem(new ItemStack(Integer.parseInt(firsthalf), 2305, Short.parseShort(lasthalf)));
 								cop.sendMessage(getConfig().getString("cop-found-msg").replaceAll("&", "§").replaceAll("%itemname%", getConfig().getStringList("drug-names").toArray()[index].toString()).replaceAll("%player%", frisked.getName()));
 								frisked.sendMessage(getConfig().getString("player-found-msg").replaceAll("&", "§").replaceAll("%cop%", cop.getName()).replaceAll("%itemname%", getConfig().getStringList("drug-names").toArray()[index].toString()));
@@ -176,7 +179,8 @@ public class FriskStick extends JavaPlugin implements Listener{
 					}else{
 						if(inventory.contains(Integer.parseInt(drug))){
 							int drugid = Integer.parseInt(drug);
-							cop.getInventory().addItem(new ItemStack(drugid, getConfig().getInt("amount-confiscated")));
+							ItemStack[] contents = inventory.getContents();
+							cop.getInventory().addItem(new ItemStack(contents[inventory.first(drugid)]));
 							inventory.removeItem(new ItemStack(drugid, 2305));
 							cop.sendMessage(getConfig().getString("cop-found-msg").replaceAll("&", "§").replaceAll("%itemname%", getConfig().getStringList("drug-names").toArray()[index].toString()).replaceAll("%player%", frisked.getName()));
 							frisked.sendMessage(getConfig().getString("player-found-msg").replaceAll("&", "§").replaceAll("%cop%", cop.getName()).replaceAll("%itemname%", getConfig().getStringList("drug-names").toArray()[index].toString()));
@@ -192,7 +196,7 @@ public class FriskStick extends JavaPlugin implements Listener{
 				if(!found){
 					cop.sendMessage(getConfig().getString("cop-not-found-msg").replaceAll("&", "§").replaceAll("%player%", frisked.getName()));
 					frisked.sendMessage(getConfig().getString("player-not-found-msg").replaceAll("&", "§").replaceAll("%cop%", cop.getName()));
-					if(cop.getHealth() >= 10){
+					if(cop.getHealth() >= 2){
 						cop.setHealth(cop.getHealth() - 2);
 					}else{
 						cop.setHealth(0);
