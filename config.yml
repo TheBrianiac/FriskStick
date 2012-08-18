@@ -6,7 +6,6 @@ drug-ids:
 - '373:0'
 - '351:2'
 - '351:9'
-amount-confiscated: 1
 amount-to-search-for: 64
 cop-not-found-msg: '&e[Frisk] &cYou have failed to find anything on %player%!'
 cop-found-msg: '&e[Frisk] &bYou have found some %itemname% on %player%!'
