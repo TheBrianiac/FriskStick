@@ -1,0 +1,25 @@
+drug-ids:
+- '353'
+- '339'
+- '39'
+- '40'
+- '373:0'
+- '351:2'
+- '351:9'
+amount-confiscated: 1
+amount-to-search-for: 64
+cop-not-found-msg: '&e[Frisk] &cYou have failed to find anything on %player%!'
+cop-found-msg: '&e[Frisk] &bYou have found some %itemname% on %player%!'
+player-not-found-msg: '&e[Frisk] &b%cop% has searched you and found nothing!'
+player-found-msg: '&e[Frisk] &c%cop% has frisked you and found some %itemname%!'
+drug-names:
+- 'Sugar'
+- 'Paper'
+- 'Brown Mushroom'
+- 'Red Mushroom'
+- 'Water Bottle'
+- 'Green Dye'
+- 'Pink Dye'
+auto-jail: true
+jail-name: jail 
+time-in-jail: 60

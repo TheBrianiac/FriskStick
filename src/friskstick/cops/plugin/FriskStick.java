@@ -24,8 +24,8 @@ public class FriskStick extends JavaPlugin implements Listener {
 	public void onEnable() {
 		
 		PluginDescriptionFile pdffile = this.getDescription();
-		this.logger.info(pdffile.getName() + " v" + pdffile.getVersion() + " has been enabled!");
-		PluginManager pm = this.getServer().getPluginManager();
+		logger.info(pdffile.getName() + " v" + pdffile.getVersion() + " has been enabled!");
+		PluginManager pm = getServer().getPluginManager();
 		pm.registerEvents(this, this);
 		getConfig().options().copyDefaults(true);
 		saveConfig();
