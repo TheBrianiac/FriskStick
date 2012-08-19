@@ -19,7 +19,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class FriskStick extends JavaPlugin implements Listener{
 	public final Logger logger = Logger.getLogger("Minecraft");
 	int index = 0;
-	
+
 	public void onEnable(){
 		PluginDescriptionFile pdffile = this.getDescription();
 		this.logger.info(pdffile.getName() + " v" + pdffile.getVersion() + " has been enabled!");
@@ -149,7 +149,7 @@ public class FriskStick extends JavaPlugin implements Listener{
 				}
 			}
 		}
-		
+
 		return false;
 	}
 	@EventHandler
