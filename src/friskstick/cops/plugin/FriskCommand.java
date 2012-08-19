@@ -27,7 +27,7 @@ public class FriskCommand implements CommandExecutor{
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
-		
+
 		Player player = (Player)sender;	
 
 		if(player == null) {
@@ -61,10 +61,12 @@ public class FriskCommand implements CommandExecutor{
 								for(int i = 1; i <= plugin.getConfig().getInt("amount-to-search-for"); i++) {
 
 									ItemStack[] contents = inventory.getContents();
+
 									if(inventory.contains(new ItemStack(Integer.parseInt(firsthalf), i, Short.parseShort(lasthalf)))) {
 
 										player.getInventory().addItem(new ItemStack(contents[inventory.first(new ItemStack(Integer.parseInt(firsthalf), i, Short.parseShort(lasthalf)))]));
 										inventory.removeItem(new ItemStack(Integer.parseInt(firsthalf), 2305, Short.parseShort(lasthalf)));
+
 										player.sendMessage(plugin.getConfig().getString("cop-found-msg").replaceAll("&", "§").replaceAll("%itemname%", plugin.getConfig().getStringList("drug-names").toArray()[index].toString()).replaceAll("%player%", plugin.getServer().getPlayer(args[0]).getName()));
 										plugin.getServer().getPlayer(args[0]).sendMessage(plugin.getConfig().getString("player-found-msg").replaceAll("&", "§").replaceAll("%player%", player.getName()).replaceAll("%itemname%", plugin.getConfig().getStringList("drug-names").toArray()[index].toString()));
 
@@ -85,9 +87,11 @@ public class FriskCommand implements CommandExecutor{
 								if(inventory.contains(Integer.parseInt(drug))) {
 
 									int drugid = Integer.parseInt(drug);
+
 									ItemStack[] contents = inventory.getContents();
 									player.getInventory().addItem(new ItemStack(contents[inventory.first(drugid)]));
 									inventory.removeItem(new ItemStack(drugid, 2305));
+
 									player.sendMessage(plugin.getConfig().getString("cop-found-msg").replaceAll("&", "§").replaceAll("%itemname%", plugin.getConfig().getStringList("drug-names").toArray()[index].toString()).replaceAll("%player%", plugin.getServer().getPlayer(args[0]).getName()));
 									plugin.getServer().getPlayer(args[0]).sendMessage(plugin.getConfig().getString("player-found-msg").replaceAll("&", "§").replaceAll("%player%", player.getName()).replaceAll("%itemname%", plugin.getConfig().getStringList("drug-names").toArray()[index].toString()));
 
