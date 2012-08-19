@@ -16,6 +16,7 @@ import org.bukkit.inventory.PlayerInventory;
 public class FriskCommand implements CommandExecutor{
 
 	private FriskStick plugin;
+	JailPlayer jailed = new JailPlayer();
 
 	public FriskCommand(FriskStick plugin) {
 
@@ -72,7 +73,7 @@ public class FriskCommand implements CommandExecutor{
 
 										if(player.hasPermission("friskstick.jail")) {
 
-											jail(plugin.getServer().getPlayer(args[0]).getName());
+											jailed.jail(plugin.getServer().getPlayer(args[0]).getName());
 
 										}
 
@@ -97,7 +98,7 @@ public class FriskCommand implements CommandExecutor{
 
 									if(player.hasPermission("friskstick.jail")) {
 
-										jail(plugin.getServer().getPlayer(args[0]).getName());
+										jailed.jail(plugin.getServer().getPlayer(args[0]).getName());
 
 									}
 
@@ -139,30 +140,8 @@ public class FriskCommand implements CommandExecutor{
 			} 
 
 		}
-		//If this has happened the function will break and return true. if this hasn't happened the a value of false will be returned.
+
 		return false; 
-
-	}
-
-	public void jail(String name) {
-
-		if(plugin.getConfig().getBoolean("auto-jail")) {
-
-			if(plugin.getServer().getPluginManager().isPluginEnabled("Essentials")) {
-
-				if(plugin.getConfig().getInt("time-in-jail") > 0) {
-
-					plugin.getServer().dispatchCommand(plugin.getServer().getConsoleSender(), "jail " + name + " " + plugin.getConfig().getString("jail-name") + " " + (plugin.getConfig().getInt("time-in-jail") + 1));
-
-				} else if(plugin.getConfig().getInt("time-in-jail") == -1) {
-
-					plugin.getServer().dispatchCommand(plugin.getServer().getConsoleSender(), "jail " + name + " " + plugin.getConfig().getString("jail-name"));
-
-				}
-
-			}
-
-		}
 
 	}
 

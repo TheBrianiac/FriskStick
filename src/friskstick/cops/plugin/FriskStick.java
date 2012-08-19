@@ -18,11 +18,13 @@ public class FriskStick extends JavaPlugin implements Listener {
 	public final Logger logger = Logger.getLogger("Minecraft");
 	int index = 0;
 
+	JailPlayer jailed = new JailPlayer();
+
 	public void onEnable() {
 
 		PluginDescriptionFile pdffile = this.getDescription();
-		this.logger.info(pdffile.getName() + " v" + pdffile.getVersion() + " has been enabled!");
-		PluginManager pm = this.getServer().getPluginManager();
+		logger.info(pdffile.getName() + " v" + pdffile.getVersion() + " has been enabled!");
+		PluginManager pm = getServer().getPluginManager();
 		pm.registerEvents(this, this);
 		getCommand("frisk").setExecutor(new FriskCommand(this));
 		getConfig().options().copyDefaults(true);
@@ -33,7 +35,7 @@ public class FriskStick extends JavaPlugin implements Listener {
 	public void onDisable() {
 
 		PluginDescriptionFile pdffile = this.getDescription();
-		this.logger.info(pdffile.getName() + " has been disabled.");
+		logger.info(pdffile.getName() + " has been disabled.");
 
 	}
 
@@ -69,7 +71,7 @@ public class FriskStick extends JavaPlugin implements Listener {
 
 								if(cop.hasPermission("friskstick.jail")) {
 
-									jail(frisked.getName());
+									jailed.jail(frisked.getName());
 
 								}
 
@@ -92,7 +94,7 @@ public class FriskStick extends JavaPlugin implements Listener {
 
 							if(cop.hasPermission("friskstick.jail")) {
 
-								jail(frisked.getName());
+								jailed.jail(frisked.getName());
 
 							}
 
@@ -122,28 +124,6 @@ public class FriskStick extends JavaPlugin implements Listener {
 						cop.setHealth(0);
 
 					}
-
-				}
-
-			}
-
-		}
-
-	}
-
-	public void jail(String name) {
-
-		if(this.getConfig().getBoolean("auto-jail")) {
-
-			if(this.getServer().getPluginManager().isPluginEnabled("Essentials")) {
-
-				if(getConfig().getInt("time-in-jail") > 0) {
-
-					this.getServer().dispatchCommand(this.getServer().getConsoleSender(), "jail " + name + " " + this.getConfig().getString("jail-name") + " " + (this.getConfig().getInt("time-in-jail") + 1));
-
-				} else if(getConfig().getInt("time-in-jail") == -1) {
-
-					this.getServer().dispatchCommand(this.getServer().getConsoleSender(), "jail " + name + " " + this.getConfig().getString("jail-name"));
 
 				}
 
