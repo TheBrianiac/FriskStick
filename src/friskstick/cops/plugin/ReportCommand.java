@@ -1,5 +1,7 @@
 package friskstick.cops.plugin;
 
+import org.bukkit.ChatColor;
+import org.bukkit.Server;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -8,7 +10,8 @@ import org.bukkit.entity.Player;
 public class ReportCommand implements CommandExecutor {
 
 	private FriskStick plugin;
-
+	Server s;
+	
 	public ReportCommand(FriskStick plugin) {
 
 		this.plugin = plugin; 
@@ -37,10 +40,24 @@ public class ReportCommand implements CommandExecutor {
 					} else if(args.length == 1) {
 
 						Player reported = plugin.getServer().getPlayer(args[0]);
-						
+
+						if(reported == player) {
+
+							player.sendMessage(ChatColor.DARK_RED + "[Report]" + ChatColor.RED + " You cannot report yourself!");
+
+						} else if(reported == null){
+							
+							player.sendMessage(ChatColor.DARK_RED + "[Report]" + ChatColor.RED + " Player does not exist or is offline!");
+							
+						} else {
+
+							s.broadcastMessage(plugin.getConfig().getString("player-report-message").replaceAll("&", "§").replaceAll("%snitch%", player.getName()).replaceAll("%reported%", reported.getName()));
+
+						}
 					}
 
 				}
+
 			}
 
 		}
