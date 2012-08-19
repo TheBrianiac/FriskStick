@@ -29,7 +29,7 @@ public class FriskCommand implements CommandExecutor{
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
 
-		Player player = (Player)sender;	
+		Player player = (Player)sender;
 
 		if(player == null) {
 

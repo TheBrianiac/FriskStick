@@ -27,6 +27,7 @@ public class FriskStick extends JavaPlugin implements Listener {
 		PluginManager pm = getServer().getPluginManager();
 		pm.registerEvents(this, this);
 		getCommand("frisk").setExecutor(new FriskCommand(this));
+		getCommand("report").setExecutor(new ReportCommand(this));
 		getConfig().options().copyDefaults(true);
 		saveConfig();
 
