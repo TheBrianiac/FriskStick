@@ -1,20 +1,19 @@
 package friskstick.cops.plugin;
 
-import org.bukkit.command.Command;
+/*import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
-import org.bukkit.plugin.java.JavaPlugin;
-
+*/
 /*
  * 
  * This is where the command for frisk will be implemented, making it easier to organize the program.
  * 
  */
 
-public class FriskCommand extends JavaPlugin{
-	int index = 0;
+public class FriskCommand extends FriskStick{
+	/*int index = 0;
 	
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args){
 		if(commandLabel.equalsIgnoreCase("frisk")){ // If the player typed /frisk then do the following...
@@ -22,8 +21,9 @@ public class FriskCommand extends JavaPlugin{
 			if(args.length == 0){
 				player.sendMessage("Usage: /frisk <playername>");
 			}else if(args.length == 1){
+				Player frisked = this.getServer().getPlayer(args[0]);
 				if(player.hasPermission("friskstick.chat")){
-					PlayerInventory inventory = this.getServer().getPlayer(args[0]).getInventory();
+					PlayerInventory inventory = frisked.getInventory();
 					boolean found = false;
 					for(String drug: getConfig().getStringList("drug-ids")){
 						if(drug.contains(":")){
@@ -85,5 +85,6 @@ public class FriskCommand extends JavaPlugin{
 			}
 		}
 	}
+	*/
 	
 }

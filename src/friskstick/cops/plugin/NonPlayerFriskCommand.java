@@ -1,13 +1,14 @@
 package friskstick.cops.plugin;
 
-import org.bukkit.command.Command;
+/*import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.plugin.java.JavaPlugin;
+*/
 
-public class NonPlayerFriskCommand extends JavaPlugin{
-	int index = 0;
+public class NonPlayerFriskCommand /*extends JavaPlugin*/{
+	/*int index = 0;
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args){
 		if(commandLabel.equalsIgnoreCase("frisk")){
 			if(args.length == 0){
@@ -67,4 +68,5 @@ public class NonPlayerFriskCommand extends JavaPlugin{
 			}
 		}
 	}
+	*/
 }
