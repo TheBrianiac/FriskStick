@@ -32,7 +32,7 @@ public class FriskStick extends JavaPlugin implements Listener{
 	}
 	
 	@EventHandler
-	public void Stick(PlayerInteractEntityEvent event){
+	public void stick(PlayerInteractEntityEvent event){
 		if(event.getRightClicked() instanceof Player && event.getPlayer().getItemInHand().getType() == Material.STICK){
 			Player frisked = (Player)event.getRightClicked();
 			Player cop = event.getPlayer();

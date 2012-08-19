@@ -4,11 +4,11 @@ main: friskstick.cops.plugin.FriskStick
 description: >
              A plugin for checking for "drugs" on the player that is right clicked.
 commands:
-   frisk:
-      description: The command to frisk another player.
-      usage: /frisk <player>
-      permission: friskstick.chat
-      permission-message: You don't have <permission> to frisk people.
+  frisk:
+    description: The command to frisk another player.
+    usage: /frisk <player>
+    permission: friskstick.chat
+    permission-message: You don't have <permission> to frisk people.
   report:
     description: Allows players to report other players for drugs.
 permissions:
