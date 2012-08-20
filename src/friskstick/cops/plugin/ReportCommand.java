@@ -53,7 +53,7 @@ public class ReportCommand implements CommandExecutor {
 							
 							for(Player recipient : plugin.getServer().getOnlinePlayers()) {
 								
-								if(recipient.hasPermission("friskstick.report.receive")) {
+								if(recipient.hasPermission("friskstick.report.receive") || recipient.isOp()) {
 									
 									recipient.sendMessage(plugin.getConfig().getString("player-report-message").replaceAll("&", "§").replaceAll("%snitch%", player.getName()).replaceAll("%reported%", reported.getName()));
 									
