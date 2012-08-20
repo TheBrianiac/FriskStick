@@ -50,12 +50,19 @@ public class ReportCommand implements CommandExecutor {
 							player.sendMessage(ChatColor.DARK_RED + "[Report]" + ChatColor.RED + " Player does not exist or is offline!");
 							
 						} else {
-							for(Player recipient : plugin.getServer().getOnlinePlayers()){
-								if(recipient.hasPermission("friskstick.report.receive")){
+							
+							for(Player recipient : plugin.getServer().getOnlinePlayers()) {
+								
+								if(recipient.hasPermission("friskstick.report.receive")) {
+									
 									recipient.sendMessage(plugin.getConfig().getString("player-report-message").replaceAll("&", "§").replaceAll("%snitch%", player.getName()).replaceAll("%reported%", reported.getName()));
+									
 								}
+								
 							}
+							
 						}
+						
 					}
 
 				}
