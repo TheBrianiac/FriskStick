@@ -31,7 +31,7 @@ public class ReportCommand implements CommandExecutor {
 
 			if(commandLabel.equalsIgnoreCase("report")) {
 
-				if(player.hasPermission("friskstick.report")) {
+				if(player.hasPermission("friskstick.report.send")) {
 
 					if(args.length == 0) {
 
@@ -50,9 +50,11 @@ public class ReportCommand implements CommandExecutor {
 							player.sendMessage(ChatColor.DARK_RED + "[Report]" + ChatColor.RED + " Player does not exist or is offline!");
 							
 						} else {
-
-							s.broadcastMessage(plugin.getConfig().getString("player-report-message").replaceAll("&", "§").replaceAll("%snitch%", player.getName()).replaceAll("%reported%", reported.getName()));
-
+							for(Player recipient : plugin.getServer().getOnlinePlayers()){
+								if(recipient.hasPermission("friskstick.report.receive")){
+									recipient.sendMessage(plugin.getConfig().getString("player-report-message").replaceAll("&", "§").replaceAll("%snitch%", player.getName()).replaceAll("%reported%", reported.getName()));
+								}
+							}
 						}
 					}
 
