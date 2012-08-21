@@ -133,9 +133,9 @@ public class FriskCommand implements CommandExecutor{
 						}
 
 					} else {
-						
+
 						player.sendMessage(ChatColor.DARK_RED + "You don't have permission to use this command!");
-						
+
 					}
 
 				}
