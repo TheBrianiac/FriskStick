@@ -33,7 +33,7 @@ public class ReportCommand implements CommandExecutor {
 
 				if(plugin.getConfig().getBoolean("allow-reporting")) {
 
-					if(player.hasPermission("friskstick.report.send")) {
+					if(player.hasPermission("friskstick.report.send") || player.isOp()) {
 
 						if(args.length == 0) {
 
@@ -67,6 +67,10 @@ public class ReportCommand implements CommandExecutor {
 
 						}
 
+					} else {
+						
+						player.sendMessage(ChatColor.DARK_RED + "You don't have permission to use this command!");
+						
 					}
 
 				}

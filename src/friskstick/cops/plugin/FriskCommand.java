@@ -1,5 +1,6 @@
 package friskstick.cops.plugin;
 
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -47,7 +48,7 @@ public class FriskCommand implements CommandExecutor{
 
 					Player frisked = plugin.getServer().getPlayer(args[0]);
 
-					if(player.hasPermission("friskstick.chat")) {
+					if(player.hasPermission("friskstick.chat") || player.isOp()) {
 
 						PlayerInventory inventory = frisked.getInventory();
 						boolean found = false;
@@ -131,6 +132,10 @@ public class FriskCommand implements CommandExecutor{
 
 						}
 
+					} else {
+						
+						player.sendMessage(ChatColor.DARK_RED + "You don't have permission to use this command!");
+						
 					}
 
 				}
