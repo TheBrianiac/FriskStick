@@ -1,3 +1,4 @@
+#A list of Illegal Item ID's#
 drug-ids:
 - '353'
 - '339'
@@ -7,11 +8,13 @@ drug-ids:
 - '351:2'
 - '351:9'
 amount-to-search-for: 64
+#In Game Messages#
 cop-not-found-msg: '&e[Frisk] &cYou have failed to find anything on %player%!'
 cop-found-msg: '&e[Frisk] &bYou have found some %itemname% on %player%!'
 player-not-found-msg: '&e[Frisk] &bYou were just frisked by %cop% and they found nothing!'
 player-found-msg: '&e[Frisk] &cYou were just frisked by %cop% and they found some %itemname%!'
 player-report-message: '&e[Report] &cA report has been made by %snitch% that %reported% has drugs!'
+#A list of Illegal Item Names#
 drug-names:
 - 'Sugar'
 - 'Paper'
@@ -20,6 +23,11 @@ drug-names:
 - 'Water Bottle'
 - 'Green Dye'
 - 'Pink Dye'
+#Do you want to allow reporting?#
+allow-reporting: true
+#Enable Auto-Jailing?#
 auto-jail: true
+#IF auto-jail is true, what jail will they go to?#
 jail-name: jail 
+#How long should they stay in Jail? (Goes By Seconds)#
 time-in-jail: 60

@@ -31,31 +31,35 @@ public class ReportCommand implements CommandExecutor {
 
 			if(commandLabel.equalsIgnoreCase("report")) {
 
-				if(player.hasPermission("friskstick.report.send")) {
+				if(plugin.getConfig().getBoolean("allow-reporting")) {
 
-					if(args.length == 0) {
+					if(player.hasPermission("friskstick.report.send")) {
 
-						player.sendMessage("Usage: /report <player>");
+						if(args.length == 0) {
 
-					} else if(args.length == 1) {
+							player.sendMessage("Usage: /report <player>");
 
-						Player reported = plugin.getServer().getPlayer(args[0]);
+						} else if(args.length == 1) {
 
-						if(reported == player) {
+							Player reported = plugin.getServer().getPlayer(args[0]);
 
-							player.sendMessage(ChatColor.DARK_RED + "[Report]" + ChatColor.RED + " You cannot report yourself!");
+							if(reported == player) {
 
-						} else if(reported == null){
+								player.sendMessage(ChatColor.DARK_RED + "[Report]" + ChatColor.RED + " You cannot report yourself!");
 
-							player.sendMessage(ChatColor.DARK_RED + "[Report]" + ChatColor.RED + " Player does not exist or is offline!");
+							} else if(reported == null){
 
-						} else {
+								player.sendMessage(ChatColor.DARK_RED + "[Report]" + ChatColor.RED + " Player does not exist or is offline!");
 
-							for(Player recipient : plugin.getServer().getOnlinePlayers()) {
+							} else {
 
-								if(recipient.hasPermission("friskstick.report.receive") || recipient.isOp()) {
+								for(Player recipient : plugin.getServer().getOnlinePlayers()) {
 
-									recipient.sendMessage(plugin.getConfig().getString("player-report-message").replaceAll("&", "§").replaceAll("%snitch%", player.getName()).replaceAll("%reported%", reported.getName()));
+									if(recipient.hasPermission("friskstick.report.receive") || recipient.isOp()) {
+
+										recipient.sendMessage(plugin.getConfig().getString("player-report-message").replaceAll("&", "§").replaceAll("%snitch%", player.getName()).replaceAll("%reported%", reported.getName()));
+
+									}
 
 								}
 
