@@ -25,9 +25,9 @@ public class FriskStick extends JavaPlugin implements Listener {
 		
 		try {
 			
-		    MetricsLite metrics = new MetricsLite(this);
-		    metrics.start();
-		    
+			MetricsLite metrics = new MetricsLite(this);
+			metrics.start();
+			
 		} catch (IOException e) {
 			
 		}
