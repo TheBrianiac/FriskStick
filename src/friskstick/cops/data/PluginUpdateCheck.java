@@ -1,4 +1,4 @@
-package friskstick.cops.plugin;
+package friskstick.cops.data;
 
 import java.net.URL;
 import java.io.BufferedReader;
@@ -12,6 +12,8 @@ import org.bukkit.ChatColor;
 import org.bukkit.event.Listener;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerJoinEvent;
+
+import friskstick.cops.plugin.FriskStick;
 
 public class PluginUpdateCheck implements Listener {
 	

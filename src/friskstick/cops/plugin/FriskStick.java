@@ -14,6 +14,11 @@ import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import friskstick.cops.commands.FriskCommand;
+import friskstick.cops.commands.ReportCommand;
+import friskstick.cops.data.MetricsLite;
+import friskstick.cops.data.PluginUpdateCheck;
+
 public class FriskStick extends JavaPlugin implements Listener {
 
 	public final Logger logger = Logger.getLogger("Minecraft");

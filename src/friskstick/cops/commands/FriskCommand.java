@@ -1,4 +1,4 @@
-package friskstick.cops.plugin;
+package friskstick.cops.commands;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -7,6 +7,9 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
+
+import friskstick.cops.plugin.FriskStick;
+import friskstick.cops.plugin.JailPlayer;
 
 public class FriskCommand implements CommandExecutor{
 

@@ -26,7 +26,7 @@
  * either expressed or implied, of anybody else.
  */
 
-package friskstick.cops.plugin;
+package friskstick.cops.data;
 
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.InvalidConfigurationException;
