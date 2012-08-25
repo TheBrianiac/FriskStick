@@ -36,6 +36,7 @@ public class FriskStick extends JavaPlugin implements Listener {
 		logger.info(pdffile.getName() + " v" + pdffile.getVersion() + " has been enabled!");
 		PluginManager pm = getServer().getPluginManager();
 		pm.registerEvents(this, this);
+		pm.registerEvents(new PluginUpdateCheck(this), this);
 		getCommand("frisk").setExecutor(new FriskCommand(this));
 		getCommand("report").setExecutor(new ReportCommand(this));
 		getConfig().options().copyDefaults(true);

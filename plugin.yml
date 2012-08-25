@@ -41,3 +41,6 @@ permissions:
   friskstick.report.receive:
     description: Allows a player to receive reports.
     default: op
+  friskstick.notify:
+    description: Notifies a player of updates.
+    default: op
