@@ -8,12 +8,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
-/*
- * 
- * This is where the command for frisk will be implemented, making it easier to organize the program.
- * 
- */
-
 public class FriskCommand implements CommandExecutor{
 
 	private FriskStick plugin;
@@ -30,7 +24,14 @@ public class FriskCommand implements CommandExecutor{
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
 
-		Player player = (Player)sender;
+		Player player = null; 		
+
+		if(sender instanceof Player) {
+
+			player = (Player)sender;
+
+		}
+
 
 		if(player == null) {
 
@@ -40,15 +41,17 @@ public class FriskCommand implements CommandExecutor{
 
 			if(commandLabel.equalsIgnoreCase("frisk")) { // If the player typed /frisk then do the following...
 
-				if(args.length == 0) {
+				if(player.hasPermission("friskstick.chat") || player.isOp()) {
 
-					player.sendMessage("Usage: /frisk <playername>");
+					if(args.length == 0) {
 
-				} else if(args.length == 1) {
+						player.sendMessage("Usage: /frisk <playername>");
 
-					Player frisked = plugin.getServer().getPlayer(args[0]);
+					} else if(args.length == 1) {
 
-					if(player.hasPermission("friskstick.chat") || player.isOp()) {
+						Player frisked = plugin.getServer().getPlayer(args[0]);
+
+
 
 						PlayerInventory inventory = frisked.getInventory();
 						boolean found = false;
@@ -132,11 +135,11 @@ public class FriskCommand implements CommandExecutor{
 
 						}
 
-					} else {
+					} 
 
-						player.sendMessage(ChatColor.DARK_RED + "You don't have permission to use this command!");
+				} else {
 
-					}
+					player.sendMessage(ChatColor.DARK_RED + "You don't have permission to frisk anyone!");
 
 				}
 

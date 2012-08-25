@@ -21,7 +21,13 @@ public class ReportCommand implements CommandExecutor {
 	@Override
 	public boolean onCommand(CommandSender sender, Command smd, String commandLabel, String[] args) {
 
-		Player player = (Player)sender;
+		Player player = null;
+
+		if(sender instanceof Player) {
+
+			player = (Player)sender;
+
+		}
 
 		if(player == null) {
 
@@ -68,9 +74,9 @@ public class ReportCommand implements CommandExecutor {
 						}
 
 					} else {
-						
+
 						player.sendMessage(ChatColor.DARK_RED + "You don't have permission to use this command!");
-						
+
 					}
 
 				}
