@@ -34,8 +34,7 @@ public class FriskCommand implements CommandExecutor{
 			player = (Player)sender;
 
 		}
-
-
+		
 		if(player == null) {
 
 			sender.sendMessage("You cannot run this command in the console!");
