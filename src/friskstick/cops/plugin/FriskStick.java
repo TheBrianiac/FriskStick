@@ -27,16 +27,16 @@ public class FriskStick extends JavaPlugin implements Listener {
 	JailPlayer jailed = new JailPlayer();
 
 	public void onEnable() {
-		
+
 		try {
-			
+
 			MetricsLite metrics = new MetricsLite(this);
 			metrics.start();
-			
+
 		} catch (IOException e) {
-			
+
 		}
-		
+
 		PluginDescriptionFile pdffile = this.getDescription();
 		logger.info(pdffile.getName() + " v" + pdffile.getVersion() + " has been enabled!");
 		PluginManager pm = getServer().getPluginManager();
