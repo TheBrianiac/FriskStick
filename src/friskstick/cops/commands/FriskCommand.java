@@ -74,8 +74,8 @@ public class FriskCommand implements CommandExecutor{
 										player.getInventory().addItem(new ItemStack(contents[inventory.first(new ItemStack(Integer.parseInt(firsthalf), i, Short.parseShort(lasthalf)))]));
 										inventory.removeItem(new ItemStack(Integer.parseInt(firsthalf), 2305, Short.parseShort(lasthalf)));
 
-										player.sendMessage(plugin.getConfig().getString("cop-found-msg").replaceAll("&", "§").replaceAll("%cop%", player.getName()).replaceAll("%itemname%", plugin.getConfig().getStringList("drug-names").toArray()[index].toString()).replaceAll("%player%", plugin.getServer().getPlayer(args[0]).getName()));
-										plugin.getServer().getPlayer(args[0]).sendMessage(plugin.getConfig().getString("player-found-msg").replaceAll("&", "§").replaceAll("%player%", player.getName()).replaceAll("%itemname%", plugin.getConfig().getStringList("drug-names").toArray()[index].toString()));
+										player.sendMessage(plugin.getConfig().getString("cop-found-msg").replaceAll("&", "§").replaceAll("%itemname%", plugin.getConfig().getStringList("drug-names").toArray()[index].toString()).replaceAll("%player%", plugin.getServer().getPlayer(args[0]).getName()));
+										plugin.getServer().getPlayer(args[0]).sendMessage(plugin.getConfig().getString("player-found-msg").replaceAll("&", "§").replaceAll("%cop%", player.getName()).replaceAll("%player%", player.getName()).replaceAll("%itemname%", plugin.getConfig().getStringList("drug-names").toArray()[index].toString()));
 
 										if(player.hasPermission("friskstick.jail")) {
 
@@ -99,8 +99,8 @@ public class FriskCommand implements CommandExecutor{
 									player.getInventory().addItem(new ItemStack(contents[inventory.first(drugid)]));
 									inventory.removeItem(new ItemStack(drugid, 2305));
 
-									player.sendMessage(plugin.getConfig().getString("cop-found-msg").replaceAll("&", "§").replaceAll("%cop%", player.getName()).replaceAll("%itemname%", plugin.getConfig().getStringList("drug-names").toArray()[index].toString()).replaceAll("%player%", plugin.getServer().getPlayer(args[0]).getName()));
-									plugin.getServer().getPlayer(args[0]).sendMessage(plugin.getConfig().getString("player-found-msg").replaceAll("&", "§").replaceAll("%player%", player.getName()).replaceAll("%itemname%", plugin.getConfig().getStringList("drug-names").toArray()[index].toString()));
+									player.sendMessage(plugin.getConfig().getString("cop-found-msg").replaceAll("&", "§").replaceAll("%itemname%", plugin.getConfig().getStringList("drug-names").toArray()[index].toString()).replaceAll("%player%", plugin.getServer().getPlayer(args[0]).getName()));
+									plugin.getServer().getPlayer(args[0]).sendMessage(plugin.getConfig().getString("player-found-msg").replaceAll("%cop%", player.getName()).replaceAll("&", "§").replaceAll("%player%", player.getName()).replaceAll("%itemname%", plugin.getConfig().getStringList("drug-names").toArray()[index].toString()));
 
 									if(player.hasPermission("friskstick.jail")) {
 
@@ -122,8 +122,8 @@ public class FriskCommand implements CommandExecutor{
 
 						if(!found) {
 
-							player.sendMessage(plugin.getConfig().getString("cop-not-found-msg").replaceAll("&", "§").replaceAll("%cop%", player.getName()).replaceAll("%player%", plugin.getServer().getPlayer(args[0]).getName()));
-							plugin.getServer().getPlayer(args[0]).sendMessage(plugin.getConfig().getString("player-not-found-msg").replaceAll("&", "§").replaceAll("%player%", player.getName()));
+							player.sendMessage(plugin.getConfig().getString("cop-not-found-msg").replaceAll("&", "§").replaceAll("%player%", plugin.getServer().getPlayer(args[0]).getName()));
+							plugin.getServer().getPlayer(args[0]).sendMessage(plugin.getConfig().getString("player-not-found-msg").replaceAll("&", "§").replaceAll("%cop%", player.getName()).replaceAll("%player%", player.getName()));
 
 							if(player.getHealth() >= 2) {
 
