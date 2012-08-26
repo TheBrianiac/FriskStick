@@ -7,7 +7,7 @@ public enum DrugEffect{
 	DIZZINESS(60, 2, PotionEffectType.CONFUSION),
 	HALLUCINATION(20, 4, PotionEffectType.BLINDNESS, PotionEffectType.CONFUSION),
 	DEATH,
-	ILLNESS(600, 0, PotionEffectType.HARM);
+	ILLNESS(600, 0, PotionEffectType.POISON);
 	
 	private PotionEffectType[] types;
 	private int power;
