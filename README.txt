@@ -1,1 +1,1 @@
-*FriskStick-A plugin to frisk players for illegal items!*
+**FriskStick-A plugin to frisk players for illegal items!**
