@@ -138,17 +138,21 @@ public class PluginUpdateCheck implements Listener {
 	@EventHandler
 	public void checkJoin(PlayerJoinEvent event) {
 
-		this.checkForUpdates();
+		if(event.getPlayer().isOp()) {
 
-		if(currentVersion != 0 || recentVersion != 0) {
+			this.checkForUpdates();
 
-			if(currentVersion < recentVersion) {
+			if(currentVersion != 0 || recentVersion != 0) {
 
-				Player player = event.getPlayer();
+				if(currentVersion < recentVersion) {
 
-				if(player.hasPermission("friskstick.notify")) {
+					Player player = event.getPlayer();
 
-					player.sendMessage(ChatColor.DARK_AQUA + "FriskStick has been updated to: " + this.getCurrentVersion());
+					if(player.hasPermission("friskstick.notify")) {
+
+						player.sendMessage(ChatColor.DARK_AQUA + "FriskStick has been updated to: " + this.getCurrentVersion());
+
+					}
 
 				}
 
