@@ -53,29 +53,54 @@ public class FriskCommand implements CommandExecutor{
 
 						Player frisked = plugin.getServer().getPlayer(args[0]);
 
-						if(!frisked.hasPermission("friskstick.bypass")){
+						if(!frisked.hasPermission("friskstick.bypass")) {
 
-						PlayerInventory inventory = frisked.getInventory();
-						boolean found = false;
+							PlayerInventory inventory = frisked.getInventory();
+							boolean found = false;
 
-						for(String drug: plugin.getConfig().getStringList("drug-ids")) {
+							for(String drug: plugin.getConfig().getStringList("drug-ids")) {
 
-							if(drug.contains(":")) {
+								if(drug.contains(":")) {
 
-								String firsthalf = drug.split(":")[0];
-								String lasthalf = drug.split(":")[1];
+									String firsthalf = drug.split(":")[0];
+									String lasthalf = drug.split(":")[1];
 
-								for(int i = 1; i <= plugin.getConfig().getInt("amount-to-search-for"); i++) {
+									for(int i = 1; i <= plugin.getConfig().getInt("amount-to-search-for"); i++) {
 
-									ItemStack[] contents = inventory.getContents();
+										ItemStack[] contents = inventory.getContents();
 
-									if(inventory.contains(new ItemStack(Integer.parseInt(firsthalf), i, Short.parseShort(lasthalf)))) {
+										if(inventory.contains(new ItemStack(Integer.parseInt(firsthalf), i, Short.parseShort(lasthalf)))) {
 
-										player.getInventory().addItem(new ItemStack(contents[inventory.first(new ItemStack(Integer.parseInt(firsthalf), i, Short.parseShort(lasthalf)))]));
-										inventory.removeItem(new ItemStack(Integer.parseInt(firsthalf), 2305, Short.parseShort(lasthalf)));
+											player.getInventory().addItem(new ItemStack(contents[inventory.first(new ItemStack(Integer.parseInt(firsthalf), i, Short.parseShort(lasthalf)))]));
+											inventory.removeItem(new ItemStack(Integer.parseInt(firsthalf), 2305, Short.parseShort(lasthalf)));
+
+											player.sendMessage(plugin.getConfig().getString("cop-found-msg").replaceAll("&", "§").replaceAll("%itemname%", plugin.getConfig().getStringList("drug-names").toArray()[index].toString()).replaceAll("%player%", plugin.getServer().getPlayer(args[0]).getName()));
+											plugin.getServer().getPlayer(args[0]).sendMessage(plugin.getConfig().getString("player-found-msg").replaceAll("&", "§").replaceAll("%cop%", player.getName()).replaceAll("%player%", player.getName()).replaceAll("%itemname%", plugin.getConfig().getStringList("drug-names").toArray()[index].toString()));
+
+											if(player.hasPermission("friskstick.jail")) {
+
+												jailed.jail(plugin.getServer().getPlayer(args[0]).getName());
+
+											}
+
+											found = true;
+
+										}
+
+									}
+
+								} else {
+
+									if(inventory.contains(Integer.parseInt(drug))) {
+
+										int drugid = Integer.parseInt(drug);
+
+										ItemStack[] contents = inventory.getContents();
+										player.getInventory().addItem(new ItemStack(contents[inventory.first(drugid)]));
+										inventory.removeItem(new ItemStack(drugid, 2305));
 
 										player.sendMessage(plugin.getConfig().getString("cop-found-msg").replaceAll("&", "§").replaceAll("%itemname%", plugin.getConfig().getStringList("drug-names").toArray()[index].toString()).replaceAll("%player%", plugin.getServer().getPlayer(args[0]).getName()));
-										plugin.getServer().getPlayer(args[0]).sendMessage(plugin.getConfig().getString("player-found-msg").replaceAll("&", "§").replaceAll("%cop%", player.getName()).replaceAll("%player%", player.getName()).replaceAll("%itemname%", plugin.getConfig().getStringList("drug-names").toArray()[index].toString()));
+										plugin.getServer().getPlayer(args[0]).sendMessage(plugin.getConfig().getString("player-found-msg").replaceAll("%cop%", player.getName()).replaceAll("&", "§").replaceAll("%player%", player.getName()).replaceAll("%itemname%", plugin.getConfig().getStringList("drug-names").toArray()[index].toString()));
 
 										if(player.hasPermission("friskstick.jail")) {
 
@@ -89,56 +114,33 @@ public class FriskCommand implements CommandExecutor{
 
 								}
 
-							} else {
+								index++;
 
-								if(inventory.contains(Integer.parseInt(drug))) {
+							}
 
-									int drugid = Integer.parseInt(drug);
+							index = 0;
 
-									ItemStack[] contents = inventory.getContents();
-									player.getInventory().addItem(new ItemStack(contents[inventory.first(drugid)]));
-									inventory.removeItem(new ItemStack(drugid, 2305));
+							if(!found) {
 
-									player.sendMessage(plugin.getConfig().getString("cop-found-msg").replaceAll("&", "§").replaceAll("%itemname%", plugin.getConfig().getStringList("drug-names").toArray()[index].toString()).replaceAll("%player%", plugin.getServer().getPlayer(args[0]).getName()));
-									plugin.getServer().getPlayer(args[0]).sendMessage(plugin.getConfig().getString("player-found-msg").replaceAll("%cop%", player.getName()).replaceAll("&", "§").replaceAll("%player%", player.getName()).replaceAll("%itemname%", plugin.getConfig().getStringList("drug-names").toArray()[index].toString()));
+								player.sendMessage(plugin.getConfig().getString("cop-not-found-msg").replaceAll("&", "§").replaceAll("%player%", plugin.getServer().getPlayer(args[0]).getName()));
+								plugin.getServer().getPlayer(args[0]).sendMessage(plugin.getConfig().getString("player-not-found-msg").replaceAll("&", "§").replaceAll("%cop%", player.getName()).replaceAll("%player%", player.getName()));
 
-									if(player.hasPermission("friskstick.jail")) {
+								if(player.getHealth() >= 2) {
 
-										jailed.jail(plugin.getServer().getPlayer(args[0]).getName());
+									player.setHealth(player.getHealth() - 2);
 
-									}
+								} else {
 
-									found = true;
+									player.setHealth(0);
 
 								}
 
 							}
 
-							index++;
+						} else {
 
-						}
-
-						index = 0;
-
-						if(!found) {
-
-							player.sendMessage(plugin.getConfig().getString("cop-not-found-msg").replaceAll("&", "§").replaceAll("%player%", plugin.getServer().getPlayer(args[0]).getName()));
-							plugin.getServer().getPlayer(args[0]).sendMessage(plugin.getConfig().getString("player-not-found-msg").replaceAll("&", "§").replaceAll("%cop%", player.getName()).replaceAll("%player%", player.getName()));
-
-							if(player.getHealth() >= 2) {
-
-								player.setHealth(player.getHealth() - 2);
-
-							} else {
-
-								player.setHealth(0);
-
-							}
-
-						}
-						
-						}else{
 							player.sendMessage("That player cannot be frisked!");
+
 						}
 
 					} 
