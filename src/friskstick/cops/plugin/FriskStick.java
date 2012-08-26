@@ -66,7 +66,7 @@ public class FriskStick extends JavaPlugin implements Listener {
 
 			if(cop.hasPermission("friskstick.use")) {
 
-				if(!frisked.hasPermission("friskstick.bypass")){
+				if(!frisked.hasPermission("friskstick.bypass")) {
 
 					PlayerInventory inventory = frisked.getInventory();
 					boolean found = false;
@@ -145,9 +145,13 @@ public class FriskStick extends JavaPlugin implements Listener {
 						}
 
 					}
-				}else{
+
+				} else {
+
 					cop.sendMessage("That player cannot be frisked!");
+
 				}
+
 			}
 
 		}
@@ -155,4 +159,3 @@ public class FriskStick extends JavaPlugin implements Listener {
 	}
 
 }
-
