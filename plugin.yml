@@ -44,3 +44,6 @@ permissions:
   friskstick.notify:
     description: Notifies a player of updates.
     default: op
+  friskstick.bypass:
+    description: Allows a player to be immune to frisking.
+    default: op

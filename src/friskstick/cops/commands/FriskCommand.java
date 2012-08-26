@@ -53,7 +53,7 @@ public class FriskCommand implements CommandExecutor{
 
 						Player frisked = plugin.getServer().getPlayer(args[0]);
 
-
+						if(!frisked.hasPermission("friskstick.bypass")){
 
 						PlayerInventory inventory = frisked.getInventory();
 						boolean found = false;
@@ -135,6 +135,10 @@ public class FriskCommand implements CommandExecutor{
 
 							}
 
+						}
+						
+						}else{
+							player.sendMessage("That player cannot be frisked!");
 						}
 
 					} 
