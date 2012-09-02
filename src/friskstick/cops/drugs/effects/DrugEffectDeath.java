@@ -4,7 +4,7 @@ import org.bukkit.entity.Player;
 
 public class DrugEffectDeath {
 
-	public void kill(Player player) {
+	public static void kill(Player player) {
 
 		player.setHealth(0);
 

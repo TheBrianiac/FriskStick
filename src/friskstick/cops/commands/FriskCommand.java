@@ -1,5 +1,7 @@
 package friskstick.cops.commands;
 
+import java.util.Iterator;
+
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -70,8 +72,10 @@ public class FriskCommand implements CommandExecutor{
 										ItemStack[] contents = inventory.getContents();
 
 										if(inventory.contains(new ItemStack(Integer.parseInt(firsthalf), i, Short.parseShort(lasthalf)))) {
-
-											player.getInventory().addItem(new ItemStack(contents[inventory.first(new ItemStack(Integer.parseInt(firsthalf), i, Short.parseShort(lasthalf)))]));
+											Iterator<Integer> iter = inventory.all(new ItemStack(Integer.parseInt(firsthalf), i, Short.parseShort(lasthalf))).keySet().iterator();
+											while(iter.hasNext()){
+												player.getInventory().addItem(new ItemStack(contents[iter.next()]));
+											}
 											inventory.removeItem(new ItemStack(Integer.parseInt(firsthalf), 2305, Short.parseShort(lasthalf)));
 
 											player.sendMessage(plugin.getConfig().getString("cop-found-msg").replaceAll("&", "§").replaceAll("%itemname%", plugin.getConfig().getStringList("drug-names").toArray()[index].toString()).replaceAll("%player%", plugin.getServer().getPlayer(args[0]).getName()));
@@ -94,9 +98,11 @@ public class FriskCommand implements CommandExecutor{
 									if(inventory.contains(Integer.parseInt(drug))) {
 
 										int drugid = Integer.parseInt(drug);
-
+										Iterator<Integer> iter = inventory.all(drugid).keySet().iterator();
 										ItemStack[] contents = inventory.getContents();
-										player.getInventory().addItem(new ItemStack(contents[inventory.first(drugid)]));
+										while(iter.hasNext()){
+											player.getInventory().addItem(new ItemStack(contents[iter.next()]));
+										}
 										inventory.removeItem(new ItemStack(drugid, 2305));
 
 										player.sendMessage(plugin.getConfig().getString("cop-found-msg").replaceAll("&", "§").replaceAll("%itemname%", plugin.getConfig().getStringList("drug-names").toArray()[index].toString()).replaceAll("%player%", plugin.getServer().getPlayer(args[0]).getName()));
