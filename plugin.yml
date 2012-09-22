@@ -3,6 +3,8 @@ version: 1.3.1 Alpha
 main: friskstick.cops.plugin.FriskStick
 description: >
              A plugin for checking for "drugs" on the player that is right clicked.
+softdepend: [Essentials]
+authors: [dchaosknight, domingocool]
 commands:
   frisk:
     description: The command to frisk another player.
