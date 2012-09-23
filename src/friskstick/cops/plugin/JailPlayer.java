@@ -8,7 +8,9 @@ public class JailPlayer extends JavaPlugin {
 	/**
 	 * 
 	 * Jails the specified player based on what is specified in the configuration. Only works with Essentials.
+	 * 
 	 * @param name The player to be jailed's name.
+	 * 
 	 */
 
 	public void jail(String name) {
