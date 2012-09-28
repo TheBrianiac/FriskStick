@@ -11,19 +11,21 @@ import org.bukkit.event.player.PlayerInteractEvent;
 
 import java.util.Random;
 
-public class Drugs implements Listener{
+/*
+ * 
+ * Main class where drugs will be implemented. The drugs will have effects.
+ * 
+ */
+
+public class Drugs implements Listener {
 
 	private FriskStick plugin;
 	private Random random;
 
-	/*
-	 * 
-	 * Main class where drugs will be implemented. The drugs will have effects.
-	 * 
-	 */
+	public Drugs(FriskStick plugin) {
 
-	public Drugs(FriskStick plugin){
 		this.plugin = plugin;
+
 	}
 
 	public void inflict(Inflictable inflict, Player player) {
@@ -34,15 +36,21 @@ public class Drugs implements Listener{
 
 	//Currently NOT implemented
 	@EventHandler
-	public void drugUse(PlayerInteractEvent event){
-		for(String drugidraw : plugin.getConfig().getStringList("drug-ids")){
+	public void drugUse(PlayerInteractEvent event) {
+
+		for(String drugidraw : plugin.getConfig().getStringList("drug-ids")) {
+
 			String[] drugids = drugidraw.split(":");
 			String drugid = drugids[0];
-			if(event.getItem().getType().equals(Material.getMaterial(Integer.parseInt(drugid)))){
+
+			if(event.getItem().getType().equals(Material.getMaterial(Integer.parseInt(drugid)))) {
+
 				int i = random.nextInt(DrugEffect.values().length);
 				DrugEffect effect = DrugEffect.values()[i];
 				Player player = event.getPlayer();
-				switch(effect){
+
+				switch(effect) {
+
 				case NAUSEA:
 					this.inflict(new DrugEffectNausea(), player);
 				case HALLUCINATION:
@@ -53,8 +61,13 @@ public class Drugs implements Listener{
 					this.inflict(new DrugEffectDizziness(), player);
 				case DEATH:
 					DrugEffectDeath.kill(player);
+
 				}
+
 			}
+
 		}
+
 	}
+
 }
