@@ -32,8 +32,8 @@ public class FriskStick extends JavaPlugin {
 		PluginDescriptionFile pdffile = this.getDescription();
 		logger.info(pdffile.getName() + " v" + pdffile.getVersion() + " has been enabled!");
 		PluginManager pm = getServer().getPluginManager();
-		pm.registerEvents(new Stick(this), this);
-		pm.registerEvents(new Drugs(this), this);
+		pm.registerEvents(new Stick(this), this); //Stick(Right Click Event) Register
+		pm.registerEvents(new Drugs(this), this); // Drug Register
 		//pm.registerEvents(new PluginUpdateCheck(this), this);
 		getCommand("frisk").setExecutor(new FriskCommand(this));
 		getCommand("report").setExecutor(new ReportCommand(this));

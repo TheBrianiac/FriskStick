@@ -34,17 +34,16 @@ public class Drugs implements Listener {
 
 	}
 
-	// Currently NOT implemented
+	// Currently NOT implemented(Still does not work)
 	@EventHandler
-	public void drugUse(PlayerInteractEvent event) {
+	public void drugUse(PlayerInteractEvent event) { // Try to use PlayerInteractEntityEvent and if entity == player return null, else continue with effects
 
 		for(String drugIDRaw : plugin.getConfig().getStringList("drug-ids")) {
-
+			
 			String[] drugIDs = drugIDRaw.split(":");
 			String drugID = drugIDs[0];
 
-			if(event.getItem().getType()
-					.equals(Material.getMaterial(Integer.parseInt(drugID)))) {
+			if(event.getItem().getType().equals(Material.getMaterial(Integer.parseInt(drugID)))) {
 
 				int i = random.nextInt(DrugEffect.values().length);
 
