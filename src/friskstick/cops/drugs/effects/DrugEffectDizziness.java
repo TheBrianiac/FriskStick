@@ -13,7 +13,8 @@ public class DrugEffectDizziness implements Inflictable {
 		for(int i = 0; i < DrugEffect.DIZZINESS.getTypes().length; i++) {
 
 			DrugEffect diz = DrugEffect.DIZZINESS;
-			player.addPotionEffect(new PotionEffect(diz.getTypes()[i], diz.getDuration(), diz.getPower()));
+			player.addPotionEffect(new PotionEffect(diz.getTypes()[i], diz
+					.getDuration(), diz.getPower()));
 
 		}
 

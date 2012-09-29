@@ -6,7 +6,7 @@ public enum GeneralDrugEffect {
 
 	private DrugEffect[] drugEffects;
 
-	private GeneralDrugEffect(DrugEffect...drugEffects) {
+	private GeneralDrugEffect(DrugEffect... drugEffects) {
 
 		this.drugEffects = drugEffects;
 

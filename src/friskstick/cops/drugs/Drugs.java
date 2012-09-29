@@ -34,18 +34,20 @@ public class Drugs implements Listener {
 
 	}
 
-	//Currently NOT implemented
+	// Currently NOT implemented
 	@EventHandler
 	public void drugUse(PlayerInteractEvent event) {
 
-		for(String drugidraw : plugin.getConfig().getStringList("drug-ids")) {
+		for(String drugIDRaw : plugin.getConfig().getStringList("drug-ids")) {
 
-			String[] drugids = drugidraw.split(":");
-			String drugid = drugids[0];
+			String[] drugIDs = drugIDRaw.split(":");
+			String drugID = drugIDs[0];
 
-			if(event.getItem().getType().equals(Material.getMaterial(Integer.parseInt(drugid)))) {
+			if(event.getItem().getType()
+					.equals(Material.getMaterial(Integer.parseInt(drugID)))) {
 
 				int i = random.nextInt(DrugEffect.values().length);
+
 				DrugEffect effect = DrugEffect.values()[i];
 				Player player = event.getPlayer();
 
@@ -53,12 +55,16 @@ public class Drugs implements Listener {
 
 				case NAUSEA:
 					this.inflict(new DrugEffectNausea(), player);
+
 				case HALLUCINATION:
 					this.inflict(new DrugEffectHallucination(), player);
+
 				case ILLNESS:
 					this.inflict(new DrugEffectIllness(), player);
+
 				case DIZZINESS:
 					this.inflict(new DrugEffectDizziness(), player);
+
 				case DEATH:
 					DrugEffectDeath.kill(player);
 
