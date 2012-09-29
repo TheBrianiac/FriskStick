@@ -10,7 +10,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import friskstick.cops.commands.FriskCommand;
 import friskstick.cops.commands.ReportCommand;
 import friskstick.cops.data.MetricsLite;
-import friskstick.cops.drugs.Drugs;
+//import friskstick.cops.drugs.Drugs;
 //import friskstick.cops.data.PluginUpdateCheck;
 import friskstick.cops.stick.Stick;
 
@@ -33,7 +33,7 @@ public class FriskStick extends JavaPlugin {
 		logger.info(pdffile.getName() + " v" + pdffile.getVersion() + " has been enabled!");
 		PluginManager pm = getServer().getPluginManager();
 		pm.registerEvents(new Stick(this), this); //Stick(Right Click Event) Register
-		pm.registerEvents(new Drugs(this), this); // Drug Register
+		//pm.registerEvents(new Drugs(this), this); // Drug Register
 		//pm.registerEvents(new PluginUpdateCheck(this), this);
 		getCommand("frisk").setExecutor(new FriskCommand(this));
 		getCommand("report").setExecutor(new ReportCommand(this));
