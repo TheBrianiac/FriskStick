@@ -14,16 +14,19 @@ import friskstick.cops.plugin.FriskStick;
 import friskstick.cops.plugin.JailPlayer;
 
 public class Stick implements Listener {
+	
+	FriskStick plugin;
 
 	public Stick(FriskStick plugin) {
-
+		
+		this.plugin = plugin;
 		plugin.getServer().getPluginManager().registerEvents(this, plugin);
 
 	}
 
-	FriskStick plugin;
+	
 	int index = 0;
-	JailPlayer jailed = new JailPlayer();
+	JailPlayer jailed = new JailPlayer(plugin);
 
 	@EventHandler
 	public void friskStickPlayer(PlayerInteractEntityEvent event) {

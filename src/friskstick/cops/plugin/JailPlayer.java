@@ -1,9 +1,12 @@
 package friskstick.cops.plugin;
 
-import org.bukkit.plugin.java.JavaPlugin;
-
-public class JailPlayer extends JavaPlugin {
-
+public class JailPlayer{
+	
+	FriskStick plugin;
+	
+	public JailPlayer(FriskStick plugin){
+		this.plugin = plugin;
+	}
 
 	/**
 	 * 
@@ -15,23 +18,23 @@ public class JailPlayer extends JavaPlugin {
 
 	public void jail(String name) {
 
-		if(this.getConfig().getBoolean("auto-jail")) {
+		/*if(plugin.getConfig().getBoolean("auto-jail")) {
 
-			if(this.getServer().getPluginManager().isPluginEnabled("Essentials")) {
+			if(plugin.getServer().getPluginManager().isPluginEnabled("Essentials")) {
 
-				if(this.getConfig().getInt("time-in-jail") > 0) {
+				if(plugin.getConfig().getInt("time-in-jail") > 0) {
 
-					this.getServer().dispatchCommand(getServer().getConsoleSender(), "jail " + name + " " + this.getConfig().getString("jail-name") + " " + (this.getConfig().getInt("time-in-jail") + 1));
+					plugin.getServer().dispatchCommand(plugin.getServer().getConsoleSender(), "jail " + name + " " + plugin.getConfig().getString("jail-name") + " " + (plugin.getConfig().getInt("time-in-jail") + 1));
 
-				} else if(this.getConfig().getInt("time-in-jail") == -1) {
+				} else if(plugin.getConfig().getInt("time-in-jail") == -1) {
 
-					this.getServer().dispatchCommand(getServer().getConsoleSender(), "jail " + name + " " + this.getConfig().getString("jail-name"));
+					plugin.getServer().dispatchCommand(plugin.getServer().getConsoleSender(), "jail " + name + " " + plugin.getConfig().getString("jail-name"));
 
 				}
 
 			}
 
-		}
+		}*/
 
 	}
 

@@ -16,13 +16,14 @@ import friskstick.cops.plugin.JailPlayer;
 public class FriskCommand implements CommandExecutor{
 
 	private FriskStick plugin;
-	JailPlayer jailed = new JailPlayer();
-
+	
 	public FriskCommand(FriskStick plugin) {
 
 		this.plugin = plugin;
 
 	}
+	
+	JailPlayer jailed = new JailPlayer(plugin);
 
 	int index = 0;
 
