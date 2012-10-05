@@ -16,21 +16,21 @@ import friskstick.cops.plugin.JailPlayer;
 public class FriskCommand implements CommandExecutor{
 
 	private FriskStick plugin;
-	
+
 	public FriskCommand(FriskStick plugin) {
 
 		this.plugin = plugin;
 
 	}
-	
-	JailPlayer jailed = new JailPlayer(plugin);
+
+	JailPlayer jailed = new JailPlayer(plugin); // Jail object (JailPlayer.java)
 
 	int index = 0;
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
 
-		Player player = null; 		
+		Player player = null;
 
 		if(sender instanceof Player) {
 
