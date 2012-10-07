@@ -13,24 +13,38 @@ import org.bukkit.inventory.PlayerInventory;
 import friskstick.cops.plugin.FriskStick;
 import friskstick.cops.plugin.JailPlayer;
 
+/**
+ * 
+ * The class that is responsible for handling the '/frisk [player]' command. 
+ *
+ */
+
 public class FriskCommand implements CommandExecutor{
 
 	private FriskStick plugin;
-
+	
+	/**
+	 * The constructor for {@link FriskCommand this} class.
+	 * @param plugin The {@link FriskStick} object required for the jailing feature to function.
+	 */
+	
 	public FriskCommand(FriskStick plugin) {
 
 		this.plugin = plugin;
 
 	}
+	
+	private JailPlayer jailed = new JailPlayer(plugin);
 
-	JailPlayer jailed = new JailPlayer(plugin); // Jail object (JailPlayer.java)
-
-	int index = 0;
-
-	@Override
+	private int index = 0;
+	
+	/**
+	 * The method that, in this case, executes the '/frisk [player]' command.
+	 */
+	
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
 
-		Player player = null;
+		Player player = null; 		
 
 		if(sender instanceof Player) {
 

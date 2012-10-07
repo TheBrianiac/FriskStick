@@ -6,6 +6,12 @@ import org.bukkit.potion.PotionEffect;
 import friskstick.cops.drugs.DrugEffect;
 import friskstick.cops.drugs.Inflictable;
 
+/**
+ * 
+ * The class handling illness as a result from drugs.
+ *
+ */
+
 public class DrugEffectIllness implements Inflictable {
 
 	public void inflict(Player player) {

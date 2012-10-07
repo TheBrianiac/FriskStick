@@ -6,6 +6,12 @@ import org.bukkit.potion.PotionEffect;
 import friskstick.cops.drugs.DrugEffect;
 import friskstick.cops.drugs.Inflictable;
 
+/**
+ * 
+ * The class handling hallucination as a result from drugs.
+ *
+ */
+
 public class DrugEffectHallucination implements Inflictable {
 
 	public void inflict(Player player) {

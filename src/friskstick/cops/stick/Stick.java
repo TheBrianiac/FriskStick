@@ -13,9 +13,20 @@ import org.bukkit.inventory.PlayerInventory;
 import friskstick.cops.plugin.FriskStick;
 import friskstick.cops.plugin.JailPlayer;
 
+/**
+ * 
+ * The class that is responsible for handling a right-click with a stick (in other words, frisking someone with a stick). 
+ *
+ */
+
 public class Stick implements Listener {
 	
-	FriskStick plugin;
+	private FriskStick plugin;
+	
+	/**
+	 * The constructor for {@link Stick this} class.
+	 * @param plugin The {@link FriskStick} object required for the jailing feature to function.
+	 */
 
 	public Stick(FriskStick plugin) {
 		
@@ -25,9 +36,14 @@ public class Stick implements Listener {
 	}
 
 	
-	int index = 0;
-	JailPlayer jailed = new JailPlayer(plugin);
-
+	private int index = 0;
+	private JailPlayer jailed = new JailPlayer(plugin);
+	
+	/**
+	 * The method that detects if a player frisks someone with a stick.
+	 * @param event The event for Bukkit to handle.
+	 */
+	
 	@EventHandler
 	public void friskStickPlayer(PlayerInteractEntityEvent event) {
 

@@ -1,8 +1,19 @@
 package friskstick.cops.plugin;
 
+/**
+ * 
+ * The class that is responsible for jailing the player, provided that Essentials is installed.
+ *
+ */
+
 public class JailPlayer{
 	
-	FriskStick plugin;
+	private FriskStick plugin;
+	
+	/**
+	 * The constructor for {@link JailPlayer this} class.
+	 * @param plugin The {@link FriskStick} object required for the jailing feature to function.
+	 */
 	
 	public JailPlayer(FriskStick plugin){
 		this.plugin = plugin;
@@ -10,7 +21,7 @@ public class JailPlayer{
 
 	/**
 	 * 
-	 * Jails the specified player based on what is specified in the configuration. Only works with Essentials.
+	 * Jails the specified player based on what is specified in the configuration. Only works with Essentials. At the moment, this method is disabled due to errors.
 	 * 
 	 * @param name The player to be jailed's name.
 	 * 
