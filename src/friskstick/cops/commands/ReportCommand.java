@@ -22,7 +22,7 @@ public class ReportCommand implements CommandExecutor {
 	
 	/**
 	 * The constructor for {@link ReportCommand this} class.
-	 * @param plugin The {@link FriskStick} object required for the jailing feature to function.
+	 * @param plugin The {@link FriskStick} object required for the command to function.
 	 */
 
 	public ReportCommand(FriskStick plugin) {

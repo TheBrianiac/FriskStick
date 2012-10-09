@@ -24,7 +24,7 @@ public class Drugs implements Listener {
 
 	/**
 	 * The constructor for {@link Drugs this} class.
-	 * @param plugin The {@link FriskStick} object required for the jailing feature to function.
+	 * @param plugin The {@link FriskStick} object required for the drug handling to function.
 	 */
 	
 	public Drugs(FriskStick plugin) {

@@ -25,7 +25,7 @@ public class Stick implements Listener {
 	
 	/**
 	 * The constructor for {@link Stick this} class.
-	 * @param plugin The {@link FriskStick} object required for the jailing feature to function.
+	 * @param plugin The {@link FriskStick} object required for the stick frisking to function.
 	 */
 
 	public Stick(FriskStick plugin) {
