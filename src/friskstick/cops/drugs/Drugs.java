@@ -12,11 +12,8 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import java.util.Random;
 
 /**
- * 
  * The main class where drugs and their effects are handled.
- * 
  */
-
 public class Drugs implements Listener {
 
 	private FriskStick plugin;
@@ -24,21 +21,21 @@ public class Drugs implements Listener {
 
 	/**
 	 * The constructor for {@link Drugs this} class.
+	 * 
 	 * @param plugin The {@link FriskStick} object required for the drug handling to function.
 	 */
-	
 	public Drugs(FriskStick plugin) {
 
 		this.plugin = plugin;
 
 	}
-	
+
 	/**
 	 * The main method that applies the potion effects.
+	 * 
 	 * @param inflict The {@link Inflictable} object (the effect) to apply.
 	 * @param player The {@link Player} to apply it to.
 	 */
-
 	public void inflict(Inflictable inflict, Player player) {
 
 		inflict.inflict(player);
@@ -47,15 +44,15 @@ public class Drugs implements Listener {
 
 	/**
 	 * The method that will detect if a player uses a drug. Currently does not work.
+	 * 
 	 * @param event The event for Bukkit to handle.
 	 */
-	
 	// Currently NOT implemented(Still does not work)
 	@EventHandler
 	public void drugUse(PlayerInteractEvent event) { // Try to use PlayerInteractEntityEvent and if entity == player return null, else continue with effects
 
 		for(String drugIDRaw : plugin.getConfig().getStringList("drug-ids")) {
-			
+
 			String[] drugIDs = drugIDRaw.split(":");
 			String drugID = drugIDs[0];
 

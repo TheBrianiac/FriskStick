@@ -10,31 +10,27 @@ import org.bukkit.entity.Player;
 import friskstick.cops.plugin.FriskStick;
 
 /**
- * 
  * The class that is responsible for handling the '/report [player]' command. 
- *
  */
-
 public class ReportCommand implements CommandExecutor {
 
 	private FriskStick plugin;
 	private Server s;
-	
+
 	/**
 	 * The constructor for {@link ReportCommand this} class.
+	 * 
 	 * @param plugin The {@link FriskStick} object required for the command to function.
 	 */
-
 	public ReportCommand(FriskStick plugin) {
 
 		this.plugin = plugin; 
 
 	}
-	
+
 	/**
 	 * The method that, in this case, executes the '/report [player]' command.
 	 */
-
 	public boolean onCommand(CommandSender sender, Command smd, String commandLabel, String[] args) {
 
 		Player player = null;

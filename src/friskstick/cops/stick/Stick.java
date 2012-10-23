@@ -14,36 +14,33 @@ import friskstick.cops.plugin.FriskStick;
 import friskstick.cops.plugin.JailPlayer;
 
 /**
- * 
  * The class that is responsible for handling a right-click with a stick (in other words, frisking someone with a stick). 
- *
  */
-
 public class Stick implements Listener {
-	
+
 	private FriskStick plugin;
-	
+
 	/**
 	 * The constructor for {@link Stick this} class.
+	 * 
 	 * @param plugin The {@link FriskStick} object required for the stick frisking to function.
 	 */
-
 	public Stick(FriskStick plugin) {
-		
+
 		this.plugin = plugin;
 		plugin.getServer().getPluginManager().registerEvents(this, plugin);
 
 	}
 
-	
+
 	private int index = 0;
 	private JailPlayer jailed = new JailPlayer(plugin);
-	
+
 	/**
 	 * The method that detects if a player frisks someone with a stick.
+	 * 
 	 * @param event The event for Bukkit to handle.
 	 */
-	
 	@EventHandler
 	public void friskStickPlayer(PlayerInteractEntityEvent event) {
 
@@ -93,7 +90,7 @@ public class Stick implements Listener {
 						} else {
 
 							if(inventory.contains(Integer.parseInt(drug))) {
-								
+
 								int drugid = Integer.parseInt(drug);
 								Iterator<Integer> iter = inventory.all(drugid).keySet().iterator();
 								ItemStack[] contents = inventory.getContents();

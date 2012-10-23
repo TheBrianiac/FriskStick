@@ -14,34 +14,30 @@ import friskstick.cops.plugin.FriskStick;
 import friskstick.cops.plugin.JailPlayer;
 
 /**
- * 
  * The class that is responsible for handling the '/frisk [player]' command. 
- *
  */
-
 public class FriskCommand implements CommandExecutor{
 
 	private FriskStick plugin;
-	
+
 	/**
 	 * The constructor for {@link FriskCommand this} class.
+	 * 
 	 * @param plugin The {@link FriskStick} object required for the command to function.
 	 */
-	
 	public FriskCommand(FriskStick plugin) {
 
 		this.plugin = plugin;
 
 	}
-	
+
 	private JailPlayer jailed = new JailPlayer(plugin);
 
 	private int index = 0;
-	
+
 	/**
 	 * The method that, in this case, executes the '/frisk [player]' command.
 	 */
-	
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
 
 		Player player = null; 		
