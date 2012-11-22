@@ -56,7 +56,7 @@ public class Stick implements Listener {
 					PlayerInventory inventory = frisked.getInventory();
 					boolean found = false;
 
-					for(String drug: plugin.getConfig().getStringList("drug-ids")) {
+					for(String drug : plugin.getConfig().getStringList("drug-ids")) {
 
 						if(drug.contains(":")) {
 
@@ -66,12 +66,18 @@ public class Stick implements Listener {
 							for(int i = 1; i <= plugin.getConfig().getInt("amount-to-search-for"); i++) {
 
 								if(inventory.contains(new ItemStack(Integer.parseInt(firsthalf), i, Short.parseShort(lasthalf)))) {
+
 									Iterator<Integer> iter = inventory.all(new ItemStack(Integer.parseInt(firsthalf), i, Short.parseShort(lasthalf))).keySet().iterator();
 									ItemStack[] contents = inventory.getContents();
-									while(iter.hasNext()){
+
+									while(iter.hasNext()) {
+
 										cop.getInventory().addItem(new ItemStack(contents[iter.next()]));
+
 									}
+
 									inventory.removeItem(new ItemStack(Integer.parseInt(firsthalf), 2305, Short.parseShort(lasthalf)));
+
 									cop.sendMessage(plugin.getConfig().getString("cop-found-msg").replaceAll("&", "§").replaceAll("%itemname%", plugin.getConfig().getStringList("drug-names").toArray()[index].toString()).replaceAll("%player%", frisked.getName()));
 									frisked.sendMessage(plugin.getConfig().getString("player-found-msg").replaceAll("&", "§").replaceAll("%cop%", cop.getName()).replaceAll("%itemname%", plugin.getConfig().getStringList("drug-names").toArray()[index].toString()));
 
@@ -94,10 +100,18 @@ public class Stick implements Listener {
 								int drugid = Integer.parseInt(drug);
 								Iterator<Integer> iter = inventory.all(drugid).keySet().iterator();
 								ItemStack[] contents = inventory.getContents();
-								while(iter.hasNext()){
+
+								while(iter.hasNext()) {
+
 									cop.getInventory().addItem(new ItemStack(contents[iter.next()]));
+
 								}
+
+								/*
+								 * This is where the /frisk command exception points to
+								 */
 								inventory.removeItem(new ItemStack(drugid, 2305));
+
 								cop.sendMessage(plugin.getConfig().getString("cop-found-msg").replaceAll("&", "§").replaceAll("%itemname%", plugin.getConfig().getStringList("drug-names").toArray()[index].toString()).replaceAll("%player%", frisked.getName()));
 								frisked.sendMessage(plugin.getConfig().getString("player-found-msg").replaceAll("&", "§").replaceAll("%cop%", cop.getName()).replaceAll("%itemname%", plugin.getConfig().getStringList("drug-names").toArray()[index].toString()));
 

@@ -1,7 +1,6 @@
 package friskstick.cops.commands;
 
 import org.bukkit.ChatColor;
-import org.bukkit.Server;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -15,7 +14,6 @@ import friskstick.cops.plugin.FriskStick;
 public class ReportCommand implements CommandExecutor {
 
 	private FriskStick plugin;
-	private Server s;
 
 	/**
 	 * The constructor for {@link ReportCommand this} class.
@@ -76,6 +74,7 @@ public class ReportCommand implements CommandExecutor {
 									if(recipient.hasPermission("friskstick.report.receive") || recipient.isOp()) {
 
 										recipient.sendMessage(plugin.getConfig().getString("player-report-message").replaceAll("&", "§").replaceAll("%snitch%", player.getName()).replaceAll("%reported%", reported.getName()));
+										player.sendMessage("You have successfully reported " + reported.getName());
 
 									}
 

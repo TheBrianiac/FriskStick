@@ -23,7 +23,7 @@ public class JailPlayer{
 	 */
 	public void jail(String name) {
 
-		/*if(plugin.getConfig().getBoolean("auto-jail")) {
+		if(plugin.getConfig().getBoolean("auto-jail")) {
 
 			if(plugin.getServer().getPluginManager().isPluginEnabled("Essentials")) {
 
@@ -39,7 +39,7 @@ public class JailPlayer{
 
 			}
 
-		}*/
+		}
 
 	}
 
