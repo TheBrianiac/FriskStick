@@ -9,6 +9,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import friskstick.cops.commands.FriskCommand;
 import friskstick.cops.commands.ReportCommand;
+import friskstick.cops.commands.ShowReportsCommand;
 import friskstick.cops.data.MetricsLite;
 //import friskstick.cops.drugs.Drugs;
 //import friskstick.cops.data.PluginUpdateCheck;
@@ -44,6 +45,7 @@ public class FriskStick extends JavaPlugin {
 		//pm.registerEvents(new PluginUpdateCheck(this), this);
 		getCommand("frisk").setExecutor(new FriskCommand(this));
 		getCommand("report").setExecutor(new ReportCommand(this));
+		getCommand("showreports").setExecutor(new ShowReportsCommand(this));
 		getConfig().options().copyDefaults(true);
 		saveConfig();
 
