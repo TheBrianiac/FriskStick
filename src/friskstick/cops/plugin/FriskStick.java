@@ -10,6 +10,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import friskstick.cops.commands.FriskCommand;
 import friskstick.cops.commands.ReportCommand;
 import friskstick.cops.commands.ShowReportsCommand;
+import friskstick.cops.data.AutoUpdate;
 import friskstick.cops.data.MetricsLite;
 //import friskstick.cops.drugs.Drugs;
 //import friskstick.cops.data.PluginUpdateCheck;
@@ -28,6 +29,9 @@ public class FriskStick extends JavaPlugin {
 	//This method already has a javadoc
 	public void onEnable() {
 
+		/*
+		 * Metrics
+		 */
 		try {
 
 			MetricsLite metrics = new MetricsLite(this);
@@ -47,6 +51,17 @@ public class FriskStick extends JavaPlugin {
 		getCommand("report").setExecutor(new ReportCommand(this));
 		getCommand("showreports").setExecutor(new ShowReportsCommand(this));
 		getConfig().options().copyDefaults(true);
+
+		try {
+
+			new AutoUpdate(this);
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+
 		saveConfig();
 
 	}
