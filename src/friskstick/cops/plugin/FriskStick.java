@@ -8,6 +8,7 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import friskstick.cops.commands.FriskCommand;
+import friskstick.cops.commands.FriskStickHelpCommand;
 import friskstick.cops.commands.ReportCommand;
 import friskstick.cops.commands.ShowReportsCommand;
 import friskstick.cops.data.AutoUpdate;
@@ -44,12 +45,12 @@ public class FriskStick extends JavaPlugin {
 		PluginDescriptionFile pdffile = this.getDescription();
 		logger.info(pdffile.getName() + " v" + pdffile.getVersion() + " has been enabled!");
 		PluginManager pm = getServer().getPluginManager();
-		pm.registerEvents(new Stick(this), this); //Stick(Right Click Event) Register
+		pm.registerEvents(new Stick(this), this);
 		//pm.registerEvents(new Drugs(this), this); // Drug Register
-		//pm.registerEvents(new PluginUpdateCheck(this), this);
 		getCommand("frisk").setExecutor(new FriskCommand(this));
 		getCommand("report").setExecutor(new ReportCommand(this));
 		getCommand("showreports").setExecutor(new ShowReportsCommand(this));
+		getCommand("FriskStick").setExecutor(new FriskStickHelpCommand(this));
 		getConfig().options().copyDefaults(true);
 
 		try {

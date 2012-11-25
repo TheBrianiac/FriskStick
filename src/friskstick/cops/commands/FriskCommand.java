@@ -16,7 +16,7 @@ import friskstick.cops.plugin.JailPlayer;
 /**
  * The class that is responsible for handling the '/frisk [player]' command. 
  */
-public class FriskCommand implements CommandExecutor{
+public class FriskCommand implements CommandExecutor {
 
 	private FriskStick plugin;
 
