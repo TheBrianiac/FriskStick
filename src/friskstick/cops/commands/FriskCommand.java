@@ -50,7 +50,7 @@ public class FriskCommand implements CommandExecutor {
 
 		if(player == null) {
 
-			sender.sendMessage("You cannot run this command in the console!");
+			sender.sendMessage(ChatColor.RED + "You cannot run this command in the console!");
 
 		} else {
 

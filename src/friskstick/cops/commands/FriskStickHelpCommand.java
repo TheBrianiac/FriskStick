@@ -5,7 +5,6 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-
 import friskstick.cops.plugin.FriskStick;
 
 public class FriskStickHelpCommand implements CommandExecutor {
@@ -25,9 +24,12 @@ public class FriskStickHelpCommand implements CommandExecutor {
 
 		}
 
+		/**
+		 * Check if the command is run my a player(if not, send error message)
+		 */
 		if(player == null) {
 
-			sender.sendMessage("You cannot run this command in the console!");
+			sender.sendMessage(ChatColor.RED + "Error: You cannot run this command in the console!");
 
 		} else {
 
