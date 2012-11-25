@@ -17,7 +17,6 @@ commands:
     description: Allows players to see reported players.
   friskstick:
     description: The help command for FriskStick.
-    usage: /friskstick
     permission: friskstick.help
 permissions:
   friskstick.*:
