@@ -5,7 +5,6 @@ import java.net.URL;
 import java.util.Scanner;
 import java.util.logging.Logger;
 
-import org.bukkit.ChatColor;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -14,7 +13,6 @@ import friskstick.cops.commands.FriskCommand;
 import friskstick.cops.commands.FriskStickHelpCommand;
 import friskstick.cops.commands.ReportCommand;
 import friskstick.cops.commands.ShowReportsCommand;
-import friskstick.cops.data.AutoUpdate;
 import friskstick.cops.data.MetricsLite;
 //import friskstick.cops.drugs.Drugs;
 //import friskstick.cops.data.PluginUpdateCheck;
@@ -58,12 +56,11 @@ public class FriskStick extends JavaPlugin {
 
 		try {
 
-			new AutoUpdate(this);
+			updateCheck();
 
-		} catch (Exception e) {
+		} catch (IOException e) {
 
 			e.printStackTrace();
-
 		}
 
 		saveConfig();
@@ -79,7 +76,7 @@ public class FriskStick extends JavaPlugin {
 	}
 
 	/**
-	 * Will be using this for update checking instead of the autoupdater to make it easier
+	 * Check For Updates
 	 */
 	public void updateCheck() throws IOException {
 
@@ -94,7 +91,7 @@ public class FriskStick extends JavaPlugin {
 		if(!latestVersion.equalsIgnoreCase(currentVersion)) {
 
 			logger.info(pdfFile.getName() + " Needs To be Updated to " + latestVersion + "!");
-			logger.info("Get it at this link: " + ChatColor.AQUA +"http://dev.bukkit.org/server-mods/friskstick/ to download");
+			logger.info("Get it here: http://dev.bukkit.org/server-mods/friskstick/ to download");
 
 		}
 
