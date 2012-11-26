@@ -1,8 +1,11 @@
 package friskstick.cops.plugin;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.Scanner;
 import java.util.logging.Logger;
 
+import org.bukkit.ChatColor;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -72,6 +75,30 @@ public class FriskStick extends JavaPlugin {
 
 		PluginDescriptionFile pdffile = this.getDescription();
 		logger.info(pdffile.getName() + " has been disabled.");
+
+	}
+
+	/**
+	 * Will be using this for update checking instead of the autoupdater to make it easier
+	 */
+	public void updateCheck() throws IOException {
+
+		String currentVersion = "1.4";
+		String latestVersion;
+
+		URL u = new URL("https://dl.dropbox.com/u/73820799/latestVersion.txt");
+		Scanner stream = new Scanner(u.openStream());
+		latestVersion = stream.nextLine();
+		PluginDescriptionFile pdfFile = this.getDescription();
+
+		if(!latestVersion.equalsIgnoreCase(currentVersion)) {
+
+			logger.info(pdfFile.getName() + " Needs To be Updated to " + latestVersion + "!");
+			logger.info("Get it at this link: " + ChatColor.AQUA +"http://dev.bukkit.org/server-mods/friskstick/ to download");
+
+		}
+
+		stream.close();
 
 	}
 
