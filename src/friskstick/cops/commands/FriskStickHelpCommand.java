@@ -35,14 +35,41 @@ public class FriskStickHelpCommand implements CommandExecutor {
 
 			if(commandLabel.equalsIgnoreCase("friskstick")) {
 
-				if(player.hasPermission("friskstick.help") || player.isOp()) {
+				if (args.length == 0) {
 
-					player.sendMessage(ChatColor.AQUA + "***************FriskStick Help***************");
-					player.sendMessage(ChatColor.DARK_AQUA + "This plugin frisks players for illegal items.");
+					if(player.hasPermission("friskstick.help") || player.isOp()) {
 
-				} else {
+						player.sendMessage(ChatColor.AQUA + "***************FriskStick Help***************");
+						player.sendMessage(ChatColor.DARK_AQUA + "This plugin frisks players for illegal items.");
+						player.sendMessage(ChatColor.DARK_AQUA + "Check out the bukkitdev page for more info at:");
+						player.sendMessage(ChatColor.DARK_AQUA + "http://dev.bukkit.org/server-mods/friskstick/");
+						player.sendMessage(ChatColor.LIGHT_PURPLE + "Use /FriskStick 1 for more pages and help");
 
-					player.sendMessage(ChatColor.RED + "You don't have permission to use this command!");
+					} else {
+
+						player.sendMessage(ChatColor.RED + "You don't have permission to use this command!");
+
+					}
+
+				} else if(args.length == 1) {
+
+					if(commandLabel.equalsIgnoreCase("friskstick")) {
+
+						if(player.hasPermission("friskstick.help")) {
+
+							if(args[1].equalsIgnoreCase("1")) {
+
+								player.sendMessage(ChatColor.AQUA + "**********FriskStick Page 1**********");
+
+							}
+
+						} else {
+
+							player.sendMessage(ChatColor.RED + "You don't have permission to use this command!");
+
+						}
+
+					}
 
 				}
 
