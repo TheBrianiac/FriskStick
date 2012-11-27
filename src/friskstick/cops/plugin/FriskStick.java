@@ -14,6 +14,7 @@ import friskstick.cops.commands.FriskStickHelpCommand;
 import friskstick.cops.commands.ReportCommand;
 import friskstick.cops.commands.ShowReportsCommand;
 import friskstick.cops.data.MetricsLite;
+import friskstick.cops.data.UpdateCheck;
 //import friskstick.cops.drugs.Drugs;
 //import friskstick.cops.data.PluginUpdateCheck;
 import friskstick.cops.stick.Stick;
@@ -47,6 +48,7 @@ public class FriskStick extends JavaPlugin {
 		logger.info(pdffile.getName() + " v" + pdffile.getVersion() + " has been enabled!");
 		PluginManager pm = getServer().getPluginManager();
 		pm.registerEvents(new Stick(this), this);
+		pm.registerEvents(new UpdateCheck(this), this);
 		//pm.registerEvents(new Drugs(this), this); // Drug Register
 		getCommand("frisk").setExecutor(new FriskCommand(this));
 		getCommand("report").setExecutor(new ReportCommand(this));
@@ -75,6 +77,8 @@ public class FriskStick extends JavaPlugin {
 
 	}
 
+
+
 	/**
 	 * Check For Updates
 	 */
@@ -88,10 +92,18 @@ public class FriskStick extends JavaPlugin {
 		latestVersion = stream.nextLine();
 		PluginDescriptionFile pdfFile = this.getDescription();
 
+		logger.info("[FriskStick] Checking for updates!");
+
 		if(!latestVersion.equalsIgnoreCase(currentVersion)) {
 
-			logger.info(pdfFile.getName() + " Needs To be Updated to " + latestVersion + "!");
+			logger.info(pdfFile.getName() + " Needs To be Updated to version " + latestVersion + "!");
 			logger.info("Get it here: http://dev.bukkit.org/server-mods/friskstick/ to download");
+			UpdateCheck.updateNeeded = true;
+
+		} else {
+
+			logger.info("[FriskStick] Plugin is up to date!");
+			UpdateCheck.updateNeeded = false;
 
 		}
 
