@@ -1,4 +1,4 @@
-package friskstick.cops.data;
+package friskstick.cops.eventListeners;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;

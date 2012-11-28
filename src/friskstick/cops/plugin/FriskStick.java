@@ -14,10 +14,10 @@ import friskstick.cops.commands.FriskStickHelpCommand;
 import friskstick.cops.commands.ReportCommand;
 import friskstick.cops.commands.ShowReportsCommand;
 import friskstick.cops.data.MetricsLite;
-import friskstick.cops.data.UpdateCheck;
+import friskstick.cops.eventListeners.Stick;
 //import friskstick.cops.drugs.Drugs;
 //import friskstick.cops.data.PluginUpdateCheck;
-import friskstick.cops.stick.Stick;
+import friskstick.cops.eventListeners.UpdateCheck;
 
 /**
  * Main class for the plugin. This is the class that should be referenced when using methods relating to the {@link JavaPlugin} class.
@@ -84,7 +84,7 @@ public class FriskStick extends JavaPlugin {
 	 */
 	public void updateCheck() throws IOException {
 
-		String currentVersion = "1.4";
+		String currentVersion = "1.4Alpha";
 		String latestVersion;
 
 		URL u = new URL("https://dl.dropbox.com/u/73820799/latestVersion.txt");

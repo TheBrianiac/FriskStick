@@ -1,4 +1,4 @@
-package friskstick.cops.stick;
+package friskstick.cops.eventListeners;
 
 import java.util.Iterator;
 
