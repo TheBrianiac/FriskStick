@@ -15,9 +15,8 @@ import friskstick.cops.plugin.FriskStick;
  * The class that is responsible for handling the '/report [player]' command. 
  */
 public class ReportCommand implements CommandExecutor {
-	
-	List<Player> reportedlist = new ArrayList<Player>();
 
+	List<Player> reportedlist = new ArrayList<Player>();
 	private FriskStick plugin;
 
 	/**

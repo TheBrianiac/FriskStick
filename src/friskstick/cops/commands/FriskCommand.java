@@ -19,6 +19,8 @@ import friskstick.cops.plugin.JailPlayer;
 public class FriskCommand implements CommandExecutor {
 
 	private FriskStick plugin;
+	private JailPlayer jailed = new JailPlayer(plugin);
+	private int index = 0;
 
 	/**
 	 * The constructor for {@link FriskCommand this} class.
@@ -30,10 +32,6 @@ public class FriskCommand implements CommandExecutor {
 		this.plugin = plugin;
 
 	}
-
-	private JailPlayer jailed = new JailPlayer(plugin);
-
-	private int index = 0;
 
 	/**
 	 * The method that, in this case, executes the '/frisk [player]' command.

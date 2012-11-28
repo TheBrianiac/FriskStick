@@ -1,5 +1,6 @@
 package friskstick.cops.eventListeners;
 
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -27,8 +28,8 @@ public class PlayerJoinEventUpdateCheck extends FriskStick implements Listener{
 
 		if(player.isOp() && updateNeeded) {
 
-			player.sendMessage("********FriskStick Notice********");
-			player.sendMessage("FriskStick is due for an update!! Get it here: http://dev.bukkit.org/server-mods/friskstick/ to download");
+			player.sendMessage(ChatColor.GOLD + "********FriskStick Notice********");
+			player.sendMessage(ChatColor.YELLOW + "FriskStick is due for an update!! Get it here: http://dev.bukkit.org/server-mods/friskstick/ to download");
 
 		}
 

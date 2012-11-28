@@ -16,7 +16,7 @@ import friskstick.cops.plugin.JailPlayer;
 /**
  * The class that is responsible for handling a right-click with a stick (in other words, frisking someone with a stick). 
  */
-public class Stick implements Listener {
+public class StickRightClickEvent implements Listener {
 
 	private FriskStick plugin;
 
@@ -25,7 +25,7 @@ public class Stick implements Listener {
 	 * 
 	 * @param plugin The {@link FriskStick} object required for the stick frisking to function.
 	 */
-	public Stick(FriskStick plugin) {
+	public StickRightClickEvent(FriskStick plugin) {
 
 		this.plugin = plugin;
 		plugin.getServer().getPluginManager().registerEvents(this, plugin);
