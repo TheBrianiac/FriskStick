@@ -6,14 +6,20 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import friskstick.cops.plugin.FriskStick;
 
-public class UpdateCheck extends FriskStick implements Listener{
+/**
+ * Handler for update checking on player join(op)
+ */
+public class PlayerJoinEventUpdateCheck extends FriskStick implements Listener{
 
 	public static boolean updateNeeded;
 
-	public UpdateCheck(FriskStick plugin) {
+	public PlayerJoinEventUpdateCheck(FriskStick plugin) {
 
 	}
 
+	/**
+	 * Player Login EventHandler
+	 */
 	@EventHandler
 	public void playerLoginUpdateCheck(PlayerJoinEvent e) {
 
@@ -21,7 +27,8 @@ public class UpdateCheck extends FriskStick implements Listener{
 
 		if(player.isOp() && updateNeeded) {
 
-			player.sendMessage("FriskStick is due for an update!!");
+			player.sendMessage("********FriskStick Notice********");
+			player.sendMessage("FriskStick is due for an update!! Get it here: http://dev.bukkit.org/server-mods/friskstick/ to download");
 
 		}
 
