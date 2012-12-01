@@ -28,8 +28,9 @@ public class PlayerJoinEventUpdateCheck extends FriskStick implements Listener{
 
 		if(player.isOp() && updateNeeded) {
 
-			player.sendMessage(ChatColor.GOLD + "********FriskStick Notice********");
-			player.sendMessage(ChatColor.YELLOW + "FriskStick is due for an update!! Get it here: http://dev.bukkit.org/server-mods/friskstick/ to download");
+			player.sendMessage(ChatColor.DARK_AQUA + "********FriskStick Notice********");
+			player.sendMessage(ChatColor.YELLOW + "FriskStick is due for an update!! Click: " + ChatColor.RED + "http://dev.bukkit.org/server-mods/friskstick/" + ChatColor.YELLOW + " to download");
+			player.sendMessage(ChatColor.GOLD + "Please download the plugin and put it in the \"plugins\" folder in your server directory. Please do NOT just reload your server. To make sure that the plugin is completely loaded properly, please RESTART your server.");
 
 		}
 
