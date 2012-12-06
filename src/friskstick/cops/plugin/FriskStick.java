@@ -5,6 +5,7 @@ import java.net.URL;
 import java.util.Scanner;
 import java.util.logging.Logger;
 
+import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -59,14 +60,15 @@ public class FriskStick extends JavaPlugin {
 
 		getConfig().options().copyDefaults(true);
 
-		try {
-
-			updateCheck();
-
-		} catch (IOException e) {
-
-			e.printStackTrace();
-		}
+		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Runnable(){
+			public void run(){
+				try {
+					updateCheck();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}, 0, this.getConfig().getInt("check-time") * 60 * 20);
 
 		saveConfig();
 

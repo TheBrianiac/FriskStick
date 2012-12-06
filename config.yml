@@ -23,6 +23,8 @@ drug-names:
 - 'Water Bottle'
 - 'Green Dye'
 - 'Pink Dye'
+#After how long do you want the plugin to check for an update? (in minutes)#
+check-time: 15
 #Do you want to allow reporting?#
 allow-reporting: true
 #Enable Auto-Jailing?#
