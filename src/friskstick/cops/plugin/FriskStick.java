@@ -48,7 +48,7 @@ public class FriskStick extends JavaPlugin {
 
 		pm.registerEvents(new StickRightClickEvent(this), this);
 		pm.registerEvents(new PlayerJoinEventUpdateCheck(this), this);
-		//pm.registerEvents(new Drugs(this), this); // Drug Register
+		//pm.registerEvents(new Drugs(this), this);
 
 		getCommand("frisk").setExecutor(new FriskCommand(this));
 		getCommand("report").setExecutor(new ReportCommand(this));
@@ -87,19 +87,20 @@ public class FriskStick extends JavaPlugin {
 	 */
 	public void updateCheck() throws IOException {
 
-		String currentVersion = "1.4Alpha";
+		PluginDescriptionFile pdfFile = this.getDescription();
+
+		String currentVersion = pdfFile.getVersion();
 		String latestVersion;
 
 		URL u = new URL("https://dl.dropbox.com/u/73820799/latestVersion.txt");
 		Scanner stream = new Scanner(u.openStream());
 		latestVersion = stream.nextLine();
-		PluginDescriptionFile pdfFile = this.getDescription();
 
 		logger.info("[FriskStick] Checking for updates!");
 
 		if(!latestVersion.equalsIgnoreCase(currentVersion)) {
 
-			logger.info(pdfFile.getName() + " Needs To be Updated to version " + latestVersion + "!");
+			logger.info("[" + pdfFile.getName() + "]" + " Needs To be Updated to version " + latestVersion + "!");
 			logger.info("Get it here: http://dev.bukkit.org/server-mods/friskstick/ to download");
 			PlayerJoinEventUpdateCheck.updateNeeded = true;
 

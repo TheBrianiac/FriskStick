@@ -57,7 +57,7 @@ public class FriskStickHelpCommand implements CommandExecutor {
 
 						if(player.hasPermission("friskstick.help")) {
 
-							if(args[1].equalsIgnoreCase("1")) {
+							if(args[0].equalsIgnoreCase("1")) {
 
 								player.sendMessage(ChatColor.AQUA + "**********FriskStick Page 1**********");
 
