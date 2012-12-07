@@ -60,14 +60,22 @@ public class FriskStick extends JavaPlugin {
 
 		getConfig().options().copyDefaults(true);
 
-		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Runnable(){
-			public void run(){
+		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
+
+			public void run() {
+
 				try {
+
 					updateCheck();
+
 				} catch (IOException e) {
+
 					e.printStackTrace();
+
 				}
+
 			}
+
 		}, 0, this.getConfig().getInt("check-time") * 60 * 20);
 
 		saveConfig();
