@@ -36,6 +36,7 @@ public class FriskCommand implements CommandExecutor {
 	/**
 	 * The method that, in this case, executes the '/frisk [player]' command.
 	 */
+	@SuppressWarnings("deprecation")
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
 
 		Player player = null; 		
@@ -87,6 +88,7 @@ public class FriskCommand implements CommandExecutor {
 											while(iter.hasNext()) {
 
 												player.getInventory().addItem(new ItemStack(contents[iter.next()]));
+												player.updateInventory();
 
 											}
 

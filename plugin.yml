@@ -15,9 +15,8 @@ commands:
     description: Allows players to report other players for drugs.
   showreports:
     description: Allows players to see reported players.
-  friskstick:
-    description: The help command for FriskStick.
-    permission: friskstick.help
+  FriskStick:
+    description: Displays help for the plugin.
 permissions:
   friskstick.*:
     description: All permissions.
@@ -58,3 +57,9 @@ permissions:
   friskstick.bypass:
     description: Allows a player to be immune to frisking.
     default: op
+  friskstick.help:
+    description: Allows a player to see the plugin help.
+    default: true
+  friskstick.beatdown:
+    description: Switches a player to beatdown mode.
+    default: false
