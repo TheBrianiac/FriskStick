@@ -1,5 +1,15 @@
 package friskstick.cops.plugin;
 
+/*TODO
+ * Add Drug Effects
+ * Add Drug Addiction
+ * Add Drug Withdrawal
+ * Add a general FriskStick command(in progress)
+ * Add a show reports command(in progress)
+ * Fix Frisk Command Bug/Auto-Jailing Bug
+ * Think of more things to do :)
+ */
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.Scanner;
@@ -29,7 +39,9 @@ public class FriskStick extends JavaPlugin {
 	 */
 	public final Logger logger = Logger.getLogger("Minecraft");
 
-	//This method already has a javadoc
+	/**
+	 * Already has a javadoc(Bukkit)
+	 */
 	public void onEnable() {
 
 		/*
@@ -82,15 +94,15 @@ public class FriskStick extends JavaPlugin {
 
 	}
 
-	//This method already has a javadoc
+	/**
+	 * Already has a javadoc(Bukkit)
+	 */
 	public void onDisable() {
 
 		PluginDescriptionFile pdffile = this.getDescription();
 		logger.info(pdffile.getName() + " has been disabled.");
 
 	}
-
-
 
 	/**
 	 * Check For Updates

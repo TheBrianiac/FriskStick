@@ -24,11 +24,11 @@ import friskstick.cops.plugin.JailPlayer;
 public class StickRightClickEvent implements Listener {
 
 	private FriskStick plugin;
-	
+
 	int friskAmount = 0;
-	
+
 	boolean hasTime = true;
-	
+
 	Timer t;
 
 	/**
@@ -174,50 +174,54 @@ public class StickRightClickEvent implements Listener {
 		}
 
 	}
-	
-	
+
+
+	/**
+	 * Add javadoc here
+	 * @param event The event
+	 */
 	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void beatdownPlayer(EntityDamageByEntityEvent event){
-		
+
 		if(event.getDamager() instanceof Player && event.getEntity() instanceof Player){
-			
+
 			Player cop = (Player)event.getDamager();
 			Player frisked = (Player)event.getEntity();
-			
+
 			if(cop.hasPermission("friskstick.use") && cop.hasPermission("friskstick.beatdown")){
-				
+
 				if(!frisked.hasPermission("friskstick.bypass")){
-					
+
 					hasTime = true;
-					
+
 					t = new Timer(1000, new ActionListener(){
 
 						public void actionPerformed(ActionEvent event) {
-							
+
 							int time = 0;
-							
+
 							time++;
-							
+
 							if(time >= 60){
-								
+
 								hasTime = false;
 								t.stop();
-								
+
 							}
-							
+
 						}
-					
+
 					});
-					
+
 					t.start();
-					
+
 					friskAmount++;
-					
+
 					if(friskAmount == 5 && hasTime){
-						
+
 						friskAmount = 0;
-						
+
 						PlayerInventory inventory = frisked.getInventory();
 						boolean found = false;
 
@@ -315,15 +319,15 @@ public class StickRightClickEvent implements Listener {
 							}
 
 						}
-						
+
 					}
-					
+
 				}
-				
+
 			}
-			
+
 		}
-		
+
 	}
 
 }
