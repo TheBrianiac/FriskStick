@@ -17,6 +17,8 @@ commands:
     description: Allows players to see reported players.
   FriskStick:
     description: Displays help for the plugin.
+  comply:
+    description: Comply to a cop's frisk request.
 permissions:
   friskstick.*:
     description: All permissions.
@@ -60,6 +62,3 @@ permissions:
   friskstick.help:
     description: Allows a player to see the plugin help.
     default: true
-  friskstick.beatdown:
-    description: Switches a player to beatdown mode.
-    default: false

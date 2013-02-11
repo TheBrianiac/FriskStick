@@ -13,9 +13,9 @@ public class JailPlayer {
 	 * @param plugin The {@link FriskStick} object required for the jailing feature to function.
 	 */
 	public JailPlayer(FriskStick plugin) {
-
+		
 		this.plugin = plugin;
-
+		
 	}
 
 	/**
