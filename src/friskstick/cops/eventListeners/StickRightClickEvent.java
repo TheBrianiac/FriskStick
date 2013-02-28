@@ -54,7 +54,7 @@ public class StickRightClickEvent implements Listener {
 	 */
 	public boolean isRunning = false;
 
-	Timer t;
+	private Timer t;
 
 	/**
 	 * The constructor for {@link Stick this} class.
@@ -67,7 +67,6 @@ public class StickRightClickEvent implements Listener {
 		plugin.getServer().getPluginManager().registerEvents(this, plugin);
 
 	}
-
 
 	private int index = 0;
 	private JailPlayer jailed = new JailPlayer(plugin);
