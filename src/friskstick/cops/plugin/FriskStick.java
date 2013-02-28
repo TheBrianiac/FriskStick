@@ -7,6 +7,8 @@ package friskstick.cops.plugin;
  * Add a general FriskStick command(in progress)
  * Add a show reports command(in progress)
  * Fix Frisk Command Bug/Auto-Jailing Bug
+ * Implement Beatdown Mode
+ * Implement Frisk allowing(with beatdown)
  * Think of more things to do :)
  */
 

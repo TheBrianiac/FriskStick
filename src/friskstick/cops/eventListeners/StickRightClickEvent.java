@@ -21,12 +21,8 @@ import friskstick.cops.plugin.FriskStick;
 import friskstick.cops.plugin.JailPlayer;
 
 /*
- * 
- * 
  * This class is currently being modified to introduce a beatdown mode. 
  * In the future, I think we should have a section in the config to keep track of what players are on the run.
- * 
- * 
  */
 
 /**
@@ -42,14 +38,17 @@ public class StickRightClickEvent implements Listener {
 	 * The boolean that tells whether or not the player can move.
 	 */
 	public boolean isStopped = false;
+
 	/**
 	 * The boolean that tells whether or not the plugin is waiting for a response from the player.
 	 */
 	public boolean isWaiting = false;
+
 	/**
 	 * The boolean that tells whether or not the player has complied to the cop's request to frisk.
 	 */
 	public boolean hasComplied = false;
+
 	/**
 	 * The boolean that tells whether or not the player is on the run.
 	 */
@@ -158,7 +157,7 @@ public class StickRightClickEvent implements Listener {
 
 										if(cop.hasPermission("friskstick.jail")) {
 
-											jailed.jail(frisked.getName());
+											jailed.jailPlayer(frisked.getName(), cop);
 
 										}
 
@@ -192,7 +191,7 @@ public class StickRightClickEvent implements Listener {
 
 									if(cop.hasPermission("friskstick.jail")) {
 
-										jailed.jail(frisked.getName());
+										jailed.jailPlayer(frisked.getName(), cop);
 
 									}
 
@@ -226,11 +225,11 @@ public class StickRightClickEvent implements Listener {
 						}
 
 					} else {
-						
+
 						cop.sendMessage(ChatColor.GOLD + frisked.getName() + " is now on the run! Beat them as much as you can!");
 						frisked.sendMessage(ChatColor.RED + "You are now on the run! Beware of the cop who frisked you!");
 						isRunning = true;
-						
+
 					}
 
 				} else {
@@ -240,9 +239,9 @@ public class StickRightClickEvent implements Listener {
 				}
 
 			} else {
-				
+
 				cop.sendMessage(ChatColor.DARK_RED + "You don't have permission to frisk anyone!");
-				
+
 			}
 
 		}
@@ -263,21 +262,21 @@ public class StickRightClickEvent implements Listener {
 		}
 
 	}
-	
+
 	@EventHandler
 	public void beatPlayer(EntityDamageByEntityEvent e){
-		
+
 		if(e.getDamager() instanceof Player && e.getEntity() instanceof Player){
-			
+
 			if(isRunning){
-				
+
 				Player cop = (Player)e.getDamager();
 				Player beaten = (Player)e.getEntity();
-				
+
 			}
-			
+
 		}
-		
+
 	}
 
 }

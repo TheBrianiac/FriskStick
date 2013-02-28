@@ -27,8 +27,6 @@ public class ShowReportsCommand implements CommandExecutor {
 
 	}
 
-
-
 	/**
 	 * The method that, in this case, executes the '/showreports' command.
 	 */
@@ -48,7 +46,7 @@ public class ShowReportsCommand implements CommandExecutor {
 
 				if(player.hasPermission("friskstick.report.show") || player.isOp()) {
 
-					for(Player reported : rc.reportedlist) {
+					for(Player reported : rc.getReported()) {
 
 						player.sendMessage(ChatColor.DARK_RED + "[Reported]" + ChatColor.RED + reported.getName());
 

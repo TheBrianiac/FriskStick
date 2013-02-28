@@ -99,7 +99,7 @@ public class FriskCommand implements CommandExecutor {
 
 											if(player.hasPermission("friskstick.jail")) {
 
-												jailed.jail(plugin.getServer().getPlayer(args[0]).getName());
+												jailed.jailPlayer(plugin.getServer().getPlayer(args[0]).getName(), player.getPlayer());
 
 											}
 
@@ -114,11 +114,16 @@ public class FriskCommand implements CommandExecutor {
 									if(inventory.contains(Integer.parseInt(drug))) {
 
 										int drugid = Integer.parseInt(drug);
+
 										Iterator<Integer> iter = inventory.all(drugid).keySet().iterator();
 										ItemStack[] contents = inventory.getContents();
+
 										while(iter.hasNext()){
+
 											player.getInventory().addItem(new ItemStack(contents[iter.next()]));
+
 										}
+
 										inventory.removeItem(new ItemStack(drugid, 2305));
 
 										player.sendMessage(plugin.getConfig().getString("cop-found-msg").replaceAll("&", "§").replaceAll("%itemname%", plugin.getConfig().getStringList("drug-names").toArray()[index].toString()).replaceAll("%player%", plugin.getServer().getPlayer(args[0]).getName()));
@@ -126,7 +131,7 @@ public class FriskCommand implements CommandExecutor {
 
 										if(player.hasPermission("friskstick.jail")) {
 
-											jailed.jail(plugin.getServer().getPlayer(args[0]).getName());
+											jailed.jailPlayer(plugin.getServer().getPlayer(args[0]).getName(), player.getPlayer());
 
 										}
 

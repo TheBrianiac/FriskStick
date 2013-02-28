@@ -12,7 +12,7 @@ import friskstick.cops.eventListeners.StickRightClickEvent;
 import friskstick.cops.plugin.FriskStick;
 
 /**
- * The class that is responsible for handling the '/report [player]' command. 
+ * The class for having players agree/disagree to searches(frisks)
  */
 public class ComplyCommand implements CommandExecutor {
 
@@ -29,7 +29,7 @@ public class ComplyCommand implements CommandExecutor {
 		this.plugin = plugin; 
 
 	}
-	
+
 	StickRightClickEvent rightclick = new StickRightClickEvent(plugin);
 
 	/**
@@ -52,11 +52,11 @@ public class ComplyCommand implements CommandExecutor {
 		} else {
 
 			if(commandLabel.equalsIgnoreCase("comply")) {
-				
+
 				if(rightclick.isWaiting){
-					
+
 					rightclick.hasComplied = true;
-					
+
 				}
 
 			}

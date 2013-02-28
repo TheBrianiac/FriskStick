@@ -6,7 +6,6 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import java.util.List;
 import java.util.ArrayList;
 
 import friskstick.cops.plugin.FriskStick;
@@ -16,7 +15,7 @@ import friskstick.cops.plugin.FriskStick;
  */
 public class ReportCommand implements CommandExecutor {
 
-	List<Player> reportedlist = new ArrayList<Player>();
+	private ArrayList<Player> reportedList = new ArrayList<Player>();
 	private FriskStick plugin;
 
 	/**
@@ -77,7 +76,7 @@ public class ReportCommand implements CommandExecutor {
 
 									if(recipient.hasPermission("friskstick.report.receive") || recipient.isOp()) {
 
-										reportedlist.add(reported);
+										reportedList.add(reported);
 										recipient.sendMessage(plugin.getConfig().getString("player-report-message").replaceAll("&", "§").replaceAll("%snitch%", player.getName()).replaceAll("%reported%", reported.getName()));
 										player.sendMessage("You have successfully reported " + reported.getName());
 
@@ -102,6 +101,17 @@ public class ReportCommand implements CommandExecutor {
 		}
 
 		return false;
+
+	}
+
+	/**
+	 * Will get and return the list of reported players
+	 * 
+	 * @return The list of reported players
+	 */
+	public ArrayList<Player> getReported() {
+
+		return reportedList;
 
 	}
 
