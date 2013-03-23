@@ -122,14 +122,16 @@ public class WantedPlayer {
 
 			if(wanted.isEmpty()){
 
-				while(reader.readLine() != null){
+				String name = null;
 
-					wanted.add(Bukkit.getPlayer(reader.readLine()));
+				while((name = reader.readLine()) != null){
+
+					wanted.add((Player)Bukkit.getServer().getOfflinePlayer(name));
 
 				}
 
 			}
-			
+
 			reader.close();
 
 		} catch (IOException e) {
@@ -144,29 +146,29 @@ public class WantedPlayer {
 		try {
 
 			writer = new BufferedWriter(new FileWriter(wantedFile));
-			
+
 			if(operation.equalsIgnoreCase("set")){
-				
+
 				for(int i = 0; i < wanted.size(); i++){
 
 					writer.write(wanted.get(i).getName());
-					
+
 					writer.newLine();
 
 				}
-				
+
 			} else if(operation.equalsIgnoreCase("remove")){
-				
+
 				removeLine(wantedFile, nameToRemove);
-				
+
 			} else {
-				
+
 				writer.close();
-				
+
 				throw new IllegalArgumentException("Wrong argument used in WantedPlayer.updateWantedConfig() method!");
-				
+
 			}
-			
+
 			writer.close();
 
 		} catch (IOException e) {
@@ -176,50 +178,50 @@ public class WantedPlayer {
 		}
 
 	}
-	
+
 	private void removeLine(File file, String textToRemove){
-		
+
 		File temp = new File(file.getAbsolutePath() + ".tmp");
-		
+
 		try {
-			
+
 			BufferedReader reader = new BufferedReader(new FileReader(file));
 			PrintWriter writer = new PrintWriter(new FileWriter(temp));
-			
+
 			String line = null;
-			
+
 			while((line = reader.readLine()) != null){
-				
+
 				if(!line.trim().equals(textToRemove)){
-					
+
 					writer.println(line);
 					writer.flush();
-					
+
 				}
-				
+
 				writer.close();
 				reader.close();
-				
+
 				if(!file.delete()){
-					
+
 					throw new RuntimeException("Could not update wanted file correctly! (deletion)");
-					
+
 				}
-				
+
 				if(!temp.renameTo(file)){
-					
+
 					throw new RuntimeException("Could not update wanted file correctly! (renaming)");
-					
+
 				}
-				
+
 			}
-			
+
 		} catch (IOException e) {
-			
+
 			e.printStackTrace();
-			
+
 		}
-		
+
 	}
 
 }
