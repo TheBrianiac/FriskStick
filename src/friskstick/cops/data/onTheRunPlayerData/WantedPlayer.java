@@ -18,6 +18,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -27,6 +28,8 @@ import friskstick.cops.plugin.FriskStick;
 public class WantedPlayer {
 
 	private ArrayList<Player> wanted;
+	
+	private HashMap<Player, Player> requests;
 
 	private FriskStick plugin;
 
@@ -35,6 +38,8 @@ public class WantedPlayer {
 	public WantedPlayer(FriskStick plugin) {
 
 		wanted = new ArrayList<Player>();
+		
+		requests = new HashMap<Player, Player>();
 
 		this.plugin = plugin;
 
@@ -78,6 +83,83 @@ public class WantedPlayer {
 
 		}
 
+	}
+	
+	/**
+	 * Gets the list of the wanted players.
+	 * 
+	 * @return The list containing the wanted players.
+	 */
+	public ArrayList<Player> getWanted(){
+		
+		return wanted;
+		
+	}
+	
+	/**
+	 * Checks if the player is wanted or not.
+	 * 
+	 * @param p The player to check.
+	 * @return True if the player is wanted, false otherwise.
+	 */
+	public boolean isWanted(Player p){
+		
+		for(int i = 0; i < wanted.size(); i++){
+			
+			if(wanted.get(i).equals(p)){
+				
+				return true;
+				
+			}
+			
+		}
+		
+		return false;
+		
+	}
+	
+	/**
+	 * Adds a frisking request.
+	 * 
+	 * @param requester The player requesting to frisk.
+	 * @param requested The player being requested.
+	 */
+	public void addRequest(Player requester, Player requested){
+		
+		requests.put(requester, requested);
+		updateRequestConfig("add", null);
+		
+	}
+	
+	/**
+	 * Removes a frisking request.
+	 * 
+	 * @param requester The player requesting to frisk.
+	 * @param requested The player being requested.
+	 */
+	public void removeRequest(Player requester, Player requested){
+		
+		requests.remove(requester);
+		updateRequestConfig("remove", requester.getName() + " - " + requested.getName());
+		
+	}
+	
+	/**
+	 * Tells if a player has a frisk request or not.
+	 * 
+	 * @param requester The player requesting to frisk.
+	 * @return True if the player has a request, false otherwise.
+	 */
+	public boolean hasRequest(Player requester){
+		
+		if(requests.containsKey(requester)){
+			
+			return true;
+			
+		}
+		
+		return false;
+		
 	}
 
 	/**
@@ -166,6 +248,106 @@ public class WantedPlayer {
 				writer.close();
 
 				throw new IllegalArgumentException("Wrong argument used in WantedPlayer.updateWantedConfig() method!");
+
+			}
+
+			writer.close();
+
+		} catch (IOException e) {
+
+			e.printStackTrace();
+
+		}
+
+	}
+	
+	/**
+	 * Updates the configuration file which contains the list of all the requests
+	 * 
+	 * @param operation The operation (add a request or remove a request) to perform on the request file.
+	 * @param requestToRemove Only applies to the remove operation. The request to remove from the file.
+	 */
+	private void updateRequestConfig(String operation, String requestToRemove) {
+
+		File requestFile = new File(plugin.getDataFolder(), "/data/requests.txt");
+
+		if(!requestFile.exists()) {
+
+			try {
+
+				requestFile.getParentFile().mkdir();
+				requestFile.createNewFile(); //Creates the new file if it does not already exist
+
+			} catch (IOException e) {
+
+				e.printStackTrace();
+
+			}
+
+		}
+
+		BufferedWriter writer;
+		BufferedReader reader;
+
+		/*
+		 * READER
+		 */
+		try {
+
+			reader = new BufferedReader(new FileReader(requestFile));
+
+			if(wanted.isEmpty()){
+
+				String name = null;
+
+				while((name = reader.readLine()) != null){
+
+					String requester = name.split("-")[0].trim();
+					String requested = name.split("-")[1].trim();
+					
+					requests.put((Player)Bukkit.getOfflinePlayer(requester), (Player)Bukkit.getOfflinePlayer(requested));
+
+				}
+
+			}
+
+			reader.close();
+
+		} catch (IOException e) {
+
+			e.printStackTrace();
+
+		}
+
+		/*
+		 * WRITER
+		 */
+		try {
+
+			writer = new BufferedWriter(new FileWriter(requestFile));
+
+			if(operation.equalsIgnoreCase("add")){
+
+				for(int i = 0; i < requests.size(); i++){
+					
+					Player[] requested = new Player[requests.size()];
+					Player[] requesters = new Player[requests.size()];
+
+					writer.write(requests.keySet().toArray(requesters)[i].getName() + " - " + requests.values().toArray(requested)[i].getName());
+
+					writer.newLine();
+
+				}
+
+			} else if(operation.equalsIgnoreCase("remove")){
+
+				removeLine(requestFile, requestToRemove);
+
+			} else {
+
+				writer.close();
+
+				throw new IllegalArgumentException("Wrong argument used in WantedPlayer.updateRequestConfig() method!");
 
 			}
 
