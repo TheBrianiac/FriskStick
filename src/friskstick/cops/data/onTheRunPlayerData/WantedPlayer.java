@@ -46,6 +46,8 @@ public class WantedPlayer {
 		if(firstTime){
 
 			updateWantedConfig("set", null);
+			
+			updateRequestConfig("add", null);
 
 			firstTime = false;
 
@@ -296,7 +298,7 @@ public class WantedPlayer {
 
 			reader = new BufferedReader(new FileReader(requestFile));
 
-			if(wanted.isEmpty()){
+			if(requests.isEmpty()){
 
 				String name = null;
 
