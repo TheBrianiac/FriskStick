@@ -27,18 +27,34 @@ import friskstick.cops.plugin.FriskStick;
 
 public class WantedPlayer {
 
+	/**
+	 * The list of wanted players
+	 */
 	private ArrayList<Player> wanted;
-	
+
 	private HashMap<Player, Player> requests;
 
+	/**
+	 * The plugin
+	 */
 	private FriskStick plugin;
 
+	/**
+	 * The boolean that checks if it is the first time
+	 * 
+	 * This might be a problem because when the server restarts, firstTime will be reset to true
+	 */
 	private boolean firstTime = true;
 
+	/**
+	 * Constructs WantedPlayers and Initializez fields
+	 * 
+	 * @param plugin The plugin
+	 */
 	public WantedPlayer(FriskStick plugin) {
 
 		wanted = new ArrayList<Player>();
-		
+
 		requests = new HashMap<Player, Player>();
 
 		this.plugin = plugin;
@@ -46,7 +62,7 @@ public class WantedPlayer {
 		if(firstTime){
 
 			updateWantedConfig("set", null);
-			
+
 			updateRequestConfig("add", null);
 
 			firstTime = false;
@@ -63,7 +79,7 @@ public class WantedPlayer {
 	public void setWanted(Player p) {
 
 		wanted.add(p);
-		updateWantedConfig("set", null);
+		updateWantedConfig("set", p.getName());
 
 	}
 
@@ -86,18 +102,19 @@ public class WantedPlayer {
 		}
 
 	}
-	
+
 	/**
 	 * Gets the list of the wanted players.
 	 * 
 	 * @return The list containing the wanted players.
 	 */
 	public ArrayList<Player> getWanted(){
-		
+
+		//TODO add getting usernames from the config list of wanted players
 		return wanted;
-		
+
 	}
-	
+
 	/**
 	 * Checks if the player is wanted or not.
 	 * 
@@ -105,21 +122,21 @@ public class WantedPlayer {
 	 * @return True if the player is wanted, false otherwise.
 	 */
 	public boolean isWanted(Player p){
-		
+
 		for(int i = 0; i < wanted.size(); i++){
-			
+
 			if(wanted.get(i).equals(p)){
-				
+
 				return true;
-				
+
 			}
-			
+
 		}
-		
+
 		return false;
-		
+
 	}
-	
+
 	/**
 	 * Adds a frisking request.
 	 * 
@@ -127,12 +144,12 @@ public class WantedPlayer {
 	 * @param requested The player being requested.
 	 */
 	public void addRequest(Player requester, Player requested){
-		
+
 		requests.put(requester, requested);
 		updateRequestConfig("add", null);
-		
+
 	}
-	
+
 	/**
 	 * Removes a frisking request.
 	 * 
@@ -140,12 +157,12 @@ public class WantedPlayer {
 	 * @param requested The player being requested.
 	 */
 	public void removeRequest(Player requester, Player requested){
-		
+
 		requests.remove(requester);
 		updateRequestConfig("remove", requester.getName() + " - " + requested.getName());
-		
+
 	}
-	
+
 	/**
 	 * Tells if a player has a frisk request or not.
 	 * 
@@ -153,24 +170,24 @@ public class WantedPlayer {
 	 * @return True if the player has a request, false otherwise.
 	 */
 	public boolean hasRequest(Player requester){
-		
+
 		if(requests.containsKey(requester)){
-			
+
 			return true;
-			
+
 		}
-		
+
 		return false;
-		
+
 	}
 
 	/**
 	 * Updates the configuration file which contains the list of all the wanted players
 	 * 
 	 * @param operation The operation (set a player or remove a player) to perform on the wanted file.
-	 * @param nameToRemove Only applies to the remove operation. The name of the player to remove from the file.
+	 * @param playerName The name of the player to do the operation on
 	 */
-	private void updateWantedConfig(String operation, String nameToRemove) {
+	private void updateWantedConfig(String operation, String playerName) {
 
 		/*TODO
 		 * FINISH THE WANTED LIST UPDATING
@@ -233,17 +250,12 @@ public class WantedPlayer {
 
 			if(operation.equalsIgnoreCase("set")){
 
-				for(int i = 0; i < wanted.size(); i++){
-
-					writer.write(wanted.get(i).getName());
-
-					writer.newLine();
-
-				}
+				writer.write(playerName);
+				writer.newLine();
 
 			} else if(operation.equalsIgnoreCase("remove")){
 
-				removeLine(wantedFile, nameToRemove);
+				removeLine(wantedFile, playerName);
 
 			} else {
 
@@ -262,7 +274,7 @@ public class WantedPlayer {
 		}
 
 	}
-	
+
 	/**
 	 * Updates the configuration file which contains the list of all the requests
 	 * 
@@ -306,7 +318,7 @@ public class WantedPlayer {
 
 					String requester = name.split("-")[0].trim();
 					String requested = name.split("-")[1].trim();
-					
+
 					requests.put((Player)Bukkit.getOfflinePlayer(requester), (Player)Bukkit.getOfflinePlayer(requested));
 
 				}
@@ -331,7 +343,7 @@ public class WantedPlayer {
 			if(operation.equalsIgnoreCase("add")){
 
 				for(int i = 0; i < requests.size(); i++){
-					
+
 					Player[] requested = new Player[requests.size()];
 					Player[] requesters = new Player[requests.size()];
 
