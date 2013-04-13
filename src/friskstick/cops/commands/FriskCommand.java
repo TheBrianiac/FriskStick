@@ -47,7 +47,7 @@ public class FriskCommand implements CommandExecutor {
 
 		}
 
-		if(player == null) {
+		if(player == null) { //If the command is not run by a player(run in console) output an error
 
 			sender.sendMessage(ChatColor.RED + "You cannot run this command in the console!");
 
@@ -55,22 +55,22 @@ public class FriskCommand implements CommandExecutor {
 
 			if(commandLabel.equalsIgnoreCase("frisk")) { // If the player typed /frisk then do the following...
 
-				if(player.hasPermission("friskstick.chat") || player.isOp()) {
+				if(player.hasPermission("friskstick.chat") || player.isOp()) { //If the player has permission to frisk or is an OP
 
-					if(args.length == 0) {
+					if(args.length == 0) { //Check to see if the command was typed correctly
 
-						player.sendMessage("Usage: /frisk <playername>");
+						player.sendMessage(ChatColor.RED + "Usage: /frisk <playername>");
 
-					} else if(args.length == 1) {
+					} else if(args.length == 1) { //Check to see if the command was typed correctly
 
-						Player frisked = plugin.getServer().getPlayer(args[0]);
+						Player frisked = plugin.getServer().getPlayer(args[0]); //Get the player to be frisked as specified by the command
 
-						if(!frisked.hasPermission("friskstick.bypass")) {
+						if(!frisked.hasPermission("friskstick.bypass")) { //Check if the player to be frisked is unfriskable
 
-							PlayerInventory inventory = frisked.getInventory();
-							boolean found = false;
+							PlayerInventory inventory = frisked.getInventory(); //Gets the player to be frisked's Inventory
+							boolean found = false; //Has something been found?
 
-							for(String drug: plugin.getConfig().getStringList("drug-ids")) {
+							for(String drug: plugin.getConfig().getStringList("drug-ids")) { //Iterate over the list of illegal items in the configuration
 
 								if(drug.contains(":")) {
 
@@ -111,14 +111,14 @@ public class FriskCommand implements CommandExecutor {
 
 								} else {
 
-									if(inventory.contains(Integer.parseInt(drug))) {
+									if(inventory.contains(Integer.parseInt(drug))) { //Check if the frisked player's inventory has an illegal item
 
 										int drugid = Integer.parseInt(drug);
 
 										Iterator<Integer> iter = inventory.all(drugid).keySet().iterator();
 										ItemStack[] contents = inventory.getContents();
 
-										while(iter.hasNext()){
+										while(iter.hasNext()) {
 
 											player.getInventory().addItem(new ItemStack(contents[iter.next()]));
 

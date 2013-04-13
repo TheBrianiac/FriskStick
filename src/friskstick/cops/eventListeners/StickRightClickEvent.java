@@ -99,12 +99,13 @@ public class StickRightClickEvent implements Listener {
 
 							time++;
 
-							if(time == 5){
+							if(time == 5) {
 
 								isStopped = false;
 								t.stop();
 
 							}
+
 						}
 
 					});
