@@ -17,7 +17,6 @@ public class FriskCommand implements CommandExecutor {
 
 	private FriskStick plugin;
 	private JailPlayer jailed = new JailPlayer(plugin);
-	private int index = 0;
 
 	/**
 	 * The constructor for {@link FriskCommand this} class.
@@ -60,13 +59,15 @@ public class FriskCommand implements CommandExecutor {
 						Player friskedPlayer = plugin.getServer().getPlayer(args[0]);
 
 						if(!friskedPlayer.hasPermission("friskstick.bypass")) {
-							
-							Inventory friskedInv = friskedPlayer.getInventory();
-							
+
+							friskedPlayer.sendMessage(player.getName() + " is trying to frisk you! Use /comply to agree to be frisked.");
+
+
+
 						} else {
-							
+
 							player.sendMessage(ChatColor.RED + "You cannot frisk this player!");
-							
+
 						}
 
 					}
