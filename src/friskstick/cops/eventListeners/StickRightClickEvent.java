@@ -129,12 +129,12 @@ public class StickRightClickEvent implements Listener {
 						PlayerInventory inventory = frisked.getInventory();
 						boolean found = false;
 
-						for(String drug : plugin.getConfig().getStringList("drug-ids")) {
+						for(String item : plugin.getConfig().getStringList("item-ids")) {
 
-							if(drug.contains(":")) {
+							if(item.contains(":")) {
 
-								String firsthalf = drug.split(":")[0];
-								String lasthalf = drug.split(":")[1];
+								String firsthalf = item.split(":")[0];
+								String lasthalf = item.split(":")[1];
 
 								for(int i = 1; i <= plugin.getConfig().getInt("amount-to-search-for"); i++) {
 
@@ -152,8 +152,8 @@ public class StickRightClickEvent implements Listener {
 
 										inventory.removeItem(new ItemStack(Integer.parseInt(firsthalf), 2305, Short.parseShort(lasthalf)));
 
-										cop.sendMessage(plugin.getConfig().getString("cop-found-msg").replaceAll("&", "§").replaceAll("%itemname%", plugin.getConfig().getStringList("drug-names").toArray()[index].toString()).replaceAll("%player%", frisked.getName()));
-										frisked.sendMessage(plugin.getConfig().getString("player-found-msg").replaceAll("&", "§").replaceAll("%cop%", cop.getName()).replaceAll("%itemname%", plugin.getConfig().getStringList("drug-names").toArray()[index].toString()));
+										cop.sendMessage(plugin.getConfig().getString("cop-found-msg").replaceAll("&", "§").replaceAll("%itemname%", plugin.getConfig().getStringList("item-names").toArray()[index].toString()).replaceAll("%player%", frisked.getName()));
+										frisked.sendMessage(plugin.getConfig().getString("player-found-msg").replaceAll("&", "§").replaceAll("%cop%", cop.getName()).replaceAll("%itemname%", plugin.getConfig().getStringList("item-names").toArray()[index].toString()));
 
 										if(cop.hasPermission("friskstick.jail")) {
 
@@ -169,10 +169,10 @@ public class StickRightClickEvent implements Listener {
 
 							} else {
 
-								if(inventory.contains(Integer.parseInt(drug))) {
+								if(inventory.contains(Integer.parseInt(item))) {
 
-									int drugid = Integer.parseInt(drug);
-									Iterator<Integer> iter = inventory.all(drugid).keySet().iterator();
+									int itemid = Integer.parseInt(item);
+									Iterator<Integer> iter = inventory.all(itemid).keySet().iterator();
 									ItemStack[] contents = inventory.getContents();
 
 									while(iter.hasNext()) {
@@ -184,10 +184,10 @@ public class StickRightClickEvent implements Listener {
 									/*
 									 * This is where the /frisk command exception points to
 									 */
-									inventory.removeItem(new ItemStack(drugid, 2305));
+									inventory.removeItem(new ItemStack(itemid, 2305));
 
-									cop.sendMessage(plugin.getConfig().getString("cop-found-msg").replaceAll("&", "§").replaceAll("%itemname%", plugin.getConfig().getStringList("drug-names").toArray()[index].toString()).replaceAll("%player%", frisked.getName()));
-									frisked.sendMessage(plugin.getConfig().getString("player-found-msg").replaceAll("&", "§").replaceAll("%cop%", cop.getName()).replaceAll("%itemname%", plugin.getConfig().getStringList("drug-names").toArray()[index].toString()));
+									cop.sendMessage(plugin.getConfig().getString("cop-found-msg").replaceAll("&", "§").replaceAll("%itemname%", plugin.getConfig().getStringList("item-names").toArray()[index].toString()).replaceAll("%player%", frisked.getName()));
+									frisked.sendMessage(plugin.getConfig().getString("player-found-msg").replaceAll("&", "§").replaceAll("%cop%", cop.getName()).replaceAll("%itemname%", plugin.getConfig().getStringList("item-names").toArray()[index].toString()));
 
 									if(cop.hasPermission("friskstick.jail")) {
 

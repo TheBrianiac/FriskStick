@@ -1,9 +1,6 @@
 package friskstick.cops.plugin;
 
 /*TODO
- * Add Drug Effects
- * Add Drug Addiction
- * Add Drug Withdrawal
  * Add a general FriskStick command(in progress)
  * Add a show reports command(in progress)
  * Fix Frisk Command Bug/Auto-Jailing Bug
@@ -29,7 +26,6 @@ import friskstick.cops.commands.ShowReportsCommand;
 import friskstick.cops.data.MetricsLite;
 import friskstick.cops.eventListeners.PlayerJoinEventUpdateCheck;
 import friskstick.cops.eventListeners.StickRightClickEvent;
-//import friskstick.cops.drugs.Drugs;
 
 /**
  * Main class for the plugin. This is the class that should be referenced when using methods relating to the {@link JavaPlugin} class.
@@ -56,6 +52,8 @@ public class FriskStick extends JavaPlugin {
 
 		} catch (IOException e) {
 
+			e.printStackTrace();
+
 		}
 
 		PluginDescriptionFile pdffile = this.getDescription();
@@ -63,7 +61,6 @@ public class FriskStick extends JavaPlugin {
 
 		pm.registerEvents(new StickRightClickEvent(this), this);
 		pm.registerEvents(new PlayerJoinEventUpdateCheck(this), this);
-		//pm.registerEvents(new Drugs(this), this);
 
 		getCommand("frisk").setExecutor(new FriskCommand(this));
 		getCommand("report").setExecutor(new ReportCommand(this));

@@ -70,12 +70,12 @@ public class FriskCommand implements CommandExecutor {
 							PlayerInventory inventory = frisked.getInventory(); //Gets the player to be frisked's Inventory
 							boolean found = false; //Has something been found?
 
-							for(String drug: plugin.getConfig().getStringList("drug-ids")) { //Iterate over the list of illegal items in the configuration
+							for(String item: plugin.getConfig().getStringList("item-ids")) { //Iterate over the list of illegal items in the configuration
 
-								if(drug.contains(":")) {
+								if(item.contains(":")) {
 
-									String firsthalf = drug.split(":")[0];
-									String lasthalf = drug.split(":")[1];
+									String firsthalf = item.split(":")[0];
+									String lasthalf = item.split(":")[1];
 
 									for(int i = 1; i <= plugin.getConfig().getInt("amount-to-search-for"); i++) {
 
@@ -94,8 +94,8 @@ public class FriskCommand implements CommandExecutor {
 
 											inventory.removeItem(new ItemStack(Integer.parseInt(firsthalf), 2305, Short.parseShort(lasthalf)));
 
-											player.sendMessage(plugin.getConfig().getString("cop-found-msg").replaceAll("&", "§").replaceAll("%itemname%", plugin.getConfig().getStringList("drug-names").toArray()[index].toString()).replaceAll("%player%", plugin.getServer().getPlayer(args[0]).getName()));
-											plugin.getServer().getPlayer(args[0]).sendMessage(plugin.getConfig().getString("player-found-msg").replaceAll("&", "§").replaceAll("%cop%", player.getName()).replaceAll("%player%", player.getName()).replaceAll("%itemname%", plugin.getConfig().getStringList("drug-names").toArray()[index].toString()));
+											player.sendMessage(plugin.getConfig().getString("cop-found-msg").replaceAll("&", "§").replaceAll("%itemname%", plugin.getConfig().getStringList("item-names").toArray()[index].toString()).replaceAll("%player%", plugin.getServer().getPlayer(args[0]).getName()));
+											plugin.getServer().getPlayer(args[0]).sendMessage(plugin.getConfig().getString("player-found-msg").replaceAll("&", "§").replaceAll("%cop%", player.getName()).replaceAll("%player%", player.getName()).replaceAll("%itemname%", plugin.getConfig().getStringList("item-names").toArray()[index].toString()));
 
 											if(player.hasPermission("friskstick.jail")) {
 
@@ -111,11 +111,11 @@ public class FriskCommand implements CommandExecutor {
 
 								} else {
 
-									if(inventory.contains(Integer.parseInt(drug))) { //Check if the frisked player's inventory has an illegal item
+									if(inventory.contains(Integer.parseInt(item))) { //Check if the frisked player's inventory has an illegal item
 
-										int drugid = Integer.parseInt(drug);
+										int itemid = Integer.parseInt(item);
 
-										Iterator<Integer> iter = inventory.all(drugid).keySet().iterator();
+										Iterator<Integer> iter = inventory.all(itemid).keySet().iterator();
 										ItemStack[] contents = inventory.getContents();
 
 										while(iter.hasNext()) {
@@ -124,10 +124,10 @@ public class FriskCommand implements CommandExecutor {
 
 										}
 
-										inventory.removeItem(new ItemStack(drugid, 2305));
+										inventory.removeItem(new ItemStack(itemid, 2305));
 
-										player.sendMessage(plugin.getConfig().getString("cop-found-msg").replaceAll("&", "§").replaceAll("%itemname%", plugin.getConfig().getStringList("drug-names").toArray()[index].toString()).replaceAll("%player%", plugin.getServer().getPlayer(args[0]).getName()));
-										plugin.getServer().getPlayer(args[0]).sendMessage(plugin.getConfig().getString("player-found-msg").replaceAll("%cop%", player.getName()).replaceAll("&", "§").replaceAll("%player%", player.getName()).replaceAll("%itemname%", plugin.getConfig().getStringList("drug-names").toArray()[index].toString()));
+										player.sendMessage(plugin.getConfig().getString("cop-found-msg").replaceAll("&", "§").replaceAll("%itemname%", plugin.getConfig().getStringList("item-names").toArray()[index].toString()).replaceAll("%player%", plugin.getServer().getPlayer(args[0]).getName()));
+										plugin.getServer().getPlayer(args[0]).sendMessage(plugin.getConfig().getString("player-found-msg").replaceAll("%cop%", player.getName()).replaceAll("&", "§").replaceAll("%player%", player.getName()).replaceAll("%itemname%", plugin.getConfig().getStringList("item-names").toArray()[index].toString()));
 
 										if(player.hasPermission("friskstick.jail")) {
 

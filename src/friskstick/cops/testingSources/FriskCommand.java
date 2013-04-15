@@ -5,6 +5,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
 
 import friskstick.cops.plugin.FriskStick;
 import friskstick.cops.plugin.JailPlayer;
@@ -60,7 +61,7 @@ public class FriskCommand implements CommandExecutor {
 
 						if(!friskedPlayer.hasPermission("friskstick.bypass")) {
 							
-							
+							Inventory friskedInv = friskedPlayer.getInventory();
 							
 						} else {
 							

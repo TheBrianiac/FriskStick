@@ -1,5 +1,5 @@
 #A list of Illegal Item ID's#
-drug-ids:
+item-ids:
 - '353'
 - '339'
 - '39'
@@ -15,7 +15,7 @@ player-not-found-msg: '&e[Frisk] &b%cop% frisked you and found nothing!'
 player-found-msg: '&e[Frisk] &c%cop% frisked you and found some %itemname%!'
 player-report-message: '&e[Report] &cA report has been made by %snitch% that %reported% has drugs!'
 #A list of Illegal Item Names#
-drug-names:
+item-names:
 - 'Sugar'
 - 'Paper'
 - 'Brown Mushroom'
