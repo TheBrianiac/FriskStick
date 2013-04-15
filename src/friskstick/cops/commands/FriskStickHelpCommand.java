@@ -59,7 +59,21 @@ public class FriskStickHelpCommand implements CommandExecutor {
 
 							if(args[0].equalsIgnoreCase("1")) {
 
-								player.sendMessage(ChatColor.AQUA + "**********FriskStick Page 1**********");
+								player.sendMessage(ChatColor.AQUA + "**********FriskStick Page 1/2**********");
+								player.sendMessage(ChatColor.AQUA + "To frisk a player use /frisk <playerName>");
+								player.sendMessage(ChatColor.AQUA + "To report a player use /report <playerName>");
+								player.sendMessage(ChatColor.AQUA + "To request assistance use /assist"); //TODO Implement assistance
+								player.sendMessage(ChatColor.LIGHT_PURPLE + "Use /FriskStick 2 for more pages and help");
+
+							}
+
+							if(args[0].equalsIgnoreCase("2")) {
+
+								player.sendMessage(ChatColor.AQUA + "**********FriskStick Page 2/2**********");
+								player.sendMessage(ChatColor.AQUA + "");
+								player.sendMessage(ChatColor.AQUA + "");
+								player.sendMessage(ChatColor.AQUA + "");
+								player.sendMessage(ChatColor.AQUA + "");
 
 							}
 

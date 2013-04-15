@@ -1,4 +1,4 @@
-package friskstick.cops.data.onTheRunPlayerData;
+package friskstick.cops.data;
 
 /*
  * TODO
