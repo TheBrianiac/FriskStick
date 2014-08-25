@@ -1,64 +1,66 @@
 name: FriskStick
-version: 1.4 Alpha
-main: friskstick.cops.plugin.FriskStick
-description: >
-             A plugin for checking for "drugs" on the player that is right clicked.
+version: Beta 1.0
+description: Allows a player to frisk people for drugs and other contraband.
+main: friskstick.main.FriskStick
+authors: [domingocool, dchaosknight]
+website: http://dev.bukkit.org/bukkit-plugins/friskstick/
 softdepend: [Essentials]
-authors: [dchaosknight, domingocool]
 commands:
-  frisk:
-    description: The command to frisk another player.
-    usage: /frisk <player>
-    permission: friskstick.chat
-    permission-message: You don't have <permission> to frisk people.
-  report:
-    description: Allows players to report other players for drugs.
-  showreports:
-    description: Allows players to see reported players.
-  FriskStick:
-    description: Displays help for the plugin.
+  friskstick:
+    description: Help command for the plugin.
+    aliases: fs
+    permission: friskstick.help.basic
+    usage: /friskstick
   comply:
-    description: Comply to a cop's frisk request.
+    description: Allows a player to comply with a frisk request.
+    permission: friskstick.comply
+    usage: /comply
+  report:
+    description: Allows a player to report someone for drugs.
+    permission: friskstick.report.send
+    usage: /report <player>
+  showreports:
+    description: Allows a player to view all reports currently not investigated.
+    permission: friskstick.report.show
+    usage: /showreports
 permissions:
   friskstick.*:
-    description: All permissions.
+    description: Gives access to all permissions.
     default: op
     children:
-      friskstick.use: true
-      friskstick.jail: true
-      friskstick.chat: true
       friskstick.report.*: true
-  friskstick.use:
-    description: Allows a player to frisk another player.
-    default: op
-  friskstick.jail:
-    description: Allows a player to jail another player after frisking.
-    default: op
-  friskstick.chat:
-    description: Allows a player to use the /frisk command.
-    default: op
+      friskstick.comply: true
+      friskstick.help.advanced: true
+      friskstick.frisk: true
+      friskstick.bypass: true
   friskstick.report.*:
-    description: All of the report permissions.
+    description: Gives all report permissions.
     default: op
     children:
       friskstick.report.send: true
       friskstick.report.receive: true
       friskstick.report.show: true
   friskstick.report.send:
-    description: Allows a player to report other players.
+    description: Allows a player to submit reports.
     default: true
   friskstick.report.receive:
     description: Allows a player to receive reports.
     default: op
   friskstick.report.show:
-    description: Allows a player to view those who have been reported.
+    description: Allows a player to use /showreports.
     default: op
-  friskstick.notify:
-    description: Notifies a player of updates.
+  friskstick.comply:
+    description: Allows a player to comply to frisk requests.
+    default: true
+  friskstick.help.advanced:
+    description: Provides all commands available in the plugin when /friskstick is used.
+    default: op
+  friskstick.help.basic:
+    description: Provides only commands that most players would have access to in the help menu.
+    default: true
+  friskstick.frisk:
+    description: Allows a player to frisk.
     default: op
   friskstick.bypass:
-    description: Allows a player to be immune to frisking.
+    description: Allows a player to bypass frisking.
     default: op
-  friskstick.help:
-    description: Allows a player to see the plugin help.
-    default: true

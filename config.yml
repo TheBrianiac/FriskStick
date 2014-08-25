@@ -1,21 +1,17 @@
-#A list of Illegal Item ID's#
-item-ids:
-- '353'
-- '339'
-- '39'
-- '40'
-- '373:0'
-- '351:2'
-- '351:9'
-amount-to-search-for: 64
-#In Game Messages#
-cop-not-found-msg: '&e[Frisk] &cYou have failed to find anything on %player%!'
-cop-found-msg: '&e[Frisk] &bYou have found some %itemname% on %player%!'
-player-not-found-msg: '&e[Frisk] &b%cop% frisked you and found nothing!'
-player-found-msg: '&e[Frisk] &c%cop% frisked you and found some %itemname%!'
-player-report-message: '&e[Report] &cA report has been made by %snitch% that %reported% has drugs!'
-#A list of Illegal Item Names#
-item-names:
+#Illegal Items
+#You can find the names for the items by going to http://jd.bukkit.org/beta/doxygen/d6/d0e/enumorg_1_1bukkit_1_1Material.html
+#and going to the "Public Attributes" section. You can go to http://minecraft-ids.grahamedgecombe.com/ or the Minecraft Wiki for any metadata you may need.
+drugs:
+- 'Sugar'
+- 'Paper'
+- 'Brown_Mushroom'
+- 'Red_Mushroom'
+- 'Potion:0'
+- 'Ink_Sack:2'
+- 'Ink_Sack:9'
+
+#The names line up with the drug ids (sugar maps to sugar, paper to paper, etc.)
+drug-names:
 - 'Sugar'
 - 'Paper'
 - 'Brown Mushroom'
@@ -23,13 +19,36 @@ item-names:
 - 'Water Bottle'
 - 'Green Dye'
 - 'Pink Dye'
-#After how long do you want the plugin to check for an update? (in minutes)#
-check-time: 15
-#Do you want to allow reporting?#
-allow-reporting: true
-#Enable Auto-Jailing?#
-auto-jail: true
-#IF auto-jail is true, what jail will they go to?#
-jail-name: jail 
-#How long should they stay in Jail? (Goes By Seconds)#
-time-in-jail: 60
+
+#By how much, in half-hearts, should the cop be damaged if they fail to find something on a player?
+frisk-failure-dmg: 2
+
+#Time (in seconds) before frisking occurs (or beatdown mode activates, depending on whether the player runs or not)
+time-before-frisking: 5
+
+#Messages
+frisk-success-cop-msg: '&e[Frisk] &cYou have found some %drugname% on %player%!'
+frisk-success-player-msg: '&e[Frisk] &c%cop% frisked you and found some %drugname%!'
+frisk-failure-cop-msg: '&e[Frisk] &cYou have failed to find anything on %player%!'
+frisk-failure-player-msg: '&e[Frisk] &c%cop% frisked you and found nothing!'
+beatdown-player-msg: '&e[Frisk] &cYou are now on the run! Escape the police at all costs!'
+beatdown-cop-msg: '&e[Frisk] &c%player% is now on the run! Chase them and beat them down!'
+player-report-msg: '&e[Report] &c%reported% has just been reported by %snitch% for having drugs!'
+
+#Is reporting enabled?
+enable-reporting: true
+
+#Is auto-jailing enabled?
+enable-auto-jailing: true
+
+#Is beatdown mode enabled?
+enable-beatdown: true
+
+#What jails should be used for auto-jailing? (Note: The plugin will pick one at random; it does not assign priorities to any one jail.)
+jails:
+- 'jail1'
+- 'jail2'
+- 'jail3'
+
+#In seconds, for how long should the player be locked away? (Set to -1 to lock him/her away indefinitely)
+time-in-jail: 300
