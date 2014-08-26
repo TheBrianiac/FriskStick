@@ -27,14 +27,14 @@ public class StickRightClickEvent implements Listener {
 
                 if(event.getPlayer().hasPermission("friskstick.frisk") && !((Player) event.getRightClicked()).hasPermission("friskstick.bypass")) {
 
-                    if(!plugin.playerDataInstance.isPlayerOnTheRun((Player) event.getRightClicked()))
-                        new Frisk(plugin).friskPlayer((Player)event.getRightClicked(), event.getPlayer(), true);
+                    if (plugin.getConfig().getString("frisk-method").equalsIgnoreCase("both") || plugin.getConfig().getString("frisk-method").equalsIgnoreCase("right-click")) {
 
-                    else
-                        new Frisk(plugin).friskPlayer((Player)event.getRightClicked(), event.getPlayer(), false);
+                        if (!plugin.playerDataInstance.isPlayerOnTheRun((Player) event.getRightClicked()))
+                            new Frisk(plugin).friskPlayer((Player) event.getRightClicked(), event.getPlayer(), false);
+
+                    }
 
                 }
-
 
             }
 

@@ -30,6 +30,8 @@ public class ReportCommand implements CommandExecutor {
 
                         plugin.reportFileInstance.writeReportToFile((Player) sender, plugin.getServer().getPlayer(args[0]));
 
+                        sender.sendMessage(ChatColor.GREEN + "Report submitted successfully!");
+
                         for (Player p : plugin.getServer().getOnlinePlayers()) {
 
                             if (p.isOp() || p.hasPermission("friskstick.report.receive"))
@@ -40,14 +42,19 @@ public class ReportCommand implements CommandExecutor {
                     } else
                         sender.sendMessage(ChatColor.RED + "The player you entered either does not exist or is currently offline.");
 
-                }
+                } else if(!(sender instanceof Player))
+                    sender.sendMessage(ChatColor.RED + "This command can not be run from the console.");
+
+                else if(!sender.hasPermission("friskstick.report.send"))
+                    sender.sendMessage(ChatColor.RED + "You do not have permission to do that!");
 
             } else
                 sender.sendMessage(ChatColor.GOLD + "Usage: /report <player>");
 
-        }
+        } else
+            sender.sendMessage(ChatColor.RED + "Reporting is not enabled on this server.");
 
-        return false;
+        return true;
 
     }
 

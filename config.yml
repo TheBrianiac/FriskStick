@@ -1,54 +1,100 @@
-#Illegal Items
-#You can find the names for the items by going to http://jd.bukkit.org/beta/doxygen/d6/d0e/enumorg_1_1bukkit_1_1Material.html
-#and going to the "Public Attributes" section. You can go to http://minecraft-ids.grahamedgecombe.com/ or the Minecraft Wiki for any metadata you may need.
+#################
+# Illegal Items #
+#################
+
+# You can find the names for the items by going to http://jd.bukkit.org/beta/doxygen/d6/d0e/enumorg_1_1bukkit_1_1Material.html
+# and going to the "Public Attributes" section. You can go to http://minecraft-ids.grahamedgecombe.com/ or the Minecraft Wiki for any metadata you may need.
 drugs:
-- 'Sugar'
-- 'Paper'
-- 'Brown_Mushroom'
-- 'Red_Mushroom'
-- 'Potion:0'
-- 'Ink_Sack:2'
-- 'Ink_Sack:9'
+- Sugar
+- Paper
+- Brown_Mushroom
+- Red_Mushroom
+- Potion 0
+- Ink_Sack 2
+- Ink_Sack 9
 
-#The names line up with the drug ids (sugar maps to sugar, paper to paper, etc.)
+# The names line up with the drug ids (sugar maps to sugar, paper to paper, etc.)
+# Used as a substitute for %drugname% in the messages below
 drug-names:
-- 'Sugar'
-- 'Paper'
-- 'Brown Mushroom'
-- 'Red Mushroom'
-- 'Water Bottle'
-- 'Green Dye'
-- 'Pink Dye'
+- Sugar
+- Paper
+- Brown Mushroom
+- Red Mushroom
+- Water Bottle
+- Green Dye
+- Pink Dye
 
-#By how much, in half-hearts, should the cop be damaged if they fail to find something on a player?
+#############################
+# Beatdown/Frisking Options #
+#############################
+
+# By how much, in half-hearts, should the cop be damaged if they fail to find something on a player?
 frisk-failure-dmg: 2
 
-#Time (in seconds) before frisking occurs (or beatdown mode activates, depending on whether the player runs or not)
+# How should frisking occur? ('right-click' for right clicking, 'hit' for left clicking, or 'both' for both. Does not apply to beatdown mode; it will always be 'hit'.)
+frisk-method: both
+
+# How many blocks should the player run (in the given time below) before beatdown mode activates?
+beatdown-blocks: 10.0
+
+# Time (in seconds) before frisking occurs (or beatdown mode activates, depending on whether the player runs or not)
 time-before-frisking: 5
 
-#Messages
+# How much health should the player have (in half-hearts) before he/she is caught when in beatdown mode?
+beatdown-frisk-health: 10
+
+# After how many seconds of being on the run will the player no longer be on the run?
+on-the-run-cooldown: 60
+
+############
+# Messages #
+############
+
 frisk-success-cop-msg: '&e[Frisk] &cYou have found some %drugname% on %player%!'
 frisk-success-player-msg: '&e[Frisk] &c%cop% frisked you and found some %drugname%!'
+
 frisk-failure-cop-msg: '&e[Frisk] &cYou have failed to find anything on %player%!'
 frisk-failure-player-msg: '&e[Frisk] &c%cop% frisked you and found nothing!'
-beatdown-player-msg: '&e[Frisk] &cYou are now on the run! Escape the police at all costs!'
-beatdown-cop-msg: '&e[Frisk] &c%player% is now on the run! Chase them and beat them down!'
+
+frisk-attempt-cop-msg: '&e[Frisk] &cAttempting to frisk %player%! They have %time% seconds to comply!'
+frisk-attempt-player-msg: '&e[Frisk] &c%cop% is attempting to frisk you! You have %time% seconds to either stay put and comply or try to make a run for it!'
+
+on-run-player-msg: '&e[Frisk] &cYou are now on the run! Escape the police at all costs!'
+on-run-cop-msg: '&e[Frisk] &c%player% is now on the run! Chase them and beat them down!'
+
+not-on-run-cop-msg: '&e[Frisk] &c%player% is no longer on the run.'
+not-on-run-player-msg: '&e[Frisk] &6You are no longer on the run.'
+
 player-report-msg: '&e[Report] &c%reported% has just been reported by %snitch% for having drugs!'
 
-#Is reporting enabled?
+report-delete-msg: '&e[Report] &aReport deleted!'
+
+plugin-update-msg: '&e[Update] &6This version of FriskStick is out of date! Download the newest version at %link%'
+
+##################
+# Plugin Options #
+##################
+
+# Is reporting enabled?
 enable-reporting: true
 
-#Is auto-jailing enabled?
+# Is auto-jailing enabled?
 enable-auto-jailing: true
 
-#Is beatdown mode enabled?
+# Is beatdown mode enabled?
 enable-beatdown: true
 
-#What jails should be used for auto-jailing? (Note: The plugin will pick one at random; it does not assign priorities to any one jail.)
+# Is update checking enabled?
+enable-update-checking: true
+
+# What is the interval (in minutes) to check for updates?
+update-check-interval: 5
+
+# What jails should be used for auto-jailing? (Note: The plugin will pick one at random; it does not assign priorities to any one jail.)
 jails:
-- 'jail1'
-- 'jail2'
-- 'jail3'
+- jail1
+- jail2
+- jail3
 
 #In seconds, for how long should the player be locked away? (Set to -1 to lock him/her away indefinitely)
 time-in-jail: 300

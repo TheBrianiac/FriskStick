@@ -1,5 +1,5 @@
 name: FriskStick
-version: Beta 1.0
+version: 1.0 Beta
 description: Allows a player to frisk people for drugs and other contraband.
 main: friskstick.main.FriskStick
 authors: [domingocool, dchaosknight]
@@ -23,6 +23,10 @@ commands:
     description: Allows a player to view all reports currently not investigated.
     permission: friskstick.report.show
     usage: /showreports
+  deletereport:
+    description: Allows a player to delete a report.
+    permission: friskstick.report.delete
+    usage: /deletereport <reportnumber>
 permissions:
   friskstick.*:
     description: Gives access to all permissions.
@@ -33,6 +37,8 @@ permissions:
       friskstick.help.advanced: true
       friskstick.frisk: true
       friskstick.bypass: true
+      friskstick.update.receive: true
+
   friskstick.report.*:
     description: Gives all report permissions.
     default: op
@@ -40,27 +46,55 @@ permissions:
       friskstick.report.send: true
       friskstick.report.receive: true
       friskstick.report.show: true
+      friskstick.report.delete: true
+
+  friskstick.update.*:
+    description: Gives all update permissions.
+    default: op
+    children:
+      friskstick.update.check: true
+      friskstick.update.receive: true
+
   friskstick.report.send:
     description: Allows a player to submit reports.
     default: true
+
   friskstick.report.receive:
     description: Allows a player to receive reports.
     default: op
+
   friskstick.report.show:
     description: Allows a player to use /showreports.
     default: op
+
+  friskstick.report.delete:
+    description: Allows a player to use /deletereport.
+    default: op
+
   friskstick.comply:
     description: Allows a player to comply to frisk requests.
     default: true
+
   friskstick.help.advanced:
     description: Provides all commands available in the plugin when /friskstick is used.
     default: op
+
   friskstick.help.basic:
     description: Provides only commands that most players would have access to in the help menu.
     default: true
+
   friskstick.frisk:
     description: Allows a player to frisk.
     default: op
+
   friskstick.bypass:
     description: Allows a player to bypass frisking.
+    default: op
+
+  friskstick.update.check:
+    description: Allows a player to check for updates.
+    default: op
+
+  friskstick.update.receive:
+    description: Allows a player to receive update messages when the plugin checks for updates.
     default: op

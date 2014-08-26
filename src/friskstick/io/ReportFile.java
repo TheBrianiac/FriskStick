@@ -15,29 +15,17 @@ public class ReportFile {
     private FriskStick plugin;
     private File reports;
 
-    private Calendar cal = Calendar.getInstance();
-
     public ReportFile(FriskStick plugin) {
 
         this.plugin = plugin;
 
-        try {
-
-            reports = new File(plugin.getDataFolder(), "reports.txt");
-
-            if(!reports.exists())
-                reports.createNewFile();
-
-        } catch(IOException e) {
-
-            plugin.getServer().getConsoleSender().sendMessage(ChatColor.RED + "Unable to create reports file! Disabling FriskStick...");
-            plugin.getServer().getPluginManager().disablePlugin(plugin);
-
-        }
+        reports = new File(plugin.getDataFolder(), "reports.txt");
 
     }
 
     public void writeReportToFile(Player reporter, Player reported) {
+
+        Calendar cal = Calendar.getInstance();
 
         int year = cal.get(Calendar.YEAR);
         int month = cal.get(Calendar.MONTH);
@@ -47,14 +35,15 @@ public class ReportFile {
         int minute = cal.get(Calendar.MINUTE);
         int second = cal.get(Calendar.SECOND);
 
-        String time = String.format("%d:%d:%d", hour, minute, second);
+        String time = String.format("%02d:%02d:%02d", hour, minute, second);
         String date = String.format("%s %d, %d", monthName, day, year);
 
         try {
 
             BufferedWriter writer = new BufferedWriter(new FileWriter(reports, true));
 
-            writer.write(reporter.getName() + " reported " + reported.getName() + " at " + time + " on " + date + "\n");
+            writer.write(reporter.getName() + " reported " + reported.getName() + " at " + time + " on " + date);
+            writer.newLine();
 
             writer.close();
 
@@ -98,32 +87,38 @@ public class ReportFile {
 
     }
 
-    public void deleteReport(String reporterName) {
+    public void deleteReport(int reportNum) {
 
         try {
 
+            // Create a temporary file
             File tmp = new File(reports.getAbsolutePath() + ".tmp");
-            tmp.createNewFile();
 
             BufferedReader reader = new BufferedReader(new FileReader(reports));
             BufferedWriter writer = new BufferedWriter(new FileWriter(tmp, true));
 
             String report;
 
+            int counter = 1;
+
             while((report = reader.readLine()) != null) {
 
-                if(!report.substring(0, reporterName.length()).equalsIgnoreCase(reporterName)) {
+                // If the report is not the report being deleted, write it to the temp. file.
+                if(!(reportNum == counter)) {
 
                     writer.write(report + "\n");
                     writer.flush();
 
                 }
 
+                counter++;
+
             }
 
             writer.close();
             reader.close();
 
+            // Delete the original reports.txt and rename the temp. file to reports.txt
             reports.delete();
             tmp.renameTo(reports);
 

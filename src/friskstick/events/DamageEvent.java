@@ -1,5 +1,6 @@
 package friskstick.events;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import friskstick.main.Frisk;
 import friskstick.main.FriskStick;
 import org.bukkit.Material;
@@ -30,25 +31,29 @@ public class DamageEvent implements Listener {
                 Player cop = (Player) event.getDamager();
                 Player frisked = (Player) event.getEntity();
 
-                if(cop.getItemInHand().getType() == Material.STICK) {
+                if (plugin.getConfig().getString("frisk-method").equalsIgnoreCase("both") || plugin.getConfig().getString("frisk-method").equalsIgnoreCase("hit")) {
 
-                    // If the player being frisked is NOT on the run, frisk the player
-                    if(!plugin.playerDataInstance.isPlayerOnTheRun(frisked))
+                    if (cop.getItemInHand().getType() == Material.STICK) {
+
+                        // If the player being frisked is NOT on the run, frisk the player
+                        if (!plugin.playerDataInstance.isPlayerOnTheRun(frisked))
+                            new Frisk(plugin).friskPlayer(frisked, cop, false);
+
+                    }
+
+                }
+
+                // If the player being frisked IS on the run AND beatdown mode is enabled...
+                if (plugin.playerDataInstance.isPlayerOnTheRun(frisked) && plugin.getConfig().getBoolean("enable-beatdown")) {
+
+                    // If the runner's health is below the maximum for beatdown mode...
+                    if (frisked.getHealth() <= plugin.getConfig().getDouble("beatdown-frisk-health")) {
+
+                        // The player is no longer on the run since he/she's been caught
+                        plugin.playerDataInstance.setPlayerNotOnTheRun(frisked);
+
+                        // Frisk the player
                         new Frisk(plugin).friskPlayer(frisked, cop, true);
-
-                    // If the player being frisked IS on the run...
-                    else {
-
-                        // If the runner's health is below the maximum for beatdown mode...
-                        if(frisked.getHealth() <= plugin.getConfig().getDouble("beatdown-frisk-health")) {
-
-                            // The player is no longer on the run since he/she's been caught
-                            plugin.playerDataInstance.setPlayerNotOnTheRun(frisked);
-
-                            // Frisk the player
-                            new Frisk(plugin).friskPlayer(frisked, cop, true);
-
-                        }
 
                     }
 
