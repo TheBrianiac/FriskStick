@@ -23,9 +23,16 @@ public class DeleteReportCommand implements CommandExecutor {
 
             try {
 
-                plugin.reportFileInstance.deleteReport(Integer.parseInt(args[0]));
+                plugin.reportFileInstance.countLines(plugin.reportFileInstance.reports);
 
-                sender.sendMessage(plugin.getConfig().getString("report-delete-msg").replaceAll("&", "§"));
+                if (plugin.reportFileInstance.linesInReportFile >= Integer.parseInt(args[0]) && !(Integer.parseInt(args[0]) <= 0)) {
+
+                    plugin.reportFileInstance.deleteReport(Integer.parseInt(args[0]));
+
+                    sender.sendMessage(plugin.getConfig().getString("report-delete-msg").replaceAll("&", "§"));
+
+                } else
+                    sender.sendMessage(ChatColor.RED + "That report does not exist!");
 
             } catch(NumberFormatException e) {
 

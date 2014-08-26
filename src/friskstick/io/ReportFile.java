@@ -13,13 +13,28 @@ import java.util.List;
 public class ReportFile {
 
     private FriskStick plugin;
-    private File reports;
+
+    public File reports;
+
+    public int linesInReportFile = 0;
 
     public ReportFile(FriskStick plugin) {
 
         this.plugin = plugin;
 
         reports = new File(plugin.getDataFolder(), "reports.txt");
+
+        try {
+
+            if(!reports.exists())
+                reports.createNewFile();
+
+        } catch(IOException e) {
+
+            plugin.getServer().getConsoleSender().sendMessage(ChatColor.RED + "Unable to access reports file! Disabling FriskStick...");
+            plugin.getServer().getPluginManager().disablePlugin(plugin);
+
+        }
 
     }
 
@@ -101,10 +116,10 @@ public class ReportFile {
 
             int counter = 1;
 
-            while((report = reader.readLine()) != null) {
+            while ((report = reader.readLine()) != null) {
 
                 // If the report is not the report being deleted, write it to the temp. file.
-                if(!(reportNum == counter)) {
+                if (!(reportNum == counter)) {
 
                     writer.write(report + "\n");
                     writer.flush();
@@ -126,6 +141,54 @@ public class ReportFile {
 
             plugin.getServer().getConsoleSender().sendMessage(ChatColor.RED + "Unable to access report file! Disabling FriskStick...");
             plugin.getServer().getPluginManager().disablePlugin(plugin);
+
+        }
+
+    }
+
+    /**
+     * Counts the lines in a file.
+     *
+     * @param file The name of the file
+     * @return The number of lines the file contains
+     */
+    public void countLines(File file) {
+
+        try {
+
+            InputStream is = new BufferedInputStream(new FileInputStream(file));
+
+            byte[] c = new byte[1024];
+
+            int count = 0;
+
+            int readChars = 0;
+
+            boolean empty = true;
+
+            while ((readChars = is.read(c)) != -1) {
+
+                empty = false;
+
+                for (int i = 0; i < readChars; ++i) {
+
+                    if (c[i] == '\n') {
+
+                        ++count;
+
+                    }
+
+                }
+
+            }
+
+            is.close();
+
+            linesInReportFile = (count == 0 && !empty) ? 1 : count;
+
+        } catch(IOException e) {
+
+            e.printStackTrace();
 
         }
 

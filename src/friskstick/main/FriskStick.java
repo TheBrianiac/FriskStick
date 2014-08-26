@@ -4,7 +4,7 @@ import friskstick.commands.DeleteReportCommand;
 import friskstick.commands.FriskStickCommand;
 import friskstick.commands.ReportCommand;
 import friskstick.commands.ShowReportsCommand;
-import friskstick.data.AutoUpdate;
+import friskstick.data.UpdateCheck;
 import friskstick.data.MetricsLite;
 import friskstick.data.PlayerData;
 import friskstick.events.DamageEvent;
@@ -102,20 +102,20 @@ public class FriskStick extends JavaPlugin {
 
         PluginDescriptionFile pdf = this.getDescription();
 
-            AutoUpdate updater = new AutoUpdate();
+        UpdateCheck updater = new UpdateCheck();
 
-            if(!updater.getName().equalsIgnoreCase(pdf.getName() + " v" + pdf.getVersion())) {
+        if(!updater.getName().equalsIgnoreCase(pdf.getName() + " v" + pdf.getVersion())) {
 
-                for (Player p : this.getServer().getOnlinePlayers()) {
+            for (Player p : this.getServer().getOnlinePlayers()) {
 
-                    if(p.isOp() || p.hasPermission("friskstick.update.receive"))
-                        p.sendMessage(this.getConfig().getString("plugin-update-msg").replaceAll("&", "§").replaceAll("%link%", "http://dev.bukkit.org/bukkit-plugins/friskstick"));
-
-                }
-
-                this.log.info("Plugin is out of date! Check the BukkitDev page for the latest version.");
+                if(p.isOp() || p.hasPermission("friskstick.update.receive"))
+                    p.sendMessage(this.getConfig().getString("plugin-update-msg").replaceAll("&", "§").replaceAll("%link%", "http://dev.bukkit.org/bukkit-plugins/friskstick"));
 
             }
+
+            this.log.info("Plugin is out of date! Check the BukkitDev page for the latest version.");
+
+        }
 
     }
 

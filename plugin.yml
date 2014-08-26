@@ -11,10 +11,6 @@ commands:
     aliases: fs
     permission: friskstick.help.basic
     usage: /friskstick
-  comply:
-    description: Allows a player to comply with a frisk request.
-    permission: friskstick.comply
-    usage: /comply
   report:
     description: Allows a player to report someone for drugs.
     permission: friskstick.report.send

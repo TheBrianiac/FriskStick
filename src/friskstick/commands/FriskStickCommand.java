@@ -33,8 +33,9 @@ public class FriskStickCommand implements CommandExecutor {
                     sender.sendMessage("");
                     sender.sendMessage(ChatColor.AQUA + "/friskstick - " + ChatColor.YELLOW + "Display the help menu");
                     sender.sendMessage(ChatColor.AQUA + "/friskstick check - " + ChatColor.YELLOW + "Check for updates");
-                    sender.sendMessage(ChatColor.AQUA + "/report - " + ChatColor.YELLOW + "Report a player for having drugs");
+                    sender.sendMessage(ChatColor.AQUA + "/report <player> - " + ChatColor.YELLOW + "Report a player for having drugs");
                     sender.sendMessage(ChatColor.AQUA + "/showreports - " + ChatColor.YELLOW + "Show the reports that have been submitted");
+                    sender.sendMessage(ChatColor.AQUA + "/deletereport <number> - " + ChatColor.YELLOW + "Delete a report from the list");
 
                     // Otherwise, if the sender is a player and has limited access to the help menu...
                 } else if (sender instanceof Player && sender.hasPermission("friskstick.help.basic")) {
