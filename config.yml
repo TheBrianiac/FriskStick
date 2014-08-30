@@ -90,7 +90,7 @@ enable-update-checking: true
 # What is the interval (in minutes) to check for updates?
 update-check-interval: 5
 
-# What jails should be used for auto-jailing? (Note: The plugin will pick one at random; it does not assign priorities to any one jail.)
+# What jails should be used for auto-jailing? (Note: The plugin will pick one at random; it does not assign priorities to any one jail.) Special thanks to bloodless2010 for the suggestion.
 jails:
 - jail1
 - jail2

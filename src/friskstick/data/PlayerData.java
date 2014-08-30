@@ -84,6 +84,8 @@ public class PlayerData {
                     player.sendMessage(plugin.getConfig().getString("not-on-run-player-msg").replaceAll("&", "§"));
                     cop.sendMessage(plugin.getConfig().getString("not-on-run-cop-msg").replaceAll("&", "§").replaceAll("%player%", player.getName()));
 
+                    timeOnTheRun.remove(player.getName());
+
                     this.cancel();
 
                 }

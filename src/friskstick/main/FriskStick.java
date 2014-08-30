@@ -62,10 +62,11 @@ public class FriskStick extends JavaPlugin {
         registerEvents();
 
         this.saveDefaultConfig();
+        this.getConfig().options().copyDefaults(true);
 
         startUpdateTimer();
 
-        PluginDescriptionFile pdf = this.getDescription();
+        PluginDescriptionFile pdf = getDescription();
 
         log.info(pdf.getName() + " v. " + pdf.getVersion() + " is now enabled!");
 
@@ -74,7 +75,7 @@ public class FriskStick extends JavaPlugin {
     @Override
     public void onDisable() {
 
-        PluginDescriptionFile pdf = this.getDescription();
+        PluginDescriptionFile pdf = getDescription();
 
         log.info(pdf.getName() + " v. " + pdf.getVersion() + " is now disabled.");
 
@@ -82,16 +83,16 @@ public class FriskStick extends JavaPlugin {
 
     public void addCommands() {
 
-        this.getCommand("friskstick").setExecutor(friskStickCommandInstance);
-        this.getCommand("report").setExecutor(reportCommandInstance);
-        this.getCommand("showreports").setExecutor(showReportsCommandInstance);
-        this.getCommand("deletereport").setExecutor(deleteReportCommandInstance);
+        getCommand("friskstick").setExecutor(friskStickCommandInstance);
+        getCommand("report").setExecutor(reportCommandInstance);
+        getCommand("showreports").setExecutor(showReportsCommandInstance);
+        getCommand("deletereport").setExecutor(deleteReportCommandInstance);
 
     }
 
     public void registerEvents() {
 
-        PluginManager manager = this.getServer().getPluginManager();
+        PluginManager manager = getServer().getPluginManager();
 
         manager.registerEvents(rightClickInstance, this);
         manager.registerEvents(damageEventInstance, this);
@@ -100,20 +101,20 @@ public class FriskStick extends JavaPlugin {
 
     public void checkForUpdates() {
 
-        PluginDescriptionFile pdf = this.getDescription();
+        PluginDescriptionFile pdf = getDescription();
 
         UpdateCheck updater = new UpdateCheck();
 
         if(!updater.getName().equalsIgnoreCase(pdf.getName() + " v" + pdf.getVersion())) {
 
-            for (Player p : this.getServer().getOnlinePlayers()) {
+            for (Player p : getServer().getOnlinePlayers()) {
 
                 if(p.isOp() || p.hasPermission("friskstick.update.receive"))
-                    p.sendMessage(this.getConfig().getString("plugin-update-msg").replaceAll("&", "§").replaceAll("%link%", "http://dev.bukkit.org/bukkit-plugins/friskstick"));
+                    p.sendMessage(getConfig().getString("plugin-update-msg").replaceAll("&", "§").replaceAll("%link%", "http://dev.bukkit.org/bukkit-plugins/friskstick"));
 
             }
 
-            this.log.info("Plugin is out of date! Check the BukkitDev page for the latest version.");
+            log.info("Plugin is out of date! Check the BukkitDev page for the latest version.");
 
         }
 
@@ -132,7 +133,7 @@ public class FriskStick extends JavaPlugin {
 
                 }
 
-            }.runTaskTimer(this, 0, this.getConfig().getInt("update-check-interval") * 60 * 20);
+            }.runTaskTimer(this, 0, getConfig().getInt("update-check-interval") * 60 * 20);
 
         }
 

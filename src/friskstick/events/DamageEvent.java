@@ -1,6 +1,5 @@
 package friskstick.events;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import friskstick.main.Frisk;
 import friskstick.main.FriskStick;
 import org.bukkit.Material;

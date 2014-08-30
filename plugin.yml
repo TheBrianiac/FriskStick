@@ -29,7 +29,6 @@ permissions:
     default: op
     children:
       friskstick.report.*: true
-      friskstick.comply: true
       friskstick.help.advanced: true
       friskstick.frisk: true
       friskstick.bypass: true
@@ -66,10 +65,6 @@ permissions:
   friskstick.report.delete:
     description: Allows a player to use /deletereport.
     default: op
-
-  friskstick.comply:
-    description: Allows a player to comply to frisk requests.
-    default: true
 
   friskstick.help.advanced:
     description: Provides all commands available in the plugin when /friskstick is used.

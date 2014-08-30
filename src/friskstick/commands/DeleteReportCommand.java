@@ -40,7 +40,7 @@ public class DeleteReportCommand implements CommandExecutor {
 
             }
 
-        } else if(args.length != 0)
+        } else if(args.length != 1)
             sender.sendMessage(ChatColor.GOLD + "Usage: /deletereport <reportnumber>");
 
         else if(!sender.hasPermission("friskstick.report.delete"))

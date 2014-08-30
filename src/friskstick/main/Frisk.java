@@ -42,6 +42,7 @@ public class Frisk {
      *
      * @param frisked The player being frisked
      * @param cop The cop frisking the player
+     * @param bypassComplianceWaiting If the frisking should occur right away, set this to true. Otherwise, set this to false.
      */
     public void friskPlayer(final Player frisked, final Player cop, boolean bypassComplianceWaiting) {
 
