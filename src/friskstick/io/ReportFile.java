@@ -26,12 +26,21 @@ public class ReportFile {
 
         try {
 
-            if(!reports.exists())
+            if(!plugin.getDataFolder().exists()) {
+
+                plugin.getDataFolder().mkdir();
+
+            }
+
+            if (!reports.exists()) {
+
                 reports.createNewFile();
 
-        } catch(IOException e) {
+            }
 
-            plugin.getServer().getConsoleSender().sendMessage(ChatColor.RED + "Unable to access reports file! Disabling FriskStick...");
+        } catch (IOException e) {
+
+            plugin.log.severe(ChatColor.RED + "Unable to access reports file! Disabling FriskStick...");
             plugin.getServer().getPluginManager().disablePlugin(plugin);
 
         }
@@ -62,9 +71,9 @@ public class ReportFile {
 
             writer.close();
 
-        } catch(IOException e) {
+        } catch (IOException e) {
 
-            plugin.getServer().getConsoleSender().sendMessage(ChatColor.RED + "Unable to access reports file! Disabling FriskStick...");
+            plugin.log.severe(ChatColor.RED + "Unable to access reports file! Disabling FriskStick...");
             plugin.getServer().getPluginManager().disablePlugin(plugin);
 
         }
@@ -81,7 +90,7 @@ public class ReportFile {
 
             String report;
 
-            while((report = reader.readLine()) != null){
+            while ((report = reader.readLine()) != null){
 
                 reportList.add(report);
 
@@ -93,7 +102,7 @@ public class ReportFile {
 
         } catch (IOException e) {
 
-            plugin.getServer().getConsoleSender().sendMessage(ChatColor.RED + "Unable to access reports file! Disabling FriskStick...");
+            plugin.log.severe(ChatColor.RED + "Unable to access reports file! Disabling FriskStick...");
             plugin.getServer().getPluginManager().disablePlugin(plugin);
 
         }
@@ -139,7 +148,7 @@ public class ReportFile {
 
         } catch (IOException e) {
 
-            plugin.getServer().getConsoleSender().sendMessage(ChatColor.RED + "Unable to access report file! Disabling FriskStick...");
+            plugin.log.severe(ChatColor.RED + "Unable to access report file! Disabling FriskStick...");
             plugin.getServer().getPluginManager().disablePlugin(plugin);
 
         }
@@ -186,7 +195,7 @@ public class ReportFile {
 
             linesInReportFile = (count == 0 && !empty) ? 1 : count;
 
-        } catch(IOException e) {
+        } catch (IOException e) {
 
             e.printStackTrace();
 

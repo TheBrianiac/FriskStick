@@ -2,6 +2,7 @@ package friskstick.events;
 
 import friskstick.main.Frisk;
 import friskstick.main.FriskStick;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -21,16 +22,32 @@ public class StickRightClickEvent implements Listener {
     @EventHandler
     public void friskEvent(PlayerInteractEntityEvent event) {
 
-        if(event.getRightClicked() instanceof Player) {
+        if (event.getRightClicked() instanceof Player) {
 
-            if(event.getPlayer().getItemInHand().getType() == Material.STICK) {
+            Player frisked = (Player) event.getRightClicked();
+            Player cop = event.getPlayer();
 
-                if(event.getPlayer().hasPermission("friskstick.frisk") && !((Player) event.getRightClicked()).hasPermission("friskstick.bypass")) {
+            if (event.getPlayer().getItemInHand().getType() == Material.STICK) {
+
+                if (event.getPlayer().hasPermission("friskstick.frisk") && !frisked.hasPermission("friskstick.bypass")) {
 
                     if (plugin.getConfig().getString("frisk-method").equalsIgnoreCase("both") || plugin.getConfig().getString("frisk-method").equalsIgnoreCase("right-click")) {
 
-                        if (!plugin.playerDataInstance.isPlayerOnTheRun((Player) event.getRightClicked()))
-                            new Frisk(plugin).friskPlayer((Player) event.getRightClicked(), event.getPlayer(), false);
+                        if (!plugin.playerDataInstance.isPlayerOnTheRun(frisked)) {
+
+                            if (!plugin.playerDataInstance.isPlayerBeingFrisked(frisked)) {
+
+                                plugin.playerDataInstance.setPlayerBeingFrisked(frisked);
+
+                                new Frisk(plugin).friskPlayer(frisked, cop, false);
+
+                            } else {
+
+                                cop.sendMessage(ChatColor.RED + "That player is already being frisked!");
+
+                            }
+
+                        }
 
                     }
 

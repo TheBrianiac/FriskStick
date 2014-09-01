@@ -35,7 +35,7 @@ public class UpdateCheck {
 
             url = new URL("https://api.curseforge.com/servermods/files?projectIDs=42526");
 
-        } catch(MalformedURLException e) {
+        } catch (MalformedURLException e) {
 
             e.printStackTrace();
 
@@ -52,7 +52,7 @@ public class UpdateCheck {
 
             JSONArray array = (JSONArray) JSONValue.parse(response);
 
-            if(array.size() > 0) {
+            if (array.size() > 0) {
 
                 JSONObject latest = (JSONObject) array.get(array.size() - 1);
 
@@ -60,7 +60,7 @@ public class UpdateCheck {
 
             }
 
-        } catch(IOException e) {
+        } catch (IOException e) {
 
             e.printStackTrace();
 

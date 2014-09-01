@@ -2,6 +2,7 @@ package friskstick.events;
 
 import friskstick.main.Frisk;
 import friskstick.main.FriskStick;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -22,10 +23,10 @@ public class DamageEvent implements Listener {
     public void playerDamaged(EntityDamageByEntityEvent event) {
 
         // If the two entities are players...
-        if(event.getDamager() instanceof Player && event.getEntity() instanceof Player) {
+        if (event.getDamager() instanceof Player && event.getEntity() instanceof Player) {
 
             // If the damager has proper perms...
-            if(((Player) event.getDamager()).hasPermission("friskstick.frisk")) {
+            if (((Player) event.getDamager()).hasPermission("friskstick.frisk")) {
 
                 Player cop = (Player) event.getDamager();
                 Player frisked = (Player) event.getEntity();
@@ -35,8 +36,21 @@ public class DamageEvent implements Listener {
                     if (cop.getItemInHand().getType() == Material.STICK) {
 
                         // If the player being frisked is NOT on the run, frisk the player
-                        if (!plugin.playerDataInstance.isPlayerOnTheRun(frisked))
-                            new Frisk(plugin).friskPlayer(frisked, cop, false);
+                        if (!plugin.playerDataInstance.isPlayerOnTheRun(frisked)) {
+
+                            if (!plugin.playerDataInstance.isPlayerBeingFrisked(frisked)) {
+
+                                plugin.playerDataInstance.setPlayerBeingFrisked(frisked);
+
+                                new Frisk(plugin).friskPlayer(frisked, cop, false);
+
+                            } else {
+
+                                cop.sendMessage(ChatColor.RED + "That player is already being frisked!");
+
+                            }
+
+                        }
 
                     }
 

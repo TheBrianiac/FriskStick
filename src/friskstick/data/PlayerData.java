@@ -4,17 +4,18 @@ import friskstick.main.FriskStick;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
+/**
+ * This class holds player data for the plugin.
+ */
 public class PlayerData {
 
     private FriskStick plugin;
 
-    private List<Player> playersOnTheRun = new ArrayList<Player>();
-    private Map<String, Long> timeOnTheRun = new HashMap<String, Long>();
+    private List<UUID> playersOnTheRun = new ArrayList<UUID>();
+    private List<UUID> playersBeingFrisked = new ArrayList<UUID>();
+    private Map<UUID, Long> timeOnTheRun = new HashMap<UUID, Long>();
 
     public PlayerData(FriskStick plugin) {
 
@@ -26,13 +27,16 @@ public class PlayerData {
      * Sets a player to be on the run if they weren't already
      *
      * @param player The player in question
+     * @param cop The cop chasing the player
      */
     public void setPlayerOnTheRun(Player player, Player cop) {
 
-        if(!playersOnTheRun.contains(player))
-            playersOnTheRun.add(player);
+        if (!playersOnTheRun.contains(player.getUniqueId())) {
 
-        startTimer(player, cop);
+            playersOnTheRun.add(player.getUniqueId());
+            startTimer(player, cop);
+
+        }
 
     }
 
@@ -44,7 +48,7 @@ public class PlayerData {
      */
     public boolean isPlayerOnTheRun(Player player) {
 
-        return playersOnTheRun.contains(player);
+        return playersOnTheRun.contains(player.getUniqueId());
 
     }
 
@@ -55,8 +59,11 @@ public class PlayerData {
      */
     public void setPlayerNotOnTheRun(Player player) {
 
-        if(playersOnTheRun.contains(player))
-            playersOnTheRun.remove(player);
+        if (playersOnTheRun.contains(player.getUniqueId())) {
+
+            playersOnTheRun.remove(player.getUniqueId());
+
+        }
 
     }
 
@@ -66,9 +73,9 @@ public class PlayerData {
      * @param player The player in question
      * @param cop The cop chasing the player
      */
-    public void startTimer(final Player player, final Player cop) {
+    private void startTimer(final Player player, final Player cop) {
 
-        timeOnTheRun.put(player.getName(), System.currentTimeMillis());
+        timeOnTheRun.put(player.getUniqueId(), System.currentTimeMillis());
 
         // Check every second
         new BukkitRunnable(){
@@ -77,14 +84,14 @@ public class PlayerData {
             public void run() {
 
                 // If enough time has passed...
-                if(System.currentTimeMillis() - timeOnTheRun.get(player.getName()) >= plugin.getConfig().getInt("on-the-run-cooldown") * 1000 && isPlayerOnTheRun(player)) {
+                if (System.currentTimeMillis() - timeOnTheRun.get(player.getUniqueId()) >= plugin.getConfig().getInt("on-the-run-cooldown") * 1000 && isPlayerOnTheRun(player)) {
 
                     // The player is no longer on the run.
                     setPlayerNotOnTheRun(player);
                     player.sendMessage(plugin.getConfig().getString("not-on-run-player-msg").replaceAll("&", "§"));
                     cop.sendMessage(plugin.getConfig().getString("not-on-run-cop-msg").replaceAll("&", "§").replaceAll("%player%", player.getName()));
 
-                    timeOnTheRun.remove(player.getName());
+                    timeOnTheRun.remove(player.getUniqueId());
 
                     this.cancel();
 
@@ -93,6 +100,32 @@ public class PlayerData {
             }
 
         }.runTaskTimer(plugin, 0, 20);
+
+    }
+
+    public void setPlayerBeingFrisked(Player player) {
+
+        if (!playersBeingFrisked.contains(player.getUniqueId())) {
+
+            playersBeingFrisked.add(player.getUniqueId());
+
+        }
+
+    }
+
+    public void setPlayerNotBeingFrisked(Player player) {
+
+        if (playersBeingFrisked.contains(player.getUniqueId())) {
+
+            playersBeingFrisked.remove(player.getUniqueId());
+
+        }
+
+    }
+
+    public boolean isPlayerBeingFrisked(Player player) {
+
+        return playersBeingFrisked.contains(player.getUniqueId());
 
     }
 

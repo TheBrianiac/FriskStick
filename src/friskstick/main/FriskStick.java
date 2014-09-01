@@ -20,16 +20,20 @@ import java.io.IOException;
 import java.util.logging.Logger;
 
 /**
- *
+ * The main class of FriskStick
  */
 public class FriskStick extends JavaPlugin {
+
+    /* TODO
+     * Add a config option for the message showing that the plugin is up-to-date (FriskStickCommand, lines
+     */
 
     /**
      * The {@link Logger} for the plugin
      */
-    public Logger log = this.getLogger();
+    public Logger log = getLogger();
 
-    // INSTANCES (Frisk class instance intentionally not included)
+    // INSTANCES (Frisk class instance intentionally not included because each frisking should have its own instance)
 
     public ReportFile reportFileInstance = new ReportFile(this);
 
@@ -52,7 +56,7 @@ public class FriskStick extends JavaPlugin {
             MetricsLite metrics = new MetricsLite(this);
             metrics.start();
 
-        } catch(IOException e) {
+        } catch (IOException e) {
 
             e.printStackTrace();
 
@@ -99,37 +103,45 @@ public class FriskStick extends JavaPlugin {
 
     }
 
-    public void checkForUpdates() {
+    /**
+     * Checks for updates to the plugin.
+     *
+     * @return {@code true} if the plugin needs updated, {@code false} otherwise.
+     */
+    public boolean checkForUpdates() {
 
         PluginDescriptionFile pdf = getDescription();
 
         UpdateCheck updater = new UpdateCheck();
 
-        if(!updater.getName().equalsIgnoreCase(pdf.getName() + " v" + pdf.getVersion())) {
-
-            for (Player p : getServer().getOnlinePlayers()) {
-
-                if(p.isOp() || p.hasPermission("friskstick.update.receive"))
-                    p.sendMessage(getConfig().getString("plugin-update-msg").replaceAll("&", "§").replaceAll("%link%", "http://dev.bukkit.org/bukkit-plugins/friskstick"));
-
-            }
-
-            log.info("Plugin is out of date! Check the BukkitDev page for the latest version.");
-
-        }
+        return !updater.getName().equalsIgnoreCase(pdf.getName() + " v" + pdf.getVersion());
 
     }
 
     private void startUpdateTimer() {
 
-        if(this.getConfig().getBoolean("enable-update-checking")) {
+        if (getConfig().getBoolean("enable-update-checking")) {
 
             new BukkitRunnable() {
 
                 @Override
                 public void run() {
 
-                    checkForUpdates();
+                    if (checkForUpdates()) {
+
+                        for (Player p : getServer().getOnlinePlayers()) {
+
+                            if (p.isOp() || p.hasPermission("friskstick.update.receive")) {
+
+                                p.sendMessage(getConfig().getString("plugin-update-msg").replaceAll("&", "§").replaceAll("%link%", "http://dev.bukkit.org/bukkit-plugins/friskstick"));
+
+                            }
+
+                        }
+
+                        log.info("Plugin is out of date! Check the BukkitDev page for the latest version.");
+
+                    }
 
                 }
 

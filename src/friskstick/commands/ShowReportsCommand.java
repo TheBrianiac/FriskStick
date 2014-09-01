@@ -23,14 +23,15 @@ public class ShowReportsCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 
-        if((sender instanceof Player && (sender.isOp() || sender.hasPermission("friskstick.report.show"))) || sender instanceof ConsoleCommandSender) {
+        if ((sender instanceof Player && (sender.isOp() || sender.hasPermission("friskstick.report.show"))) || sender instanceof ConsoleCommandSender) {
 
             List<String> reports = plugin.reportFileInstance.readReportsFromFile();
 
-            if(reports.size() == 0)
+            if (reports.size() == 0) {
+
                 sender.sendMessage(ChatColor.RED + "There are no reports available.");
 
-            else {
+            } else {
 
                 int count = 1;
 
@@ -44,10 +45,11 @@ public class ShowReportsCommand implements CommandExecutor {
 
             }
 
-        }
+        } else if (!sender.hasPermission("friskstick.report.show")) {
 
-        else if(!sender.hasPermission("friskstick.report.show"))
             sender.sendMessage(ChatColor.RED + "You do not have permission to do that!");
+
+        }
 
         return true;
 

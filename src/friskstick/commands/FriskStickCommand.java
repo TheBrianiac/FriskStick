@@ -21,9 +21,9 @@ public class FriskStickCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 
-        if(label.equalsIgnoreCase("friskstick") || label.equalsIgnoreCase("fs")) {
+        if (cmd.getName().equalsIgnoreCase("friskstick")) {
 
-            if(args.length == 0) {
+            if (args.length == 0) {
 
                 // If the sender is a player and has full access to the help menu OR the command was sent from the console...
                 if ((sender instanceof Player && (sender.isOp() || sender.hasPermission("friskstick.help.advanced"))) || sender instanceof ConsoleCommandSender) {
@@ -50,11 +50,31 @@ public class FriskStickCommand implements CommandExecutor {
 
             } else if (args.length == 1 && args[0].equalsIgnoreCase("check")) {
 
-                if ((sender instanceof Player && (sender.isOp() || sender.hasPermission("friskstick.update.check"))) || sender instanceof ConsoleCommandSender)
-                    plugin.checkForUpdates();
+                if (plugin.getConfig().getBoolean("enable-update-checking")) {
 
-                else
-                    sender.sendMessage(ChatColor.RED + "You do not have permission to do that!");
+                    if ((sender instanceof Player && (sender.isOp() || sender.hasPermission("friskstick.update.check"))) || sender instanceof ConsoleCommandSender) {
+
+                        if (plugin.checkForUpdates()) {
+
+                            sender.sendMessage(plugin.getConfig().getString("plugin-update-msg").replaceAll("&", "§").replaceAll("%link%", "http://dev.bukkit.org/bukkit-plugins/friskstick"));
+
+                        } else {
+
+                            sender.sendMessage(ChatColor.GREEN + "FriskStick is up to date.");
+
+                        }
+
+                    } else {
+
+                        sender.sendMessage(ChatColor.RED + "You do not have permission to do that!");
+
+                    }
+
+                } else {
+
+                    sender.sendMessage(ChatColor.RED + "Update checking is not enabled on this server.");
+
+                }
 
             }
 

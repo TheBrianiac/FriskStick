@@ -19,7 +19,7 @@ public class DeleteReportCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 
-        if(sender.hasPermission("friskstick.report.delete") && args.length == 1) {
+        if (sender.hasPermission("friskstick.report.delete") && args.length == 1) {
 
             try {
 
@@ -31,20 +31,27 @@ public class DeleteReportCommand implements CommandExecutor {
 
                     sender.sendMessage(plugin.getConfig().getString("report-delete-msg").replaceAll("&", "§"));
 
-                } else
+                } else {
+
                     sender.sendMessage(ChatColor.RED + "That report does not exist!");
 
-            } catch(NumberFormatException e) {
+                }
+
+            } catch (NumberFormatException e) {
 
                 sender.sendMessage(ChatColor.RED + "Please ensure the number entered is an integer.");
 
             }
 
-        } else if(args.length != 1)
+        } else if (args.length != 1) {
+
             sender.sendMessage(ChatColor.GOLD + "Usage: /deletereport <reportnumber>");
 
-        else if(!sender.hasPermission("friskstick.report.delete"))
+        } else if (!sender.hasPermission("friskstick.report.delete")) {
+
             sender.sendMessage(ChatColor.RED + "You do not have permission to do that!");
+
+        }
 
         return true;
 
