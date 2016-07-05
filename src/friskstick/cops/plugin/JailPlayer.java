@@ -31,29 +31,25 @@ public class JailPlayer {
 
 		if(plugin.getConfig().getBoolean("auto-jail")) {
 
-			if(plugin.getServer().getPluginManager().getPlugin("Essentials").isEnabled()) {
+			if(plugin.getConfig().getInt("time-in-jail") > 0) {
 
-				if(plugin.getConfig().getInt("time-in-jail") > 0) {
+				// Runs command /jail <player> -j <jail name> -t <time> -r Drugs
+				plugin.getServer().dispatchCommand(plugin.getServer().getConsoleSender(), "jail " + name + " -j " + plugin.getConfig().getString("jail-name") + " -t " + (plugin.getConfig().getInt("time-in-jail") + " -r Drugs"));
 
-					plugin.getServer().dispatchCommand(plugin.getServer().getConsoleSender(), "jail " + name + " " + plugin.getConfig().getString("jail-name") + " " + (plugin.getConfig().getInt("time-in-jail") + 1));
+			} else if(plugin.getConfig().getInt("time-in-jail") == -1) {
 
-				} else if(plugin.getConfig().getInt("time-in-jail") == -1) {
+				// Runs command /jail <player> -j <jail name> -r Drugs
+				plugin.getServer().dispatchCommand(plugin.getServer().getConsoleSender(), "jail " + name + " -j " + plugin.getConfig().getString("jail-name") + " -r Drugs");
 
-					plugin.getServer().dispatchCommand(plugin.getServer().getConsoleSender(), "jail " + name + " " + plugin.getConfig().getString("jail-name"));
+			} else {
 
-				} else {
+				for(Player p : plugin.getServer().getOnlinePlayers()) {
 
-					for(Player p : plugin.getServer().getOnlinePlayers()) {
+					if(p.isOp() && p.isOnline()) {
 
-						if(p.isOp() && p.isOnline()) {
-
-							p.sendMessage(ChatColor.RED + "There is a problem with your jailtime setup in the config which doesn't allow cops to jail players! Please fix it.");
-
-						}
+						p.sendMessage(ChatColor.RED + "There is a problem with your jailtime setup in the config which doesn't allow cops to jail players! Please fix it.");
 
 					}
-
-					cop.sendMessage(ChatColor.RED + "You failed to jail the suspect! This is an internal problem. Please urge your server administrator to fix the issue.");
 
 				}
 
